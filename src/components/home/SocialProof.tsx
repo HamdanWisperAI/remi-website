@@ -5,16 +5,21 @@ function SocialProof() {
   const [animateLogos, setAnimateLogos] = useState(false)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [isDesktop, setIsDesktop] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
-    const checkScreenSize = () => {
+    // Set initial window width (client-side only)
+    setWindowWidth(window.innerWidth)
+    setIsDesktop(window.innerWidth >= 768)
+
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
       setIsDesktop(window.innerWidth >= 768)
     }
     
-    checkScreenSize()
-    window.addEventListener('resize', checkScreenSize)
+    window.addEventListener('resize', handleResize)
     
-    return () => window.removeEventListener('resize', checkScreenSize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
@@ -101,15 +106,15 @@ function SocialProof() {
     display: "grid",
     gridTemplateColumns: isDesktop 
       ? "repeat(auto-fit, minmax(200px, 1fr))" 
-      : window.innerWidth < 380
+      : windowWidth < 380
         ? "repeat(2, 1fr)"
-        : window.innerWidth < 480
+        : windowWidth < 480
           ? "repeat(3, 1fr)"
           : "repeat(4, 1fr)",
-    gap: isDesktop ? "40px" : window.innerWidth < 380 ? "12px" : window.innerWidth < 480 ? "16px" : "20px",
+    gap: isDesktop ? "40px" : windowWidth < 380 ? "12px" : windowWidth < 480 ? "16px" : "20px",
     width: "100%",
     maxWidth: "1000px",
-    padding: isDesktop ? "40px" : window.innerWidth < 380 ? "16px" : window.innerWidth < 480 ? "24px" : "28px",
+    padding: isDesktop ? "40px" : windowWidth < 380 ? "16px" : windowWidth < 480 ? "24px" : "28px",
     background: "white",
     borderRadius: isDesktop ? "24px" : "16px",
     boxShadow: `
@@ -126,7 +131,7 @@ function SocialProof() {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: isDesktop ? "20px" : window.innerWidth < 380 ? "8px" : window.innerWidth < 480 ? "10px" : "14px",
+    padding: isDesktop ? "20px" : windowWidth < 380 ? "8px" : windowWidth < 480 ? "10px" : "14px",
     borderRadius: "16px",
     background: "#f5f9fc",
     transition: "all 0.15s ease-out",
@@ -134,12 +139,12 @@ function SocialProof() {
     border: "2px solid transparent",
     transform: animateLogos ? "translateY(0)" : "translateY(30px)",
     opacity: animateLogos ? 1 : 0,
-    minHeight: isDesktop ? "120px" : window.innerWidth < 380 ? "60px" : window.innerWidth < 480 ? "80px" : "100px"
+    minHeight: isDesktop ? "120px" : windowWidth < 380 ? "60px" : windowWidth < 480 ? "80px" : "100px"
   }
 
   const logoStyle: React.CSSProperties = {
-    maxWidth: isDesktop ? "140px" : window.innerWidth < 380 ? "50px" : window.innerWidth < 480 ? "70px" : "90px",
-    maxHeight: isDesktop ? "90px" : window.innerWidth < 380 ? "35px" : window.innerWidth < 480 ? "50px" : "65px",
+    maxWidth: isDesktop ? "140px" : windowWidth < 380 ? "50px" : windowWidth < 480 ? "70px" : "90px",
+    maxHeight: isDesktop ? "90px" : windowWidth < 380 ? "35px" : windowWidth < 480 ? "50px" : "65px",
     objectFit: "contain",
     filter: "grayscale(100%) opacity(0.7)",
     transition: "all 0.15s ease-out"

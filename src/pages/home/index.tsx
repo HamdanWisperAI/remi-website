@@ -1,5 +1,6 @@
 import React from 'react'
 import Header from '@/components/home/Header'
+import Intro from '@/components/home/Intro'
 import Hero from '@/components/home/Hero'
 import Footer from '@/components/home/Footer'
 import SocialProof from '@/components/home/SocialProof'
@@ -10,6 +11,7 @@ function index() {
       <Header />
       <div style={{marginTop: '70px'}}>
         <Hero />
+        <Intro />
         <SocialProof />
         <Footer />
       </div>

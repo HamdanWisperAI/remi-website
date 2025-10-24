@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import Intro from "./Intro";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
 import { CardStack } from "@/components/ui/card-stack";
@@ -339,7 +340,7 @@ export default function Hero() {
 
       {/* Spacer */}
       <div className="h-[30vh] bg-linear-to-b from-white to-gray-50"></div>
-
+      <Intro/>
       {/* Three Tools Section with Scroll Animations */}
       <div ref={galleryRef} className="gallery">
         {/* Left: Scrollable Content */}
