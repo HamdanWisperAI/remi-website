@@ -4,6 +4,7 @@ import Intro from '@/components/home/Intro'
 import Hero from '@/components/home/Hero'
 import Footer from '@/components/home/Footer'
 import SocialProof from '@/components/home/SocialProof'
+import FAQ from '@/components/home/FAQ'
 
 function index() {
   return (
@@ -13,6 +14,7 @@ function index() {
         <Hero />
         <Intro />
         <SocialProof />
+        <FAQ />
         <Footer />
       </div>
     </div>
