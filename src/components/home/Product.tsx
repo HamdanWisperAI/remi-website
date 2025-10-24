@@ -10,6 +10,7 @@ import { OrbitComponent } from "@/components/ui/orbit";
 import { AnimatedList } from "@/components/ui/animated-list";
 import { ArrowRight, BookOpen, BarChart3, Smartphone, CheckSquare } from "lucide-react";
 import { motion } from "framer-motion";
+import HeroSection from "./HeroSection";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -77,7 +78,7 @@ const Notification = ({
   );
 };
 
-export default function Hero() {
+export default function Product() {
   const galleryRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
 
@@ -337,7 +338,7 @@ export default function Hero() {
 
         </div>
       </section>
-
+      <HeroSection/>
       {/* Spacer */}
       <div className="h-[30vh] bg-linear-to-b from-white to-gray-50"></div>
       <Intro/>
