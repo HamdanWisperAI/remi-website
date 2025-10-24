@@ -4,6 +4,18 @@ function SocialProof() {
   const [isVisible, setIsVisible] = useState(false)
   const [animateLogos, setAnimateLogos] = useState(false)
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsDesktop(window.innerWidth >= 768)
+    }
+    
+    checkScreenSize()
+    window.addEventListener('resize', checkScreenSize)
+    
+    return () => window.removeEventListener('resize', checkScreenSize)
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100)
@@ -21,30 +33,30 @@ function SocialProof() {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: "80px 20px",
+    padding: isDesktop ? "80px 20px" : "60px 16px",
     position: "relative",
     overflow: "hidden"
   }
 
   const decorativeCircleStyle: React.CSSProperties = {
     position: "absolute",
-    width: "300px",
-    height: "300px",
+    width: isDesktop ? "300px" : "200px",
+    height: isDesktop ? "300px" : "200px",
     borderRadius: "50%",
     background: `radial-gradient(circle, rgba(98, 91, 255, 0.1) 0%, rgba(98, 91, 255, 0.05) 50%, transparent 100%)`,
-    top: "-150px",
-    right: "-150px",
+    top: isDesktop ? "-150px" : "-100px",
+    right: isDesktop ? "-150px" : "-100px",
     animation: "float 6s ease-in-out infinite"
   }
 
   const decorativeCircle2Style: React.CSSProperties = {
     position: "absolute",
-    width: "200px",
-    height: "200px",
+    width: isDesktop ? "200px" : "150px",
+    height: isDesktop ? "200px" : "150px",
     borderRadius: "50%",
     background: `radial-gradient(circle, rgba(98, 91, 255, 0.08) 0%, transparent 70%)`,
-    bottom: "-100px",
-    left: "-100px",
+    bottom: isDesktop ? "-100px" : "-80px",
+    left: isDesktop ? "-100px" : "-80px",
     animation: "float 8s ease-in-out infinite reverse"
   }
 
@@ -77,49 +89,57 @@ function SocialProof() {
 
   const subtitleStyle: React.CSSProperties = {
     color: "#666",
-    fontSize: "18px",
+    fontSize: isDesktop ? "18px" : "14px",
     fontWeight: "400",
     margin: "10px 0 0 0",
     textAlign: "center",
     maxWidth: "600px",
-    whiteSpace: "nowrap"
+    whiteSpace: isDesktop ? "nowrap" : "normal"
   }
 
   const logoGridStyle: React.CSSProperties = {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-    gap: "40px",
+    gridTemplateColumns: isDesktop 
+      ? "repeat(auto-fit, minmax(200px, 1fr))" 
+      : window.innerWidth < 380
+        ? "repeat(2, 1fr)"
+        : window.innerWidth < 480
+          ? "repeat(3, 1fr)"
+          : "repeat(4, 1fr)",
+    gap: isDesktop ? "40px" : window.innerWidth < 380 ? "12px" : window.innerWidth < 480 ? "16px" : "20px",
     width: "100%",
     maxWidth: "1000px",
-    padding: "40px",
+    padding: isDesktop ? "40px" : window.innerWidth < 380 ? "16px" : window.innerWidth < 480 ? "24px" : "28px",
     background: "white",
-    borderRadius: "24px",
+    borderRadius: isDesktop ? "24px" : "16px",
     boxShadow: `
       0 20px 40px rgba(0, 0, 0, 0.1),
       0 4px 12px rgba(98, 91, 255, 0.15),
       inset 0 1px 0 rgba(255, 255, 255, 0.6)
     `,
     border: "1px solid rgba(98, 91, 255, 0.1)",
-    position: "relative"
+    position: "relative",
+    overflow: "hidden"
   }
 
   const logoItemStyle: React.CSSProperties = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    padding: "20px",
+    padding: isDesktop ? "20px" : window.innerWidth < 380 ? "8px" : window.innerWidth < 480 ? "10px" : "14px",
     borderRadius: "16px",
     background: "#f5f9fc",
     transition: "all 0.15s ease-out",
     cursor: "pointer",
     border: "2px solid transparent",
     transform: animateLogos ? "translateY(0)" : "translateY(30px)",
-    opacity: animateLogos ? 1 : 0
+    opacity: animateLogos ? 1 : 0,
+    minHeight: isDesktop ? "120px" : window.innerWidth < 380 ? "60px" : window.innerWidth < 480 ? "80px" : "100px"
   }
 
   const logoStyle: React.CSSProperties = {
-    maxWidth: "140px",
-    maxHeight: "90px",
+    maxWidth: isDesktop ? "140px" : window.innerWidth < 380 ? "50px" : window.innerWidth < 480 ? "70px" : "90px",
+    maxHeight: isDesktop ? "90px" : window.innerWidth < 380 ? "35px" : window.innerWidth < 480 ? "50px" : "65px",
     objectFit: "contain",
     filter: "grayscale(100%) opacity(0.7)",
     transition: "all 0.15s ease-out"
@@ -174,9 +194,9 @@ function SocialProof() {
   // Testimonials section styles
   const testimonialsContainerStyle: React.CSSProperties = {
     width: "100%",
-    minHeight: "100vh",
+    minHeight: isDesktop ? "100vh" : "auto",
     background: "white",
-    padding: "100px 20px",
+    padding: isDesktop ? "100px 20px" : "60px 16px 80px 16px",
     position: "relative"
   }
 
@@ -184,19 +204,20 @@ function SocialProof() {
     maxWidth: "1400px",
     margin: "0 auto",
     display: "flex",
-    alignItems: "center",
-    gap: "80px",
-    height: "100%"
+    flexDirection: isDesktop ? "row" : "column",
+    alignItems: isDesktop ? "center" : "stretch",
+    gap: isDesktop ? "80px" : "40px",
+    height: isDesktop ? "100%" : "auto"
   }
 
   const testimonialsLeftStyle: React.CSSProperties = {
-    flex: "1",
-    paddingRight: "40px"
+    flex: isDesktop ? "1" : "initial",
+    paddingRight: isDesktop ? "40px" : "0"
   }
 
   const testimonialsTitleStyle: React.CSSProperties = {
     color: "black",
-    fontSize: "clamp(32px, 5vw, 56px)",
+    fontSize: isDesktop ? "clamp(32px, 5vw, 56px)" : "clamp(24px, 4vw, 36px)",
     fontWeight: "700",
     margin: "0 0 20px 0",
     lineHeight: "1.2",
@@ -205,35 +226,39 @@ function SocialProof() {
 
   const testimonialsSubtitleStyle: React.CSSProperties = {
     color: "#666",
-    fontSize: "18px",
+    fontSize: isDesktop ? "18px" : "14px",
     fontWeight: "400",
     margin: "0",
     lineHeight: "1.6"
   }
 
   const testimonialsRightStyle: React.CSSProperties = {
-    flex: "1",
+    flex: isDesktop ? "1" : "initial",
     position: "relative",
-    height: "500px",
+    height: isDesktop ? "500px" : "auto",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    width: "100%"
   }
 
   const carouselContainerStyle: React.CSSProperties = {
     position: "relative",
-    width: "400px",
-    height: "450px",
-    perspective: "1000px"
+    width: isDesktop ? "400px" : "100%",
+    height: isDesktop ? "450px" : "auto",
+    perspective: "1000px",
+    maxWidth: isDesktop ? "400px" : "100%",
+    margin: isDesktop ? "0" : "0 auto",
+    paddingBottom: isDesktop ? "0" : "20px"
   }
 
   const testimonialCardStyle: React.CSSProperties = {
-    position: "absolute",
+    position: isDesktop ? "absolute" : "relative",
     width: "100%",
-    height: "100%",
+    height: isDesktop ? "100%" : "auto",
     background: "white",
-    borderRadius: "24px",
-    padding: "40px 30px 30px 30px",
+    borderRadius: isDesktop ? "24px" : "20px",
+    padding: isDesktop ? "40px 30px 30px 30px" : "32px 24px 24px 24px",
     boxShadow: `
       0 25px 50px rgba(0, 0, 0, 0.15),
       0 10px 20px rgba(98, 91, 255, 0.1),
@@ -248,73 +273,77 @@ function SocialProof() {
   }
 
   const logoCircleStyle: React.CSSProperties = {
-    position: "absolute",
-    top: "-30px",
-    left: "50%",
+    position: isDesktop ? "absolute" : "relative",
+    top: isDesktop ? "-30px" : "0",
+    left: isDesktop ? "50%" : "50%",
     transform: "translateX(-50%)",
-    width: "80px",
-    height: "80px",
+    width: isDesktop ? "80px" : "70px",
+    height: isDesktop ? "80px" : "70px",
     borderRadius: "50%",
     background: "#f5f9fc",
     border: "4px solid white",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)"
+    boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1)",
+    marginBottom: isDesktop ? "0" : "20px"
   }
 
   const logoCircleImgStyle: React.CSSProperties = {
-    maxWidth: "50px",
-    maxHeight: "50px",
+    maxWidth: isDesktop ? "50px" : "45px",
+    maxHeight: isDesktop ? "50px" : "45px",
     objectFit: "contain"
   }
 
   const quoteStyle: React.CSSProperties = {
     color: "black",
-    fontSize: "18px",
+    fontSize: isDesktop ? "18px" : "16px",
     fontWeight: "400",
     lineHeight: "1.6",
     fontStyle: "italic",
-    margin: "30px 0",
+    margin: isDesktop ? "30px 0" : "20px 0",
     textAlign: "center"
   }
 
   const authorStyle: React.CSSProperties = {
     textAlign: "center",
-    marginTop: "auto"
+    marginTop: isDesktop ? "auto" : "16px"
   }
 
   const authorNameStyle: React.CSSProperties = {
     color: "#625bff",
-    fontSize: "16px",
+    fontSize: isDesktop ? "16px" : "15px",
     fontWeight: "600",
     margin: "0"
   }
 
   const authorPositionStyle: React.CSSProperties = {
     color: "#666",
-    fontSize: "14px",
+    fontSize: isDesktop ? "14px" : "13px",
     fontWeight: "400",
     margin: "5px 0 0 0"
   }
 
   const navigationStyle: React.CSSProperties = {
-    position: "absolute",
-    bottom: "-80px",
-    left: "50%",
-    transform: "translateX(-50%)",
+    position: isDesktop ? "absolute" : "relative",
+    bottom: isDesktop ? "-80px" : "0",
+    left: isDesktop ? "50%" : "auto",
+    transform: isDesktop ? "translateX(-50%)" : "none",
     display: "flex",
-    gap: "20px"
+    gap: "20px",
+    justifyContent: "center",
+    marginTop: isDesktop ? "0" : "40px",
+    width: isDesktop ? "auto" : "100%"
   }
 
   const navButtonStyle: React.CSSProperties = {
-    width: "50px",
-    height: "50px",
+    width: isDesktop ? "50px" : "44px",
+    height: isDesktop ? "50px" : "44px",
     borderRadius: "50%",
     background: "#625bff",
     border: "none",
     color: "white",
-    fontSize: "20px",
+    fontSize: isDesktop ? "20px" : "18px",
     cursor: "pointer",
     display: "flex",
     alignItems: "center",
@@ -359,24 +388,38 @@ function SocialProof() {
           transform: translateZ(50px) scale(1) !important;
           opacity: 1 !important;
           z-index: 3 !important;
+          display: block !important;
         }
 
         .testimonial-card-left {
           transform: translateX(-120px) translateZ(-100px) scale(0.8) rotateY(25deg) !important;
           opacity: 0.6 !important;
           z-index: 1 !important;
+          display: none !important;
         }
 
         .testimonial-card-right {
           transform: translateX(120px) translateZ(-100px) scale(0.8) rotateY(-25deg) !important;
           opacity: 0.6 !important;
           z-index: 1 !important;
+          display: none !important;
         }
 
         .testimonial-card-hidden {
           transform: translateZ(-200px) scale(0.5) !important;
           opacity: 0 !important;
           z-index: 0 !important;
+          display: none !important;
+        }
+
+        @media (min-width: 768px) {
+          .testimonial-card-left {
+            display: block !important;
+          }
+
+          .testimonial-card-right {
+            display: block !important;
+          }
         }
 
       `}</style>
