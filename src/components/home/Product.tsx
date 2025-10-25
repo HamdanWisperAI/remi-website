@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { gsap } from "gsap";
 import Intro from "./Intro";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -309,22 +310,26 @@ export default function Product() {
             }}
             className="flex flex-col sm:flex-row gap-4 justify-center pt-4"
           >
-            <Button
-              size="lg"
-              className="group relative bg-linear-to-r from-[#625bff] to-[#7c6fff] text-white hover:shadow-xl font-semibold text-base px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 overflow-hidden w-full sm:w-auto"
-            >
-              <span className="relative z-10 flex items-center justify-center">
-                Start With CI — 3 Days
-                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </span>
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="border-2 border-gray-300 text-[#0f172a] hover:bg-gray-50 hover:border-[#625bff] hover:text-[#625bff] font-semibold text-base px-8 py-6 rounded-xl bg-white transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-            >
-              Start With Literacy — 2 Weeks
-            </Button>
+            <Link href="/product/CI">
+              <Button
+                size="lg"
+                className="group relative bg-linear-to-r from-[#625bff] to-[#7c6fff] text-white hover:shadow-xl font-semibold text-base px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 overflow-hidden w-full sm:w-auto"
+              >
+                <span className="relative z-10 flex items-center justify-center">
+                  Start With CI — 3 Days
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                </span>
+              </Button>
+            </Link>
+            <Link href="/product/financialLiteracy">
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-2 border-gray-300 text-[#0f172a] hover:bg-gray-50 hover:border-[#625bff] hover:text-[#625bff] font-semibold text-base px-8 py-6 rounded-xl bg-white transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+              >
+                Start With Literacy — 2 Weeks
+              </Button>
+            </Link>
           </motion.div>
 
           <motion.p

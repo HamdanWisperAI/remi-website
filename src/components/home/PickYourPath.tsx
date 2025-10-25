@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
+import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { ChevronRight, Sparkles, TrendingUp, Users, Shield } from 'lucide-react';
 
@@ -14,21 +15,24 @@ const PickYourPath: React.FC = () => {
       problem: 'Losing loans to rate competition?',
       timeline: '3 days',
       icon: TrendingUp,
-      description: 'Real-time competitor tracking and rate analysis to keep you ahead.'
+      description: 'Real-time competitor tracking and rate analysis to keep you ahead.',
+      href: '/product/CI'
     },
     {
       title: 'Financial Literacy',
       problem: 'Members choosing digital-first competitors?',
       timeline: '2 weeks',
       icon: Users,
-      description: 'Engagement tools to keep your members informed and loyal.'
+      description: 'Engagement tools to keep your members informed and loyal.',
+      href: '/product/financialLiteracy'
     },
     {
       title: 'Compliance Tracking',
       problem: 'CRA review keeping you up at night?',
       timeline: 'Instant',
       icon: Shield,
-      description: 'Automated compliance monitoring for peace of mind.'
+      description: 'Automated compliance monitoring for peace of mind.',
+      href: '/product/CRA'
     },
     {
       title: 'Strategy Consultation',
@@ -65,7 +69,7 @@ const PickYourPath: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {paths.map((path, index) => {
             const Icon = path.icon;
-            return (
+            const cardContent = (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
@@ -107,6 +111,14 @@ const PickYourPath: React.FC = () => {
                   {path.timeline}
                 </div>
               </motion.div>
+            );
+
+            return path.href ? (
+              <Link key={index} href={path.href}>
+                {cardContent}
+              </Link>
+            ) : (
+              cardContent
             );
           })}
         </div>
