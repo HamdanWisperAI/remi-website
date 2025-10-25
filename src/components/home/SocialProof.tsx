@@ -164,7 +164,7 @@ function SocialProof() {
   const testimonials = [
     {
       id: 1,
-      logo: "/assets/images/bankofamericaLogo.png",
+      logo: "/assets/images/avatarLogo.png",
       company: "Bank of America",
       quote: "This platform has revolutionized how we handle customer transactions. The security and reliability are unmatched in the industry.",
       author: "Sarah Johnson",
@@ -172,7 +172,7 @@ function SocialProof() {
     },
     {
       id: 2,
-      logo: "/assets/images/chaseLogo.png",
+      logo: "/assets/images/avatarLogo.png",
       company: "Chase Bank",
       quote: "Outstanding service and incredible performance. Our customers love the seamless experience this platform provides.",
       author: "Michael Chen",
@@ -180,7 +180,7 @@ function SocialProof() {
     },
     {
       id: 3,
-      logo: "/assets/images/jpmorganLogo.png",
+      logo: "/assets/images/avatarLogo.png",
       company: "JPMorgan",
       quote: "The innovation and cutting-edge technology have transformed our operations. Highly recommend this solution.",
       author: "Emma Rodriguez",
@@ -272,7 +272,8 @@ function SocialProof() {
     border: "1px solid rgba(98, 91, 255, 0.1)",
     display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
+    alignItems: "center",
+    justifyContent: "center",
     transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
     transformStyle: "preserve-3d"
   }
@@ -472,10 +473,10 @@ function SocialProof() {
           {/* Left Side - Text */}
           <div style={testimonialsLeftStyle}>
             <h2 style={testimonialsTitleStyle}>
-              Here's what the <span style={highlightStyle}>banks</span> have to say about us
+              Here's what the <span style={highlightStyle}>users</span> have to say about us
             </h2>
             <p style={testimonialsSubtitleStyle}>
-              Discover why leading financial institutions choose our platform for their most critical operations and customer experiences.
+              Discover what the early users have to say about shaping finance with us.
             </p>
           </div>
 
@@ -511,11 +512,7 @@ function SocialProof() {
                       "{testimonial.quote}"
                     </div>
                     
-                    <div style={authorStyle}>
-                      <p style={authorNameStyle}>{testimonial.author}</p>
-                      <p style={authorPositionStyle}>{testimonial.position}</p>
-                      <p style={authorPositionStyle}>{testimonial.company}</p>
-                    </div>
+                    
                   </div>
                 )
               })}
