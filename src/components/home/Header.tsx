@@ -89,9 +89,9 @@ function Header() {
       name: 'Products',
       hasDropdown: true,
       items: [
-        { name: 'Consumer Financial Literacy Platform', href: '#consumer-literacy', description: 'Empower your customers with financial knowledge' },
-        { name: 'Competitive Intelligence Dashboard', href: '#competitive-intelligence', description: 'Stay ahead with market insights' },
-        { name: 'CRA Compliance & Tracking', href: '#cra-compliance', description: 'Simplify regulatory compliance' },
+        { name: 'Consumer Financial Literacy Platform', href: '/product/financialLiteracy', description: 'Empower your customers with financial knowledge' },
+        { name: 'Competitive Intelligence Dashboard', href: '/product/CI', description: 'Stay ahead with market insights' },
+        { name: 'CRA Compliance & Tracking', href: '/product/CRA', description: 'Simplify regulatory compliance' },
         { name: 'Platform Overview', href: '#platform-overview', description: 'See all our capabilities' }
       ]
     },

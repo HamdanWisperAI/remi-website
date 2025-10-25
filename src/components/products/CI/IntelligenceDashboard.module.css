@@ -1,0 +1,970 @@
+/* Intelligence Dashboard Section Container */
+.dashboardSection {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding: 60px 40px;
+  overflow: hidden;
+}
+
+/* ===== TITLE SECTION ===== */
+.titleContainer {
+  max-width: 900px;
+  margin: 0 auto 24px auto;
+  text-align: center;
+}
+
+.mainTitle {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #222;
+  margin: 0 0 8px 0;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #666d7d;
+  margin: 0;
+  line-height: 1.5;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ===== ROLES TABS SECTION ===== */
+.rolesContainer {
+  max-width: 1400px;
+  margin: 0 auto 24px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.rolesTabs {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.roleTab {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.roleTab:hover {
+  background: #f0f2f7;
+  border-color: #e0e0e6;
+  transform: translateY(-2px);
+}
+
+.roleTabActive {
+  background: linear-gradient(135deg, #625bff 0%, #5044d9 100%);
+  border-color: #625bff;
+  color: #ffffff;
+  box-shadow: 0 6px 16px rgba(98, 91, 255, 0.25);
+}
+
+.roleTabActive .roleLabel,
+.roleTabActive .roleDescription {
+  color: #ffffff;
+}
+
+.roleTabActive .roleIcon {
+  color: #ffffff;
+}
+
+.roleIconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(98, 91, 255, 0.1);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.roleTabActive .roleIconWrapper {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.roleIcon {
+  color: #625bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  transition: all 0.3s ease;
+}
+
+.roleTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.roleLabel {
+  font-size: 12px;
+  font-weight: 700;
+  color: #222;
+  transition: color 0.3s ease;
+}
+
+.roleDescription {
+  font-size: 10px;
+  color: #999;
+  transition: color 0.3s ease;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #625bff, #5044d9);
+  border-radius: 2px;
+}
+
+/* ===== DASHBOARD CONTAINER ===== */
+.dashboardContainer {
+  max-width: 1600px;
+  margin: 0 auto 40px auto;
+  position: relative;
+}
+
+/* 10/70/20 Layout */
+.layoutWrapper {
+  display: grid;
+  grid-template-columns: 10% 70% 20%;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.rolesColumn {
+  width: 100%;
+}
+
+.dashboardColumn {
+  width: 100%;
+}
+
+.explanationColumn {
+  width: 100%;
+}
+
+.hiddenRoles {
+  display: none;
+}
+
+/* ===== DASHBOARD MOCKUP ===== */
+.dashboardMockup {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Dashboard Header */
+.dashboardHeader {
+  background: linear-gradient(135deg, #f5f3ff 0%, #fafbfc 100%);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.headerBrand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brandLogo {
+  width: 28px;
+  height: 28px;
+  background: linear-gradient(135deg, #625bff 0%, #5044d9 100%);
+  border-radius: 6px;
+}
+
+.brandText {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+}
+
+.headerActions {
+  display: flex;
+  gap: 10px;
+}
+
+.actionButton {
+  width: 6px;
+  height: 6px;
+  background: #ddd;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+/* Main Dashboard Content */
+.mainContent {
+  padding: 24px;
+  flex: 1;
+  min-height: auto;
+}
+
+/* View Header */
+.viewHeader {
+  margin-bottom: 18px;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 12px;
+}
+
+.viewTitle {
+  font-size: 18px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 4px 0;
+}
+
+.viewSubtitle {
+  font-size: 12px;
+  color: #999;
+  margin: 0;
+}
+
+/* Metrics Grid */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.metricCard {
+  background: #f5f3ff;
+  border: 1px solid rgba(98, 91, 255, 0.1);
+  border-radius: 10px;
+  padding: 14px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  transition: all 0.3s ease;
+}
+
+.metricCard:hover {
+  border-color: rgba(98, 91, 255, 0.2);
+  box-shadow: 0 4px 12px rgba(98, 91, 255, 0.08);
+  transform: translateY(-1px);
+}
+
+.metricIcon {
+  color: #625bff;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(98, 91, 255, 0.1);
+  border-radius: 8px;
+}
+
+.metricContent {
+  flex: 1;
+}
+
+.metricLabel {
+  font-size: 10px;
+  font-weight: 600;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
+}
+
+.metricValue {
+  font-size: 22px;
+  font-weight: 700;
+  color: #625bff;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.metricSubtext {
+  font-size: 11px;
+  color: #666d7d;
+}
+
+/* ===== TABLES ===== */
+.tableSection {
+  margin-bottom: 20px;
+}
+
+.tableTitle {
+  font-size: 13px;
+  font-weight: 700;
+  color: #222;
+  margin: 0 0 10px 0;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 8px;
+}
+
+.dataTable,
+.featureTable,
+.campaignTable,
+.rateTable {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f5f3ff;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 11px;
+}
+
+.dataTable thead,
+.featureTable thead,
+.campaignTable thead,
+.rateTable thead {
+  background: rgba(98, 91, 255, 0.08);
+}
+
+.dataTable th,
+.featureTable th,
+.campaignTable th,
+.rateTable th {
+  padding: 10px 12px;
+  text-align: left;
+  font-size: 10px;
+  font-weight: 700;
+  color: #222;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom: 1px solid rgba(98, 91, 255, 0.1);
+}
+
+.dataTable td,
+.featureTable td,
+.campaignTable td,
+.rateTable td {
+  padding: 10px 12px;
+  font-size: 11px;
+  color: #666d7d;
+  border-bottom: 1px solid rgba(98, 91, 255, 0.05);
+}
+
+.dataTable tbody tr:hover,
+.featureTable tbody tr:hover,
+.campaignTable tbody tr:hover,
+.rateTable tbody tr:hover {
+  background: rgba(98, 91, 255, 0.04);
+}
+
+.dataTable tbody tr:last-child td,
+.featureTable tbody tr:last-child td,
+.campaignTable tbody tr:last-child td,
+.rateTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.positive { color: #00d084; font-weight: 600; }
+.neutral { color: #f59e0b; font-weight: 600; }
+.negative { color: #ef4444; font-weight: 600; }
+.trendUp { color: #00d084; font-weight: 600; }
+.trendDown { color: #ef4444; font-weight: 600; }
+.trendFlat { color: #999; font-weight: 600; }
+
+.featureTable td:first-child {
+  text-align: left;
+  color: #222;
+  font-weight: 500;
+}
+
+.checkmark {
+  color: #00d084;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.campaignTable td:first-child {
+  color: #222;
+  font-weight: 500;
+}
+
+.statusActive {
+  background: rgba(0, 208, 132, 0.1);
+  color: #00d084;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.statusEnding {
+  background: rgba(245, 158, 11, 0.1);
+  color: #f59e0b;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-weight: 600;
+  font-size: 10px;
+}
+
+.rateTable td:first-child {
+  color: #222;
+  font-weight: 500;
+}
+
+.rateHighlight {
+  color: #625bff;
+  font-weight: 700;
+  background: rgba(98, 91, 255, 0.1);
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+
+.advantage {
+  color: #00d084;
+  font-weight: 700;
+}
+
+/* ===== OPPORTUNITIES & SECTIONS ===== */
+.opportunitiesSection {
+  margin-bottom: 20px;
+}
+
+.opportunityList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.opportunityItem {
+  display: flex;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #f5f3ff;
+  border-left: 3px solid #00d084;
+  border-radius: 6px;
+  font-size: 11px;
+  color: #666d7d;
+}
+
+.opportunityBullet {
+  color: #00d084;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Timeline Section */
+.timelineSection {
+  margin-bottom: 20px;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #f5f3ff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border-bottom: 1px solid rgba(98, 91, 255, 0.1);
+  position: relative;
+}
+
+.timelineItem:last-child {
+  border-bottom: none;
+}
+
+.timelineDot {
+  width: 10px;
+  height: 10px;
+  background: #625bff;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.timelineContent {
+  flex: 1;
+  font-size: 11px;
+  color: #666d7d;
+}
+
+.badge {
+  background: rgba(98, 91, 255, 0.1);
+  color: #625bff;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+/* Messaging Section */
+.messagingSection {
+  margin-bottom: 20px;
+}
+
+.messagingList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.messagingItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  background: #f5f3ff;
+  border-radius: 6px;
+}
+
+.messagingBar {
+  height: 5px;
+  background: linear-gradient(90deg, #625bff 0%, #5044d9 100%);
+  border-radius: 2px;
+  min-width: 60px;
+  flex-shrink: 0;
+}
+
+.messagingItem span {
+  font-size: 11px;
+  color: #666d7d;
+  font-weight: 500;
+}
+
+/* Objection Section */
+.objectionSection {
+  margin-bottom: 20px;
+}
+
+.objectionList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.objectionItem {
+  padding: 12px;
+  background: #f5f3ff;
+  border-radius: 6px;
+  border-left: 3px solid #f59e0b;
+}
+
+.objectionItem strong {
+  color: #222;
+  font-size: 11px;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.responseText {
+  color: #222;
+  font-size: 11px;
+  font-weight: 500;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(98, 91, 255, 0.1);
+}
+
+/* Dashboard Footer */
+.dashboardFooter {
+  background: linear-gradient(135deg, #f5f3ff 0%, #fafbfc 100%);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 10px;
+  color: #999;
+}
+
+.footerStatus {
+  font-weight: 500;
+}
+
+.footerIndicators {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.liveIndicator {
+  width: 6px;
+  height: 6px;
+  background: #00d084;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 208, 132, 0.5);
+}
+
+/* ===== EXPLANATION PANEL ===== */
+.explanationPanel {
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1.3;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+
+.keywordHighlight {
+  color: #625bff;
+}
+
+/* ===== ROLE CONTENT ===== */
+.roleContent {
+  width: 100%;
+}
+
+/* ===== SUPPORTING TEXT ===== */
+.supportingText {
+  max-width: 800px;
+  margin: 0 auto 30px auto;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ===== CTA BUTTON ===== */
+.ctaButton {
+  display: block;
+  margin: 0 auto;
+  padding: 14px 40px;
+  background: linear-gradient(135deg, #625bff 0%, #5044d9 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(98, 91, 255, 0.3);
+  text-transform: none;
+  font-family: inherit;
+  letter-spacing: 0;
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(98, 91, 255, 0.4);
+  background: linear-gradient(135deg, #5044d9 0%, #3f38a3 100%);
+}
+
+.ctaButton:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(98, 91, 255, 0.3);
+}
+
+.ctaRipple {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 1024px) {
+  .layoutWrapper {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .rolesColumn {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    grid-column: 1 / -1;
+  }
+
+  .rolesTabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .roleTab {
+    width: auto;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    padding: 8px 10px;
+  }
+
+  .dashboardSection {
+    padding: 50px 25px;
+  }
+
+  .mainTitle {
+    font-size: 36px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .roleIconWrapper {
+    width: 28px;
+    height: 28px;
+  }
+
+  .roleIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .roleLabel {
+    font-size: 11px;
+  }
+
+  .roleDescription {
+    font-size: 9px;
+  }
+
+  .mainContent {
+    padding: 18px;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+
+  .metricCard {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .metricIcon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .metricValue {
+    font-size: 18px;
+  }
+
+  .viewTitle {
+    font-size: 15px;
+  }
+
+  .viewSubtitle {
+    font-size: 11px;
+  }
+
+  .tableTitle {
+    font-size: 12px;
+  }
+
+  .tableSection {
+    margin-bottom: 16px;
+  }
+
+  .explanationPanel {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 768px) {
+  .layoutWrapper {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .rolesColumn {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .roleTab {
+    padding: 8px 8px;
+    gap: 8px;
+  }
+
+  .dashboardSection {
+    padding: 40px 16px;
+  }
+
+  .mainTitle {
+    font-size: 28px;
+    margin-bottom: 6px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .mainContent {
+    padding: 14px;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .metricCard {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .metricIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .metricValue {
+    font-size: 18px;
+  }
+
+  .viewTitle {
+    font-size: 14px;
+  }
+
+  .viewSubtitle {
+    font-size: 11px;
+  }
+
+  .tableSection {
+    margin-bottom: 14px;
+    overflow-x: auto;
+  }
+
+  .dataTable,
+  .featureTable,
+  .campaignTable,
+  .rateTable {
+    min-width: 500px;
+    font-size: 10px;
+  }
+
+  .supportingText {
+    font-size: 13px;
+    margin-bottom: 24px;
+  }
+
+  .ctaButton {
+    padding: 12px 32px;
+    font-size: 13px;
+  }
+
+  .explanationPanel {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .layoutWrapper {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .rolesColumn {
+    grid-template-columns: 1fr;
+  }
+
+  .roleTab {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 8px 10px;
+  }
+
+  .roleDescription {
+    display: block;
+    font-size: 8px;
+  }
+
+  .dashboardSection {
+    padding: 30px 12px;
+  }
+
+  .mainTitle {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 11px;
+  }
+
+  .mainContent {
+    padding: 12px;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .metricCard {
+    padding: 10px;
+  }
+
+  .metricIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .metricValue {
+    font-size: 16px;
+  }
+
+  .metricLabel {
+    font-size: 9px;
+  }
+
+  .viewTitle {
+    font-size: 13px;
+  }
+
+  .supportingText {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  .ctaButton {
+    padding: 12px 28px;
+    font-size: 12px;
+    width: calc(100% - 56px);
+  }
+
+  .explanationPanel {
+    font-size: 14px;
+  }
+}

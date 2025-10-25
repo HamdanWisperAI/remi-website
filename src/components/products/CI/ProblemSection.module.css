@@ -1,0 +1,526 @@
+/* Problem Section - Modern Compact Design with Inverted Competitor Layout */
+.problemSection {
+  position: relative;
+  width: 100%;
+  padding: 80px 0;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.problemContainer {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+/* PART 1: PROBLEM LAYOUT - Image Left, Text Right */
+.problemLayout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 60px;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+/* Left Column - Problem Image */
+.problemImageWrapper {
+  position: relative;
+  height: 420px;
+  border-radius: 12px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.problemImageWrapper.imageInView {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.problemImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Right Column - Problem Text Content */
+.problemContent {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Main Headline */
+.mainHeadline {
+  font-size: 36px;
+  font-weight: 700;
+  color: #222222;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.3px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.mainHeadline.headlineInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Problems Grid - Modern Cards */
+.problemsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.problemCard {
+  padding: 28px 24px;
+  background: linear-gradient(135deg, #f8f8f8 0%, #fafafa 100%);
+  border: 1.5px solid #e5e5e5;
+  border-radius: 12px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid #ef4444;
+}
+
+.problemCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #ef4444, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.problemCard.cardInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.problemCard:hover {
+  background: linear-gradient(135deg, #fef2f2 0%, #fef8f8 100%);
+  border-color: #ef4444;
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.15);
+}
+
+.problemCard:hover::before {
+  opacity: 1;
+}
+
+.cardText {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222222;
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+/* Final Problem Statement */
+.finalStatement {
+  font-size: 18px;
+  font-weight: 600;
+  color: #21808d;
+  line-height: 1.4;
+  padding: 20px 24px;
+  border-left: 3px solid #21808d;
+  background: rgba(33, 128, 141, 0.04);
+  border-radius: 8px;
+  margin: 0;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: 0.5s;
+}
+
+.finalStatement.statementInView {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* PART 2: COMPETITOR LAYOUT - Text Left, Image Right (Inverted) */
+.competitorLayout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Left Column - Competitor Text Content */
+.competitorContent {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Competitor Headline (matches main headline style) */
+.competitorHeadline {
+  font-size: 36px;
+  font-weight: 700;
+  color: #222222;
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.3px;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.competitorHeadline.headlineInView {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.competitorSubhead {
+  font-size: 22px;
+  font-weight: 500;
+  color: #444444;
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+  transition-delay: 0.12s;
+}
+
+.competitorSubhead.subheadingInView {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Actions List */
+.actionsList {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Action Item */
+.actionItem {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.actionItem.itemInView {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.actionItem:hover .actionMarker {
+  background: #21808d;
+  transform: scale(1.2);
+}
+
+.actionItem:hover {
+  padding-left: 8px;
+}
+
+/* Action Marker */
+.actionMarker {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #aaaaaa;
+  flex-shrink: 0;
+  margin-top: 8px;
+  transition: all 0.3s ease;
+}
+
+/* Action Text */
+.actionText {
+  font-size: 18px;
+  font-weight: 600;
+  color: #222222;
+  line-height: 1.6;
+  margin: 0;
+  letter-spacing: -0.2px;
+}
+
+/* Competitor Cards - Green accent for competitive advantages */
+.competitorContent .problemsGrid .problemCard {
+  border-left-color: #10b981;
+  background: linear-gradient(135deg, #f0fdf4 0%, #f7fefc 100%);
+}
+
+.competitorContent .problemsGrid .problemCard::before {
+  background: linear-gradient(90deg, transparent, #10b981, transparent);
+}
+
+.competitorContent .problemsGrid .problemCard:hover {
+  background: linear-gradient(135deg, #ecfdf5 0%, #f0fdf4 100%);
+  border-color: #10b981;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
+}
+
+/* Right Column - Competitor Image */
+.competitorImageWrapper {
+  position: relative;
+  height: 600px;
+  border-radius: 0;
+  overflow: visible;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  box-shadow: none;
+}
+
+.competitorImageWrapper.competitorImageInView {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.competitorImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+  background: transparent;
+}
+@media (max-width: 1024px) {
+  .problemContainer {
+    padding: 0 40px;
+  }
+
+  .problemLayout {
+    grid-template-columns: 320px 1fr;
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  .problemImageWrapper {
+    height: 380px;
+  }
+
+  .mainHeadline {
+    font-size: 32px;
+  }
+
+  .problemsGrid {
+    gap: 16px;
+  }
+
+  .problemCard {
+    padding: 24px 20px;
+  }
+
+  .cardText {
+    font-size: 17px;
+  }
+
+  .finalStatement {
+    font-size: 16px;
+    padding: 16px 20px;
+  }
+
+  .competitorLayout {
+    grid-template-columns: 1fr 320px;
+    gap: 40px;
+  }
+
+  .actionText {
+    font-size: 17px;
+  }
+
+  .competitorImageWrapper {
+    height: 520px;
+  }
+}
+
+/* Responsive Design - Tablet (Medium) */
+@media (max-width: 860px) {
+  .problemContainer {
+    padding: 0 30px;
+  }
+
+  .problemLayout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+  }
+
+  .problemImageWrapper {
+    height: 320px;
+  }
+
+  .mainHeadline {
+    font-size: 28px;
+  }
+
+  .problemsGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .problemCard {
+    padding: 22px 20px;
+  }
+
+  .cardText {
+    font-size: 16px;
+  }
+
+  .competitorLayout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .competitorImageWrapper {
+    height: 320px;
+    order: 1;
+  }
+
+  .competitorContent {
+    order: 2;
+  }
+
+  .actionText {
+    font-size: 16px;
+  }
+}
+
+/* Responsive Design - Mobile */
+@media (max-width: 640px) {
+  .problemSection {
+    padding: 60px 0;
+  }
+
+  .problemContainer {
+    padding: 0 24px;
+  }
+
+  .problemLayout {
+    margin-bottom: 50px;
+  }
+
+  .problemImageWrapper {
+    height: 280px;
+    border-radius: 10px;
+  }
+
+  .mainHeadline {
+    font-size: 24px;
+  }
+
+  .problemsGrid {
+    gap: 12px;
+  }
+
+  .problemCard {
+    padding: 20px 18px;
+  }
+
+  .cardText {
+    font-size: 15px;
+  }
+
+  .finalStatement {
+    font-size: 15px;
+    padding: 14px 18px;
+    border-left-width: 3px;
+  }
+
+  .actionsList {
+    gap: 14px;
+  }
+
+  .actionText {
+    font-size: 15px;
+  }
+
+  .competitorImageWrapper {
+    height: 380px;
+    border-radius: 10px;
+  }
+}
+
+/* Responsive Design - Small Mobile */
+@media (max-width: 480px) {
+  .problemSection {
+    padding: 50px 0;
+  }
+
+  .problemContainer {
+    padding: 0 18px;
+  }
+
+  .mainHeadline {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .problemCard {
+    padding: 18px 16px;
+  }
+
+  .cardText {
+    font-size: 14px;
+  }
+
+  .finalStatement {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .actionsList {
+    gap: 12px;
+  }
+
+  .actionItem {
+    gap: 12px;
+  }
+
+  .actionMarker {
+    margin-top: 7px;
+  }
+
+  .actionText {
+    font-size: 14px;
+  }
+
+  .competitorImageWrapper {
+    height: 320px;
+    border-radius: 8px;
+  }
+}
+
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .problemImageWrapper,
+  .mainHeadline,
+  .problemCard,
+  .finalStatement,
+  .actionItem,
+  .competitorImageWrapper {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .problemImageWrapper.imageInView,
+  .mainHeadline.headlineInView,
+  .problemCard.cardInView,
+  .finalStatement.statementInView,
+  .actionItem.itemInView,
+  .competitorImageWrapper.competitorImageInView {
+    opacity: 1;
+    transform: none;
+  }
+}

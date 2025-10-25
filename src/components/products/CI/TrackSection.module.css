@@ -1,0 +1,391 @@
+/* Track Section Container */
+.trackSection {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  padding: 60px 0 80px 0;
+}
+
+/* Image Container - Header */
+.trackImageContainer {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow: none;
+  padding: 40px 0;
+  margin: 0;
+  background: transparent;
+}
+
+/* Image Wrapper */
+.trackImageWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Track Image */
+.trackImage {
+  width: 100%;
+  height: auto;
+  display: none;
+}
+
+/* Text Overlay Container */
+.trackTextOverlay {
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  background: transparent;
+  gap: 12px;
+}
+
+/* Track Headline */
+.trackHeadline {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a2e;
+  text-align: center;
+  text-shadow: none;
+  max-width: 80%;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+  margin: 0;
+}
+
+/* Track Subtitle */
+.trackSubtitle {
+  font-size: 28px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: #666d7d;
+  text-align: center;
+  text-shadow: none;
+  max-width: 80%;
+  animation: fadeInUp 0.6s ease-out 0.6s both;
+  margin: 0;
+}
+
+/* Cards Section */
+.cardsSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 30px 40px;
+}
+
+/* Cards Grid - 2x4 layout */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Track Card - Modern Image-First Design */
+.trackCard {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  animation: slideInUp 0.6s ease-out both;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.trackCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(98, 91, 255, 0.03) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.trackCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: #625bff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.trackCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px rgba(98, 91, 255, 0.15);
+  border-color: rgba(98, 91, 255, 0.15);
+}
+
+.trackCard:hover::before {
+  opacity: 1;
+}
+
+.trackCard:hover::after {
+  transform: scaleX(1);
+}
+
+/* Card Image Container */
+.cardImageContainer {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f3ff 0%, #fafbfc 100%);
+  border-bottom: 3px solid #625bff;
+}
+
+/* Card Image */
+.cardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.trackCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+/* Card Content */
+.cardContent {
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card Title */
+.cardTitle {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 0 0 8px 0;
+  line-height: 1.3;
+}
+
+/* Card Description */
+.cardDesc {
+  font-size: 12px;
+  color: #666d7d;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+  flex-grow: 1;
+}
+
+/* Animations */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .trackSection {
+    padding: 50px 0 60px 0;
+  }
+
+  .trackImageContainer {
+    padding: 0;
+    margin: 0;
+  }
+
+  .trackHeadline {
+    font-size: 40px;
+  }
+
+  .trackSubtitle {
+    font-size: 24px;
+  }
+
+  .cardsSection {
+    padding: 25px 30px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .cardImageContainer {
+    height: 160px;
+  }
+
+  .cardContent {
+    padding: 18px 14px;
+  }
+
+  .cardTitle {
+    font-size: 14px;
+  }
+
+  .cardDesc {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  .trackSection {
+    padding: 40px 0 50px 0;
+  }
+
+  .trackImageContainer {
+    padding: 0;
+    margin: 0;
+  }
+
+  .trackHeadline {
+    font-size: 32px;
+    max-width: 90%;
+  }
+
+  .trackSubtitle {
+    font-size: 20px;
+    max-width: 90%;
+  }
+
+  .cardsSection {
+    padding: 20px 20px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .cardImageContainer {
+    height: 140px;
+  }
+
+  .cardContent {
+    padding: 16px 12px;
+  }
+
+  .cardTitle {
+    font-size: 13px;
+    margin-bottom: 6px;
+  }
+
+  .cardDesc {
+    font-size: 10px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 480px) {
+  .trackSection {
+    padding: 30px 0 40px 0;
+  }
+
+  .trackImageContainer {
+    padding: 0;
+    margin: 0;
+  }
+
+  .trackHeadline {
+    font-size: 24px;
+    max-width: 95%;
+  }
+
+  .trackSubtitle {
+    font-size: 16px;
+    max-width: 95%;
+  }
+
+  .cardsSection {
+    padding: 15px 14px;
+  }
+
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .trackCard:hover {
+    transform: translateY(-4px);
+  }
+
+  .cardImageContainer {
+    height: 120px;
+  }
+
+  .cardContent {
+    padding: 14px 10px;
+  }
+
+  .cardTitle {
+    font-size: 12px;
+    margin-bottom: 4px;
+  }
+
+  .cardDesc {
+    font-size: 9px;
+    line-height: 1.3;
+  }
+}

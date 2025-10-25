@@ -269,11 +269,6 @@ const TimelineSection: React.FC = () => {
               </motion.div>
 
               <p className="text-sm font-semibold text-[#171717] mt-2">{metric.label}</p>
-
-              {/* Source Tooltip */}
-              <div className="absolute inset-0 rounded-xl bg-[#171717] opacity-0 group-hover:opacity-95 transition-opacity duration-300 flex items-center justify-center p-4">
-                <p className="text-xs text-white text-center">{metric.source}</p>
-              </div>
             </motion.div>
           ))}
         </div>
