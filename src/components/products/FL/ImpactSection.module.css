@@ -1,0 +1,543 @@
+/* Impact Section - Mobile First Responsive Design */
+.impactSection {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 4rem 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .impactSection {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .impactSection {
+    padding: 8rem 2rem;
+  }
+}
+
+/* Animated Background Grid */
+.backgroundGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(98, 91, 255, 0.15) 25%, rgba(98, 91, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.15) 75%, rgba(98, 91, 255, 0.15) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(98, 91, 255, 0.15) 25%, rgba(98, 91, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.15) 75%, rgba(98, 91, 255, 0.15) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.impactContainer {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .sectionHeader {
+    margin-bottom: 5rem;
+  }
+}
+
+.mainHeadline {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1a202c;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+@media (min-width: 640px) {
+  .mainHeadline {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mainHeadline {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainHeadline {
+    font-size: 3.5rem;
+  }
+}
+
+.headlineInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animated Accent Bars */
+.accentBars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.accentBars.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.accentBar {
+  height: 4px;
+  width: 2rem;
+  background: linear-gradient(90deg, transparent, #625bff, transparent);
+  border-radius: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.accentBar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.accentBar:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.subHeadline {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #625bff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+@media (min-width: 768px) {
+  .subHeadline {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subHeadline {
+    font-size: 1.5rem;
+  }
+}
+
+.subheadlineInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Case Studies Grid */
+.caseStudiesGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 640px) {
+  .caseStudiesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .caseStudiesGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Case Study Cards */
+.caseStudyCard {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.5s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  overflow: hidden;
+}
+
+.caseStudyCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #625bff, #8b5cf6);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.cardInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.caseStudyCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(98, 91, 255, 0.15);
+  border-color: #625bff;
+}
+
+.caseStudyCard:hover::before {
+  transform: scaleX(1);
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.cardIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.caseStudyCard:hover .cardIcon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.companyName {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a202c;
+  line-height: 1.3;
+}
+
+.improvement {
+  margin-bottom: 1rem;
+}
+
+.improvementValue {
+  display: block;
+  font-size: 2rem;
+  font-weight: 900;
+  color: #625bff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 1024px) {
+  .improvementValue {
+    font-size: 2.5rem;
+  }
+}
+
+.improvementDescription {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #625bff;
+  line-height: 1.4;
+}
+
+.cardDetails {
+  font-size: 0.875rem;
+  color: #4a5568;
+  line-height: 1.5;
+}
+
+/* Business Impact Section */
+.businessImpactSection {
+  margin-bottom: 4rem;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #1a202c;
+  text-align: center;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+@media (min-width: 640px) {
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .sectionTitle {
+    font-size: 2.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sectionTitle {
+    font-size: 2.5rem;
+  }
+}
+
+.titleInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.sectionSubtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #625bff;
+  text-align: center;
+  margin-bottom: 3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+@media (min-width: 768px) {
+  .sectionSubtitle {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .sectionSubtitle {
+    font-size: 1.25rem;
+  }
+}
+
+.subtitleInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.businessImpactsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .businessImpactsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.businessImpactCard {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  transition: all 0.5s ease;
+  opacity: 1;
+  transform: translateY(0);
+  position: relative;
+  overflow: hidden;
+}
+
+.businessImpactCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.businessImpactCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+}
+
+.businessImpactCard:hover::before {
+  transform: scaleX(1);
+}
+
+.impactTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+@media (min-width: 1024px) {
+  .impactTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.statItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.statItem:last-child {
+  border-bottom: none;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: #4a5568;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.statValue {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #10b981;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 1024px) {
+  .statValue {
+    font-size: 1.25rem;
+  }
+}
+
+/* Bottom CTA */
+.bottomCTA {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 0.6s;
+}
+
+.ctaInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ctaText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .ctaText {
+    font-size: 1.5rem;
+  }
+}
+
+.ctaButton {
+  background: #625bff;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(98, 91, 255, 0.3);
+}
+
+.ctaButton:hover {
+  background: #5a52e8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(98, 91, 255, 0.4);
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .impactSection {
+    padding: 3rem 0.5rem;
+  }
+  
+  .mainHeadline {
+    font-size: 1.75rem;
+  }
+  
+  .caseStudyCard,
+  .businessImpactCard {
+    padding: 1.5rem 1rem;
+  }
+  
+  .improvementValue {
+    font-size: 1.75rem;
+  }
+  
+  .companyName {
+    font-size: 1rem;
+  }
+  
+  .impactTitle {
+    font-size: 1.125rem;
+  }
+  
+  .ctaText {
+    font-size: 1.125rem;
+  }
+  
+  .ctaButton {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation delays for staggered effect */
+.caseStudyCard:nth-child(1) { transition-delay: 0.1s; }
+.caseStudyCard:nth-child(2) { transition-delay: 0.2s; }
+.caseStudyCard:nth-child(3) { transition-delay: 0.3s; }
+.caseStudyCard:nth-child(4) { transition-delay: 0.4s; }
+
+.businessImpactCard:nth-child(1) { transition-delay: 0.5s; }
+.businessImpactCard:nth-child(2) { transition-delay: 0.6s; }
+.businessImpactCard:nth-child(3) { transition-delay: 0.7s; }

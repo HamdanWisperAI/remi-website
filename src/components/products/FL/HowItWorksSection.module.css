@@ -1,0 +1,384 @@
+/* How It Works Section - Mobile First Responsive Design */
+.howItWorksSection {
+  position: relative;
+  width: 100%;
+  background: white;
+  padding: 4rem 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .howItWorksSection {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .howItWorksSection {
+    padding: 8rem 2rem;
+  }
+}
+
+/* Animated Background Grid */
+.backgroundGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 1;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(98, 91, 255, 0.1) 25%, rgba(98, 91, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.1) 75%, rgba(98, 91, 255, 0.1) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(98, 91, 255, 0.1) 25%, rgba(98, 91, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.1) 75%, rgba(98, 91, 255, 0.1) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .header {
+    margin-bottom: 5rem;
+  }
+}
+
+.mainTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1a202c;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mainTitle {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainTitle {
+    font-size: 3.5rem;
+  }
+}
+
+/* Animated Accent Bars */
+.accentBars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.accentBar {
+  height: 4px;
+  width: 2rem;
+  background: linear-gradient(90deg, transparent, #625bff, transparent);
+  border-radius: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.accentBar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.accentBar:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #625bff;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* Cards Grid */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .cardsGrid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Card */
+.card {
+  position: relative;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(98, 91, 255, 0.15);
+  border-color: #625bff;
+}
+
+.cardClicked {
+  transform: scale(0.98);
+}
+
+.cardBorder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 1.5rem 1.5rem 0 0;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.card:hover .cardBorder {
+  transform: scaleX(1);
+}
+
+/* Card Number */
+.cardNumber {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 0.875rem;
+  z-index: 2;
+}
+
+/* Card Icon */
+.cardIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.card:hover .cardIcon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Card Content */
+.cardContent {
+  flex: 1;
+  text-align: center;
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+@media (min-width: 1024px) {
+  .cardTitle {
+    font-size: 1.5rem;
+  }
+}
+
+.cardSubtitle {
+  font-size: 0.875rem;
+  color: #625bff;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 1024px) {
+  .cardSubtitle {
+    font-size: 1rem;
+  }
+}
+
+/* Details List */
+.detailsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.detailItem {
+  font-size: 0.875rem;
+  color: #4a5568;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+  padding-left: 1.25rem;
+  position: relative;
+}
+
+.detailItem::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #10b981;
+  font-weight: 700;
+  font-size: 0.75rem;
+}
+
+.detailItem:last-child {
+  margin-bottom: 0;
+}
+
+/* Hover Accent Line */
+.hoverAccent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 0;
+  border-radius: 0 0 1.5rem 1.5rem;
+  transition: width 0.3s ease;
+}
+
+.card:hover .hoverAccent {
+  width: 100%;
+}
+
+/* Bottom Text */
+.bottomText {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 2px solid #e2e8f0;
+}
+
+.bottomDescription {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .bottomDescription {
+    font-size: 1.25rem;
+  }
+}
+
+.ctaButton {
+  background: #625bff;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(98, 91, 255, 0.3);
+}
+
+.ctaButton:hover {
+  background: #5a52e8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(98, 91, 255, 0.4);
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .howItWorksSection {
+    padding: 3rem 0.5rem;
+  }
+  
+  .mainTitle {
+    font-size: 1.75rem;
+  }
+  
+  .card {
+    padding: 1.5rem 1rem;
+    min-height: 350px;
+  }
+  
+  .cardTitle {
+    font-size: 1.125rem;
+  }
+  
+  .cardSubtitle {
+    font-size: 0.8rem;
+  }
+  
+  .detailItem {
+    font-size: 0.8rem;
+  }
+  
+  .bottomDescription {
+    font-size: 1rem;
+  }
+  
+  .ctaButton {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+  }
+}

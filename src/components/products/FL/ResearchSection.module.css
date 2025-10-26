@@ -1,0 +1,411 @@
+/* Research Section - Mobile First Responsive Design */
+.researchSection {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 4rem 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .researchSection {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .researchSection {
+    padding: 8rem 2rem;
+  }
+}
+
+/* Animated Background Grid */
+.backgroundGrid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.1;
+  pointer-events: none;
+  z-index: 1;
+  background-image: 
+    linear-gradient(0deg, transparent 24%, rgba(98, 91, 255, 0.15) 25%, rgba(98, 91, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.15) 75%, rgba(98, 91, 255, 0.15) 76%, transparent 77%, transparent),
+    linear-gradient(90deg, transparent 24%, rgba(98, 91, 255, 0.15) 25%, rgba(98, 91, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.15) 75%, rgba(98, 91, 255, 0.15) 76%, transparent 77%, transparent);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+.researchContainer {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Section Header */
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 768px) {
+  .sectionHeader {
+    margin-bottom: 5rem;
+  }
+}
+
+.mainHeadline {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1a202c;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+@media (min-width: 640px) {
+  .mainHeadline {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mainHeadline {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainHeadline {
+    font-size: 3.5rem;
+  }
+}
+
+.headlineInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Animated Accent Bars */
+.accentBars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.2s;
+}
+
+.accentBars.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.accentBar {
+  height: 4px;
+  width: 2rem;
+  background: linear-gradient(90deg, transparent, #625bff, transparent);
+  border-radius: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.accentBar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.accentBar:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.subHeadline {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #625bff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.4s;
+}
+
+@media (min-width: 768px) {
+  .subHeadline {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subHeadline {
+    font-size: 1.5rem;
+  }
+}
+
+.subheadlineInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stats Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .statsGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .statsGrid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Stat Cards */
+.statCard {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 1.5rem;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.5s ease;
+  opacity: 0;
+  transform: translateY(30px);
+  position: relative;
+  overflow: hidden;
+}
+
+.statCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #625bff, #8b5cf6);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.cardInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.statCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(98, 91, 255, 0.15);
+  border-color: #625bff;
+}
+
+.statCard:hover::before {
+  transform: scaleX(1);
+}
+
+/* Card Icon */
+.cardIcon {
+  width: 64px;
+  height: 64px;
+  background: linear-gradient(135deg, #625bff, #8b5cf6);
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.statCard:hover .cardIcon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 10px 25px rgba(98, 91, 255, 0.3);
+}
+
+/* Card Content */
+.cardContent {
+  flex: 1;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+@media (min-width: 1024px) {
+  .cardTitle {
+    font-size: 1.125rem;
+  }
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #625bff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (min-width: 640px) {
+  .statValue {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .statValue {
+    font-size: 3.5rem;
+  }
+}
+
+.cardSubtitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #625bff;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.cardDescription {
+  font-size: 0.875rem;
+  color: #4a5568;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.cardSource {
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+  text-align: left;
+}
+
+.sourceLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.sourceText {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  line-height: 1.4;
+  font-style: italic;
+}
+
+/* Bottom CTA */
+.bottomCTA {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out 0.6s;
+}
+
+.ctaInView {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ctaText {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .ctaText {
+    font-size: 1.5rem;
+  }
+}
+
+.ctaButton {
+  background: #625bff;
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(98, 91, 255, 0.3);
+}
+
+.ctaButton:hover {
+  background: #5a52e8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(98, 91, 255, 0.4);
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .researchSection {
+    padding: 3rem 0.5rem;
+  }
+  
+  .mainHeadline {
+    font-size: 1.75rem;
+  }
+  
+  .statCard {
+    padding: 1.5rem 1rem;
+  }
+  
+  .statValue {
+    font-size: 2rem;
+  }
+  
+  .cardTitle {
+    font-size: 0.9rem;
+  }
+  
+  .cardDescription {
+    font-size: 0.8rem;
+  }
+  
+  .ctaText {
+    font-size: 1.125rem;
+  }
+  
+  .ctaButton {
+    padding: 0.875rem 2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Animation delays for staggered effect */
+.statCard:nth-child(1) { transition-delay: 0.1s; }
+.statCard:nth-child(2) { transition-delay: 0.2s; }
+.statCard:nth-child(3) { transition-delay: 0.3s; }
+.statCard:nth-child(4) { transition-delay: 0.4s; }
+.statCard:nth-child(5) { transition-delay: 0.5s; }

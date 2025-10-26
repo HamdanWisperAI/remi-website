@@ -1,0 +1,762 @@
+/* Phone Dashboard Section - Mobile First Responsive Design */
+.dashboardSection {
+  position: relative;
+  width: 100%;
+  background: white;
+  padding: 4rem 1rem;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .dashboardSection {
+    padding: 6rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboardSection {
+    padding: 8rem 2rem;
+  }
+}
+
+/* Section Title */
+.titleContainer {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .titleContainer {
+    margin-bottom: 4rem;
+  }
+}
+
+.mainTitle {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #1a202c;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mainTitle {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainTitle {
+    font-size: 3.5rem;
+  }
+}
+
+/* Animated Accent Bars */
+.accentBars {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.accentBar {
+  height: 4px;
+  width: 2rem;
+  background: linear-gradient(90deg, transparent, #625bff, transparent);
+  border-radius: 2px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.accentBar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.accentBar:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #625bff;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .subtitle {
+    font-size: 1.5rem;
+  }
+}
+
+/* Dashboard Container */
+.dashboardContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Persona Tabs - Horizontal Layout */
+.personasTabs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .personasTabs {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.personaTab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.5rem 1rem;
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  text-align: center;
+}
+
+.personaTab:hover {
+  border-color: #625bff;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(98, 91, 255, 0.15);
+}
+
+.personaTabActive {
+  border-color: #625bff;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  box-shadow: 0 8px 25px rgba(98, 91, 255, 0.2);
+}
+
+.personaIconWrapper {
+  width: 56px;
+  height: 56px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.personaTabActive .personaIconWrapper {
+  transform: scale(1.1);
+}
+
+.personaTextWrapper {
+  width: 100%;
+}
+
+.personaLabel {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.personaDesc {
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+.activeIndicator {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 4px;
+  background: #625bff;
+  border-radius: 2px 2px 0 0;
+}
+
+/* Content Area */
+.contentArea {
+  width: 100%;
+}
+
+/* Phone Wrapper */
+.phoneWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.phone {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  filter: drop-shadow(0 25px 50px rgba(0, 0, 0, 0.2));
+  transition: transform 0.3s ease;
+}
+
+@media (min-width: 640px) {
+  .phone {
+    max-width: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .phone {
+    max-width: 380px;
+  }
+}
+
+.phone:hover {
+  transform: translateY(-5px);
+}
+
+/* Floating Cards Around Phone */
+.floatingCards {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  .floatingCards {
+    max-width: 1000px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .floatingCards {
+    max-width: 1100px;
+  }
+}
+
+/* Floating Card - Top */
+.floatingCard {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #625bff;
+  max-width: 280px;
+  pointer-events: auto;
+  animation: float 3s ease-in-out infinite;
+}
+
+@media (min-width: 768px) {
+  .floatingCard {
+    left: -5%;
+    max-width: 320px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .floatingCard {
+    left: -10%;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cardIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.cardSubtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* Lessons Grid - Bottom Right */
+.lessonsGrid {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 280px;
+}
+
+@media (min-width: 768px) {
+  .lessonsGrid {
+    right: -5%;
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lessonsGrid {
+    right: -10%;
+    max-width: 320px;
+  }
+}
+
+/* Lesson Card */
+.lessonCard {
+  background: white;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  pointer-events: auto;
+  transition: all 0.3s ease;
+}
+
+.lessonCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+}
+
+.lessonHeader {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.lessonDuration,
+.lessonDifficulty {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+.lessonDuration {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.lessonDifficulty {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.lessonTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+.lessonProgress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #625bff;
+  min-width: 35px;
+  text-align: right;
+}
+
+/* Stats Badge - Top Right */
+.statsBadge {
+  position: absolute;
+  top: 15%;
+  right: 5%;
+  background: linear-gradient(135deg, #625bff, #8b5cf6);
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 10px 40px rgba(98, 91, 255, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  pointer-events: auto;
+  animation: float 3s ease-in-out infinite 0.5s;
+}
+
+@media (min-width: 768px) {
+  .statsBadge {
+    right: -5%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .statsBadge {
+    right: -10%;
+  }
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.statNumber {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statDivider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Old phone content styles - keep for reference */
+.phoneContent {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.phoneHeader {
+  background: #f8fafc;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.phoneStatusBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.phoneTime {
+  font-variant-numeric: tabular-nums;
+}
+
+.phoneIcons {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.phoneIcon {
+  width: 4px;
+  height: 4px;
+  background: #1a202c;
+  border-radius: 50%;
+}
+
+.phoneBody {
+  flex: 1;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  overflow-y: auto;
+}
+
+/* Persona Content */
+.personaContent {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.personaHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.personaIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.personaInfo {
+  flex: 1;
+}
+
+.personaName {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.personaDescription {
+  font-size: 0.875rem;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* Lessons List */
+.lessonsList {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lessonCard {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+
+.lessonCard:hover {
+  border-color: #625bff;
+  box-shadow: 0 4px 15px rgba(98, 91, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.lessonHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.lessonTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a202c;
+  line-height: 1.3;
+  flex: 1;
+  margin-right: 0.5rem;
+}
+
+.lessonMeta {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.lessonDuration,
+.lessonDifficulty {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+}
+
+.lessonDuration {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.lessonDifficulty {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.lessonDescription {
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+
+.lessonProgress {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #625bff;
+  min-width: 35px;
+  text-align: right;
+}
+
+/* Explanation Column (20%) */
+.explanationColumn {
+  order: 3;
+}
+
+.explanationPanel {
+  background: #f8fafc;
+  border: 2px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  height: fit-content;
+}
+
+.explanationTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.explanationText {
+  font-size: 0.875rem;
+  color: #4a5568;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.keywordHighlight {
+  color: #625bff;
+  font-weight: 600;
+}
+
+.explanationStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statNumber {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #625bff;
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #6b7280;
+  line-height: 1.2;
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .dashboardSection {
+    padding: 3rem 0.5rem;
+  }
+  
+  .mainTitle {
+    font-size: 1.75rem;
+  }
+  
+  .personaTab {
+    min-width: 180px;
+    padding: 0.75rem;
+  }
+  
+  .phoneMockup {
+    max-width: 300px;
+    height: 500px;
+  }
+  
+  .lessonCard {
+    padding: 0.75rem;
+  }
+  
+  .lessonTitle {
+    font-size: 0.8rem;
+  }
+  
+  .lessonDescription {
+    font-size: 0.7rem;
+  }
+  
+  .explanationPanel {
+    padding: 1rem;
+  }
+}
