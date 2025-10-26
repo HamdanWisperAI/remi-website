@@ -153,10 +153,62 @@ export default function Product() {
         }
 
         .text-gradient {
-          background: linear-gradient(135deg, #625bff 0%, #7c6fff 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
+          color: #625bff;
+        }
+
+        .hero-background {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-image: url('/assets/images/home/homeBG.png');
+          background-size: cover;
+          background-position: center;
+          opacity: 1;
+          z-index: 0;
+        }
+
+        .hero-vignette {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.15) 100%);
+          z-index: 1;
+          pointer-events: none;
+        }
+
+        .hero-section {
+          position: relative;
+          width: 100%;
+          height: 700px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        @media (max-width: 1024px) {
+          .hero-section {
+            height: auto;
+            min-height: 600px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .hero-section {
+            height: auto;
+            min-height: 100vh;
+            padding: 40px 16px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .hero-section {
+            padding: 20px 12px;
+          }
         }
 
         .gallery {
@@ -260,21 +312,18 @@ export default function Product() {
         }
       `}</style>
 
-      {/* Main Hero Section */}
-      <section className="relative overflow-hidden bg-white px-4 sm:px-6 lg:px-8 py-20 sm:py-32 lg:py-40 min-h-[90vh] flex items-center justify-center w-full">
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl" />
-        </div>
+      <section className="hero-section bg-white px-4 sm:px-6 lg:px-8 py-20 sm:py-32 lg:py-40">
+        <div className="hero-background"></div>
+        <div className="hero-vignette"></div>
 
-        <div className="w-full mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-8">
+        <div className="relative z-10 w-full mx-auto max-w-5xl px-4 sm:px-6 text-center space-y-8">
 
           {/* Main Headline with Enhanced Animation */}
           <motion.h1
             initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             transition={{ duration: 1.2, ease: "easeOut", type: "spring" }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.1] text-[#0f172a]"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.1] text-black"
           >
             Start Anywhere.
             <br />
@@ -325,7 +374,7 @@ export default function Product() {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-gray-300 text-[#0f172a] hover:bg-gray-50 hover:border-[#625bff] hover:text-[#625bff] font-semibold text-base px-8 py-6 rounded-xl bg-white transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                className="border-2 border-gray-300 text-black bg-white hover:bg-gray-50 hover:border-[#625bff] hover:text-[#625bff] font-semibold text-base px-8 py-6 rounded-xl transition-all duration-300 hover:scale-105 w-full sm:w-auto"
               >
                 Start With Literacy — 2 Weeks
               </Button>
@@ -336,7 +385,7 @@ export default function Product() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.3 }}
-            className="text-base text-[#0f172a] pt-8 font-semibold tracking-wide"
+            className="text-base text-black pt-8 font-semibold tracking-wide"
           >
             Built for banks and credit unions from $100M to $10B in assets.
           </motion.p>
@@ -414,6 +463,14 @@ export default function Product() {
                   Deploy in 72 hours. Yes, really. We&apos;ve timed it.
                 </div>
 
+                <div className="pl-16 pt-6">
+                  <Link href="/product/CI">
+                    <Button className="bg-[#625bff] hover:bg-[#625bff]/90 text-white font-semibold px-6 py-3 rounded-lg">
+                      Learn More
+                    </Button>
+                  </Link>
+                </div>
+
                 <div className="rounded-2xl p-8 border border-[#625bff]/20 bg-[#625bff]/5">
                   <p className="italic text-[#0f172a] text-lg leading-relaxed">
                     &quot;It&apos;s like having a spy at every competitor&apos;s strategy meeting. Except legal and way more useful.&quot;
@@ -487,6 +544,14 @@ export default function Product() {
                   Two weeks to deploy. From &quot;let&apos;s do this&quot; to &quot;we&apos;re doing this.&quot;
                 </div>
 
+                <div className="pl-16 pt-6">
+                  <Link href="/product/financialLiteracy">
+                    <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white font-semibold px-6 py-3 rounded-lg">
+                      Learn More
+                    </Button>
+                  </Link>
+                </div>
+
                 <div className="rounded-2xl p-8 border border-[#10b981]/20 bg-[#10b981]/5">
                   <p className="italic text-[#0f172a] text-lg leading-relaxed">
                     &quot;Members actually thank you for this. When&apos;s the last time someone thanked you for financial education?&quot;
@@ -558,6 +623,14 @@ export default function Product() {
 
                 <div className="pl-16 pt-6 border-t border-gray-200 text-purple-600 font-semibold">
                   Instant activation. Like, click-a-button instant.
+                </div>
+
+                <div className="pl-16 pt-6">
+                  <Link href="/product/CRA">
+                    <Button className="bg-purple-600 hover:bg-purple-600/90 text-white font-semibold px-6 py-3 rounded-lg">
+                      Learn More
+                    </Button>
+                  </Link>
                 </div>
 
                 <div className="rounded-2xl p-8 border border-purple-500/20 bg-purple-500/5">
@@ -666,6 +739,14 @@ export default function Product() {
                 Deploy in 72 hours. Yes, really. We&apos;ve timed it.
               </p>
 
+              <div className="pt-4">
+                <Link href="/product/CI">
+                  <Button className="bg-[#625bff] hover:bg-[#625bff]/90 text-white font-semibold px-6 py-3 rounded-lg w-full">
+                    Learn More
+                  </Button>
+                </Link>
+              </div>
+
               <div className="rounded-xl p-6 border border-[#625bff]/20 bg-[#625bff]/5">
                 <p className="text-gray-700 italic text-sm">
                   &quot;It&apos;s like having a spy at every competitor&apos;s strategy meeting. Except legal and way more useful.&quot;
@@ -745,6 +826,14 @@ export default function Product() {
               <p className="text-sm font-semibold text-[#10b981]">
                 Two weeks to deploy. From &quot;let&apos;s do this&quot; to &quot;we&apos;re doing this.&quot;
               </p>
+
+              <div className="pt-4">
+                <Link href="/product/financialLiteracy">
+                  <Button className="bg-[#10b981] hover:bg-[#10b981]/90 text-white font-semibold px-6 py-3 rounded-lg w-full">
+                    Learn More
+                  </Button>
+                </Link>
+              </div>
 
               <div className="rounded-xl p-6 border border-[#10b981]/20 bg-[#10b981]/5">
                 <p className="text-gray-700 italic text-sm">
@@ -831,6 +920,14 @@ export default function Product() {
               <p className="text-sm font-semibold text-purple-600">
                 Instant activation. Like, click-a-button instant.
               </p>
+
+              <div className="pt-4">
+                <Link href="/product/CRA">
+                  <Button className="bg-purple-600 hover:bg-purple-600/90 text-white font-semibold px-6 py-3 rounded-lg w-full">
+                    Learn More
+                  </Button>
+                </Link>
+              </div>
 
               <div className="rounded-xl p-6 border border-purple-500/20 bg-purple-500/5">
                 <p className="text-gray-700 italic text-sm">

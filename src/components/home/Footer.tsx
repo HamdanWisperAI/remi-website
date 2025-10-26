@@ -49,9 +49,9 @@ function Footer() {
               </div>
               <div>
                   <ul className={`list-disc ${isDesktop ? 'pl-[1.2rem]' : 'pl-5'} m-0 flex flex-col ${isDesktop ? 'gap-[5px]' : 'gap-3'} [&>li]:text-black [&>li::marker]:text-[#625bff] [&>li>a]:text-black [&>li>a]:no-underline [&>li>a:hover]:text-[#625bff]`}>
-                      <li><a href="#" className={`${isDesktop ? 'text-base' : 'text-sm'}`}>Consumer Financial Literacy Platform</a></li>
-                      <li><a href="#" className={`${isDesktop ? 'text-base' : 'text-sm'}`}>Competitive Intelligence Dashboard</a></li>
-                      <li><a href="#" className={`${isDesktop ? 'text-base' : 'text-sm'}`}>CRA Compliance & Tracking</a></li>
+                      <li><a href="/product/financialLiteracy" className={`${isDesktop ? 'text-base' : 'text-sm'}`}>Consumer Financial Literacy Platform</a></li>
+                      <li><a href="/product/CI" className={`${isDesktop ? 'text-base' : 'text-sm'}`}>Competitive Intelligence Dashboard</a></li>
+                      <li><a href="/product/CRA" className={`${isDesktop ? 'text-base' : 'text-sm'}`}>CRA Compliance & Tracking</a></li>
                   </ul>
               </div>
           </div>
