@@ -3,28 +3,60 @@
   position: relative;
   width: 100%;
   background: #ffffff;
-  padding: 60px 40px;
+  padding: 32px 40px;
   overflow: hidden;
 }
 
 /* ===== TITLE SECTION ===== */
 .titleContainer {
   max-width: 900px;
-  margin: 0 auto 24px auto;
+  margin: 0 auto 16px auto;
   text-align: center;
 }
 
 .mainTitle {
-  font-size: 40px;
+  font-size: 32px;
   font-weight: 900;
   line-height: 1.2;
   color: #222;
-  margin: 0 0 8px 0;
+  margin: 0 0 4px 0;
   letter-spacing: -0.5px;
 }
 
+.accentBars {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.accentBar {
+  height: 3px;
+  width: 40px;
+  background: linear-gradient(90deg, transparent, #625bff, transparent);
+  border-radius: 2px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.accentBars .accentBar:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.accentBars .accentBar:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
 .subtitle {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   color: #666d7d;
   margin: 0;
@@ -189,7 +221,7 @@
 /* Dashboard Header */
 .dashboardHeader {
   background: linear-gradient(135deg, #f5f3ff 0%, #fafbfc 100%);
-  padding: 12px 20px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -203,14 +235,14 @@
 }
 
 .brandLogo {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   background: linear-gradient(135deg, #625bff 0%, #5044d9 100%);
   border-radius: 6px;
 }
 
 .brandText {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
   color: #222;
 }
@@ -230,27 +262,27 @@
 
 /* Main Dashboard Content */
 .mainContent {
-  padding: 24px;
+  padding: 18px;
   flex: 1;
   min-height: auto;
 }
 
 /* View Header */
 .viewHeader {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
   border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
 }
 
 .viewTitle {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
   color: #222;
-  margin: 0 0 4px 0;
+  margin: 0 0 2px 0;
 }
 
 .viewSubtitle {
-  font-size: 12px;
+  font-size: 11px;
   color: #999;
   margin: 0;
 }
@@ -259,17 +291,17 @@
 .metricsGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 24px;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .metricCard {
   background: #f5f3ff;
   border: 1px solid rgba(98, 91, 255, 0.1);
   border-radius: 10px;
-  padding: 14px;
+  padding: 12px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
   align-items: flex-start;
   transition: all 0.3s ease;
 }
@@ -286,8 +318,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   background: rgba(98, 91, 255, 0.1);
   border-radius: 8px;
 }
@@ -297,39 +329,39 @@
 }
 
 .metricLabel {
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .metricValue {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
   color: #625bff;
   line-height: 1;
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .metricSubtext {
-  font-size: 11px;
+  font-size: 10px;
   color: #666d7d;
 }
 
 /* ===== TABLES ===== */
 .tableSection {
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 
 .tableTitle {
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
   color: #222;
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
   border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
 }
 
 .dataTable,
@@ -341,7 +373,7 @@
   background: #f5f3ff;
   border-radius: 8px;
   overflow: hidden;
-  font-size: 11px;
+  font-size: 10px;
 }
 
 .dataTable thead,
@@ -355,9 +387,9 @@
 .featureTable th,
 .campaignTable th,
 .rateTable th {
-  padding: 10px 12px;
+  padding: 8px 10px;
   text-align: left;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 700;
   color: #222;
   text-transform: uppercase;
@@ -369,8 +401,8 @@
 .featureTable td,
 .campaignTable td,
 .rateTable td {
-  padding: 10px 12px;
-  font-size: 11px;
+  padding: 8px 10px;
+  font-size: 10px;
   color: #666d7d;
   border-bottom: 1px solid rgba(98, 91, 255, 0.05);
 }
@@ -600,12 +632,12 @@
 /* Dashboard Footer */
 .dashboardFooter {
   background: linear-gradient(135deg, #f5f3ff 0%, #fafbfc 100%);
-  padding: 12px 20px;
+  padding: 10px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
-  font-size: 10px;
+  font-size: 9px;
   color: #999;
 }
 
@@ -629,7 +661,7 @@
 
 /* ===== EXPLANATION PANEL ===== */
 .explanationPanel {
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 900;
   line-height: 1.3;
   color: #222;

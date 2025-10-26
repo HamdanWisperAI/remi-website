@@ -1,186 +1,145 @@
-import React from 'react'
-import { motion } from 'framer-motion'
-import { Globe, Zap, Shield } from 'lucide-react'
+import React, { useState } from 'react'
 
 const HowWeDoIt = () => {
+  const [clickedCard, setClickedCard] = useState<number | null>(null)
+
   const cards = [
     {
       id: 1,
       title: 'Public Data Aggregation',
-      subtitle: 'Automated aggregation from public websites, filings, and APIs only.',
-      icon: Globe,
-      gradient: 'linear-gradient(135deg, #625bff 0%, #5044d9 100%)',
-      accentColor: '#625bff'
+      subtitle: 'Automated aggregation from public websites, filings, and APIs only.'
     },
     {
       id: 2,
-      title: 'Pattern Recognition & Verification',
-      subtitle: 'AI-assisted pattern recognition with expert human QA.',
-      icon: Zap,
-      gradient: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
-      accentColor: '#10b981'
+      title: 'AI + Human Verification',
+      subtitle: 'Pattern recognition powered by artificial intelligence, verified by expert teams.'
     },
     {
       id: 3,
       title: 'Legal, Secure & Private',
-      subtitle: 'Your data is never shared—compliance and privacy by design.',
-      icon: Shield,
-      gradient: 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)',
-      accentColor: '#f59e0b'
+      subtitle: 'Your data is never shared—compliance and privacy by design.'
     }
   ]
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.1
-      }
-    }
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.5
-      }
-    }
-  }
-
-  const iconVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.6
-      }
-    }
-  }
-
   return (
-    <section className="relative w-full bg-stone-50 px-10 py-20 overflow-hidden md:px-8 md:py-16 lg:px-10 lg:py-20 sm:px-5 sm:py-12">
-      {/* Background Grid Pattern */}
-      <div className="absolute inset-0 opacity-3 pointer-events-none z-0" style={{
-        backgroundImage: 'linear-gradient(0deg, transparent 24%, rgba(98, 91, 255, 0.05) 25%, rgba(98, 91, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.05) 75%, rgba(98, 91, 255, 0.05) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(98, 91, 255, 0.05) 25%, rgba(98, 91, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.05) 75%, rgba(98, 91, 255, 0.05) 76%, transparent 77%, transparent)',
+    <section className="relative w-full bg-white overflow-hidden py-24 px-6 md:px-10 lg:px-16">
+      {/* Animated Background Grid Pattern */}
+      <div className="absolute inset-0 opacity-5 pointer-events-none z-0 animate-pulse" style={{
+        backgroundImage: `
+          linear-gradient(0deg, transparent 24%, rgba(98, 91, 255, 0.1) 25%, rgba(98, 91, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.1) 75%, rgba(98, 91, 255, 0.1) 76%, transparent 77%, transparent),
+          linear-gradient(90deg, transparent 24%, rgba(98, 91, 255, 0.1) 25%, rgba(98, 91, 255, 0.1) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.1) 75%, rgba(98, 91, 255, 0.1) 76%, transparent 77%, transparent)
+        `,
         backgroundSize: '50px 50px'
-      }}></div>
+      }} />
 
-      {/* Title */}
-      <motion.div
-        className="relative z-10 max-w-3xl mx-auto mb-16 text-center md:mb-14 lg:mb-16 sm:mb-10 flex flex-col items-center justify-center"
-        initial={{ opacity: 0, y: -20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <h2 className="text-4xl font-black leading-tight text-black mb-2 tracking-tight md:text-3xl lg:text-4xl sm:text-2xl">How We Do It</h2>
-        <p className="text-sm font-medium text-black uppercase tracking-wider md:text-xs lg:text-sm">Legal, Ethical, Transparent</p>
-      </motion.div>
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Main Headline with Bounce + Pulse Animation */}
+        <div className="mb-6 text-center">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-black leading-tight tracking-tighter mb-4">
+            We Do It the Right Way
+          </h2>
 
-      {/* Cards Grid */}
-      <motion.div
-        className="relative z-10 max-w-6xl mx-auto mb-10 grid grid-cols-1 md:grid-cols-3 gap-7 auto-rows-max md:gap-6 lg:gap-7 sm:gap-5"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '0px 0px -100px 0px' }}
-      >
-        {cards.map((card) => {
-          const IconComponent = card.icon
+          {/* Animated Accent Bar */}
+          <div className="flex justify-center gap-2 mb-8">
+            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-[#625bff] to-transparent animate-pulse rounded-full" />
+            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-[#625bff] to-transparent animate-pulse rounded-full animation-delay-300" />
+            <div className="h-1 w-24 bg-gradient-to-r from-transparent via-[#625bff] to-transparent animate-pulse rounded-full animation-delay-600" />
+          </div>
+        </div>
 
-          return (
-            <motion.div
+        {/* Subtitle */}
+        <div className="text-center mb-20 opacity-0 animate-fade-in">
+          <p className="text-xl md:text-2xl lg:text-3xl font-semibold text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            Legal, Ethical, Transparent Collection—Guaranteed.
+          </p>
+        </div>
+
+        {/* Cards Container */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-10 mb-16">
+          {cards.map((card, index) => (
+            <div
               key={card.id}
-              className="relative bg-gray-100 border border-gray-300 rounded-2xl p-8 flex flex-col items-center text-center transition-all duration-300 shadow-sm hover:border-gray-400 hover:shadow-lg md:p-7 lg:p-8 sm:p-6"
-              variants={cardVariants}
-              whileHover={{ y: -8 }}
+              className={`
+                group relative
+                bg-white border-2 border-black rounded-2xl
+                p-10 md:p-8 lg:p-10
+                flex flex-col items-start text-left
+                transition-all duration-500
+                hover:scale-105 hover:shadow-2xl
+                ${clickedCard === card.id ? 'scale-95' : 'scale-100'}
+                cursor-pointer
+                focus-within:ring-2 focus-within:ring-[#625bff] focus-within:ring-offset-2
+              `}
               role="article"
               aria-label={`${card.title}: ${card.subtitle}`}
+              tabIndex={0}
+              onClick={() => {
+                setClickedCard(card.id)
+                setTimeout(() => setClickedCard(null), 300)
+              }}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault()
+                  setClickedCard(card.id)
+                  setTimeout(() => setClickedCard(null), 300)
+                }
+              }}
             >
-              {/* Icon Container with Animation */}
-              <motion.div
-                className="relative w-20 h-20 rounded-lg flex items-center justify-center mb-5 overflow-hidden md:w-20 md:h-20 md:mb-4 lg:w-20 lg:h-20 lg:mb-5 sm:w-16 sm:h-16 sm:mb-4"
-                style={{ background: card.gradient }}
-                variants={iconVariants}
-              >
-                <motion.div
-                  className="relative z-10 flex items-center justify-center"
-                  animate={{
-                    y: [0, -6, 0],
-                    opacity: [1, 0.8, 1]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    delay: card.id * 0.3
-                  }}
-                >
-                  <IconComponent size={32} color="#ffffff" strokeWidth={1.5} />
-                </motion.div>
+              {/* Animated Border Ping Effect */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-[#625bff] opacity-0 group-hover:opacity-100 animate-pulse pointer-events-none" />
 
-                {/* Animated Background Glow */}
-                <motion.div
-                  className="absolute rounded-full blur-lg"
-                  style={{ 
-                    background: card.accentColor,
-                    width: '100%',
-                    height: '100%',
-                    top: '50%',
-                    left: '50%',
-                    transform: 'translate(-50%, -50%)',
-                    zIndex: 0
-                  }}
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    opacity: [0.2, 0.4, 0.2]
-                  }}
-                  transition={{
-                    duration: 4,
-                    repeat: Infinity,
-                    delay: card.id * 0.3
-                  }}
-                />
-              </motion.div>
+              {/* Card Content */}
+              <div className="relative z-10 w-full">
+                <h3 className="text-2xl md:text-xl lg:text-2xl font-bold text-black mb-4 leading-tight group-hover:translate-x-1 transition-transform duration-300">
+                  {card.title}
+                </h3>
 
-              {/* Title */}
-              <h3 className="text-lg font-bold text-black mb-2 leading-snug md:text-base lg:text-lg sm:text-base">{card.title}</h3>
+                <p className="text-lg md:text-base lg:text-lg text-gray-500 leading-relaxed opacity-0 animate-fade-in" style={{
+                  animationDelay: `${index * 0.15}s`
+                }}>
+                  {card.subtitle}
+                </p>
 
-              {/* Subtitle */}
-              <p className="text-sm font-normal text-black mb-5 leading-relaxed flex items-center justify-center flex-1 md:text-xs lg:text-sm sm:text-xs sm:mb-4">{card.subtitle}</p>
+                {/* Hover Accent Underline */}
+                <div className="absolute bottom-0 left-0 h-1 w-0 bg-gradient-to-r from-[#625bff] to-purple-400 group-hover:w-20 transition-all duration-500 rounded-full" />
+              </div>
+            </div>
+          ))}
+        </div>
 
-              {/* Bottom Accent Line */}
-              <motion.div
-                className="absolute bottom-0 left-0 h-1 w-0"
-                style={{ backgroundColor: card.accentColor }}
-                initial={{ width: 0 }}
-                whileInView={{ width: '100%' }}
-                transition={{ duration: 0.8, delay: 0.2 + card.id * 0.1 }}
-                viewport={{ once: true }}
-              />
-            </motion.div>
-          )
-        })}
-      </motion.div>
+        {/* Legal Footer */}
+        <div className="text-center pt-16 border-t-2 border-gray-200">
+          <p className="text-sm md:text-base lg:text-lg text-gray-400 font-light leading-relaxed max-w-2xl mx-auto opacity-0 animate-fade-in animation-delay-600">
+            100% compliant with financial regulations. Your data stays yours—always.
+          </p>
+        </div>
+      </div>
 
-      {/* Legal Text Footer */}
-      <motion.div
-        className="relative z-10 text-center pt-5 border-t border-gray-300 md:pt-4 lg:pt-5 sm:pt-4"
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.8 }}
-        viewport={{ once: true }}
-      >
-        <p className="text-xs font-normal text-gray-600 leading-relaxed tracking-wide md:text-xs lg:text-xs sm:text-xs">
-          Compliant with regulatory frameworks. Your strategies stay secret.
-        </p>
-      </motion.div>
+      {/* Tailwind CSS Custom Animations in Style Tag */}
+      <style jsx>{`
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+        }
+
+        .animation-delay-300 {
+          animation-delay: 300ms;
+        }
+
+        .animation-delay-600 {
+          animation-delay: 600ms;
+        }
+      `}</style>
     </section>
   )
 }

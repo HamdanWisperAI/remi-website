@@ -571,6 +571,20 @@ function IntelligenceDashboard() {
         >
           Competitive Intelligence Dashboard
         </motion.h2>
+
+        {/* Animated Accent Bar */}
+        <motion.div
+          className={styles.accentBars}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
+          <div className={styles.accentBar}></div>
+          <div className={styles.accentBar}></div>
+          <div className={styles.accentBar}></div>
+        </motion.div>
+
         <motion.p
           className={styles.subtitle}
           initial={{ opacity: 0, y: 20 }}

@@ -7,6 +7,9 @@ import TrackSection from '@/components/products/CI/TrackSection'
 import IntelligenceDashboard from '@/components/products/CI/IntelligenceDashboard'
 import HowWeDoIt from '@/components/products/CI/HowWeDoIt'
 import FAQ from '@/components/products/CI/FAQ'
+import Payment from '@/components/products/CI/Payment'
+import Hero from '@/components/products/CI/Hero'
+import CTASection from '@/components/products/CI/CTA'
 
 function index() {
   return (
@@ -17,8 +20,11 @@ function index() {
         <ProblemSection />
         <TrackSection />
         <IntelligenceDashboard />
+        <Hero />
         <HowWeDoIt />
         <FAQ />
+        <Payment />
+        <CTASection />
         <Footer />
       </div>
     </div>
