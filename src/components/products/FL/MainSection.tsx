@@ -47,8 +47,6 @@ function MainSection() {
           <div className={styles.flHeroPhoneWrapper}>
             <Android 
               src="/assets/images/Remi.jpg"
-              width={433}
-              height={882}
               className={styles.androidPhone}
             />
           </div>
