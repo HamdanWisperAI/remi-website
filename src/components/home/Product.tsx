@@ -325,7 +325,7 @@ export default function Product() {
             transition={{ duration: 1.2, ease: "easeOut", type: "spring" }}
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter leading-[1.1] text-black"
           >
-            Start Anywhere
+            Start Anywhere.
             <br />
             <span className="text-gradient">Win Everywhere.</span>
           </motion.h1>
