@@ -1,66 +1,206 @@
+'use client'
+
 import React from 'react'
+import { Timeline } from '@/components/ui/timeline'
+import { motion } from 'framer-motion'
+import { CheckCircle } from 'lucide-react'
 
 const TimelineSection = () => {
-  const timeline = [
+  const colors = {
+    1: { bg: 'bg-blue-100', text: 'text-blue-600', border: 'border-blue-600' },
+    2: { bg: 'bg-purple-100', text: 'text-purple-600', border: 'border-purple-600' },
+    3: { bg: 'bg-green-100', text: 'text-green-600', border: 'border-green-600' },
+    4: { bg: 'bg-orange-100', text: 'text-orange-600', border: 'border-orange-600' },
+    5: { bg: 'bg-pink-100', text: 'text-pink-600', border: 'border-pink-600' },
+    6: { bg: 'bg-emerald-100', text: 'text-emerald-600', border: 'border-emerald-600' },
+  } as const
+
+  const timelineData = [
     {
-      number: 1,
-      title: 'Platform Launch',
-      items: [
-        'Technical integration complete',
-        'Content customization finished',
-        'Staff training delivered',
-        'Soft launch with pilot group'
-      ]
+      title: 'Month 01',
+      content: (
+        <div className="max-w-4xl">
+          <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">
+            Platform <span className="text-blue-600">Launch</span>
+          </h3>
+          <p className="text-base md:text-lg text-gray-600 mb-5">Foundation for CRA success</p>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              'Technical integration complete',
+              'Content customization finished',
+              'Staff training delivered',
+              'Soft launch with pilot group'
+            ].map((item, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-start gap-2"
+              >
+                <CheckCircle size={18} className={`${colors[1].text} mt-0.5 shrink-0`} />
+                <span>{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      )
     },
     {
-      number: 2,
-      title: 'Community Rollout',
-      items: [
-        'Marketing campaign launch',
-        'Partner organization integration',
-        'Community event kickoffs',
-        'Media coverage secured'
-      ]
+      title: 'Month 02',
+      content: (
+        <div className="max-w-4xl">
+          <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">
+            Community <span className="text-purple-600">Rollout</span>
+          </h3>
+          <p className="text-base md:text-lg text-gray-600 mb-5">Building engagement and awareness</p>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              'Marketing campaign launch',
+              'Partner organization integration',
+              'Community event kickoffs',
+              'Media coverage secured'
+            ].map((item, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-start gap-2"
+              >
+                <CheckCircle size={18} className={`${colors[2].text} mt-0.5 shrink-0`} />
+                <span>{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      )
     },
     {
-      number: 3,
-      title: 'Scale Achievement',
-      items: [
-        '1,000+ active users',
-        '80%+ completion rates',
-        'Initial outcomes documented',
-        'Geographic coverage expanding'
-      ]
+      title: 'Month 03',
+      content: (
+        <div className="max-w-4xl">
+          <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">
+            Scale <span className="text-green-600">Achievement</span>
+          </h3>
+          <p className="text-base md:text-lg text-gray-600 mb-5">Reaching critical milestones</p>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              '1,000+ active users',
+              '80%+ completion rates',
+              'Initial outcomes documented',
+              'Geographic coverage expanding'
+            ].map((item, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-start gap-2"
+              >
+                <CheckCircle size={18} className={`${colors[3].text} mt-0.5 shrink-0`} />
+                <span>{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      )
     },
     {
-      number: 4,
-      title: 'Impact Documentation',
-      items: [
-        'First behavioral changes measured',
-        'Credit improvements beginning',
-        'Product adoption tracking',
-        'Community feedback collected'
-      ]
+      title: 'Month 04',
+      content: (
+        <div className="max-w-4xl">
+          <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">
+            Impact <span className="text-orange-600">Documentation</span>
+          </h3>
+          <p className="text-base md:text-lg text-gray-600 mb-5">Measuring real-world results</p>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              'First behavioral changes measured',
+              'Credit improvements beginning',
+              'Product adoption tracking',
+              'Community feedback collected'
+            ].map((item, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-start gap-2"
+              >
+                <CheckCircle size={18} className={`${colors[4].text} mt-0.5 shrink-0`} />
+                <span>{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      )
     },
     {
-      number: 5,
-      title: 'Report Preparation',
-      items: [
-        'CRA documentation package',
-        'Examiner-ready dashboards',
-        'Impact visualization tools',
-        'Success story compilation'
-      ]
+      title: 'Month 05',
+      content: (
+        <div className="max-w-4xl">
+          <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">
+            Report <span className="text-pink-600">Preparation</span>
+          </h3>
+          <p className="text-base md:text-lg text-gray-600 mb-5">Examiner-ready documentation</p>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              'CRA documentation package',
+              'Examiner-ready dashboards',
+              'Impact visualization tools',
+              'Success story compilation'
+            ].map((item, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-start gap-2"
+              >
+                <CheckCircle size={18} className={`${colors[5].text} mt-0.5 shrink-0`} />
+                <span>{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      )
     },
     {
-      number: 6,
-      title: 'Examination Ready',
-      items: [
-        'Full platform deployment',
-        'Measurable outcomes proven',
-        'Innovation clearly demonstrated',
-        'Outstanding rating positioned'
-      ]
+      title: 'Month 06',
+      content: (
+        <div className="max-w-4xl">
+          <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">
+            Examination <span className="text-emerald-600">Ready</span>
+          </h3>
+          <p className="text-base md:text-lg text-gray-600 mb-5">Positioned for Outstanding rating</p>
+          <ul className="space-y-3 text-gray-700">
+            {[
+              'Full platform deployment',
+              'Measurable outcomes proven',
+              'Innovation clearly demonstrated',
+              'Outstanding rating positioned'
+            ].map((item, idx) => (
+              <motion.li
+                key={idx}
+                initial={{ opacity: 0, x: -10 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="flex items-start gap-2"
+              >
+                <CheckCircle size={18} className={`${colors[6].text} mt-0.5 shrink-0`} />
+                <span>{item}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </div>
+      )
     }
   ]
 
@@ -68,7 +208,7 @@ const TimelineSection = () => {
     <section className="relative w-full bg-white overflow-hidden py-24 px-6 md:px-10 lg:px-16">
       <div className="relative z-10 max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-16">
+        <div className="mb-16 text-center">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 leading-tight tracking-tight mb-3">
             From Contract to Outstanding
           </h2>
@@ -77,84 +217,12 @@ const TimelineSection = () => {
           </p>
         </div>
 
-        {/* Desktop: Horizontal Timeline */}
-        <div className="hidden lg:block relative mb-8">
-          {/* Progress Bar */}
-          <div className="absolute top-5 left-0 right-0 h-1 bg-gray-200 rounded-full">
-            <div className="h-full w-full bg-gradient-to-r from-[#625bff] via-purple-500 to-orange-500 rounded-full"></div>
-          </div>
-
-          {/* Timeline Grid */}
-          <div className="grid grid-cols-6 gap-4">
-            {timeline.map((item, index) => (
-              <div key={index} className="relative">
-                {/* Connected Node */}
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-white border-4 border-[#625bff] flex items-center justify-center shadow-lg z-20">
-                  <span className="font-bold text-[#625bff] text-lg">{item.number}</span>
-                </div>
-
-                {/* Card */}
-                <div className="mt-20 bg-white rounded-2xl border border-gray-200 p-7 hover:shadow-lg hover:border-gray-300 transition-all duration-300">
-                  <div className="text-xs font-bold text-[#625bff] uppercase tracking-wider mb-3">
-                    Month {item.number}
-                  </div>
-                  
-                  <h3 className="font-bold text-gray-900 mb-5 text-lg leading-tight">
-                    {item.title}
-                  </h3>
-                  
-                  <ul className="space-y-3">
-                    {item.items.map((point, idx) => (
-                      <li key={idx} className="flex gap-3 items-start">
-                        <span className="text-[#625bff] font-bold text-sm mt-0.5">•</span>
-                        <span className="text-sm text-gray-600 leading-relaxed">{point}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Mobile/Tablet: Vertical Timeline */}
-        <div className="lg:hidden relative pl-8">
-          {/* Vertical Progress Line */}
-          <div className="absolute left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-[#625bff] via-purple-500 to-orange-500 rounded-full"></div>
-
-          {timeline.map((item, index) => (
-            <div key={index} className="relative mb-10 last:mb-0">
-              {/* Node */}
-              <div className="absolute -left-[22px] top-1 w-10 h-10 rounded-full bg-[#625bff] flex items-center justify-center shadow-md z-10">
-                <span className="font-bold text-white text-base">{item.number}</span>
-              </div>
-
-              {/* Card */}
-              <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:shadow-lg transition-all duration-300">
-                <div className="text-xs font-bold text-[#625bff] uppercase tracking-wider mb-2">
-                  Month {item.number}
-                </div>
-                
-                <h3 className="font-bold text-gray-900 mb-4 text-lg">
-                  {item.title}
-                </h3>
-                
-                <ul className="space-y-3">
-                  {item.items.map((point, idx) => (
-                    <li key={idx} className="flex gap-3 items-start">
-                      <span className="text-[#625bff] font-bold text-sm mt-0.5">•</span>
-                      <span className="text-sm text-gray-600 leading-relaxed">{point}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          ))}
-        </div>
+        {/* Timeline Component */}
+        <Timeline data={timelineData} />
 
         {/* CTA Section */}
         <div className="mt-24 text-center">
-          <div className="inline-block bg-gradient-to-r from-[#625bff] to-purple-600 rounded-3xl p-12 shadow-xl">
+          <div className="inline-block bg-linear-to-r from-[#625bff] to-purple-600 rounded-3xl p-12 shadow-xl">
             <h3 className="text-3xl md:text-4xl font-black text-white mb-4">
               Ready to get started?
             </h3>

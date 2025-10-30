@@ -1,479 +1,241 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
+import { CheckCircle, ArrowRight } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
 
-interface PricingCard {
-  id: number
-  title: string
-  price: string
-  description: string
-  features: string[]
-  cta: string
-  popular?: boolean
-}
-
-const pricingCards: PricingCard[] = [
+const pricingPlans = [
   {
-    id: 1,
-    title: 'Basic Package',
-    price: '$2,500',
-    description: 'Essential CRA compliance tools',
+    name: 'Pilot Program',
+    description: 'Test with 500 members',
+    price: 'Custom',
+    priceDetail: '90-day trial',
     features: [
-      'Up to 1,000 active users',
-      'Basic tracking and reporting',
-      'Monthly CRA documentation',
-      'Email support',
-      'Core financial literacy content',
+      { text: 'Up to 500 active users', included: true },
+      { text: 'Core financial literacy content', included: true },
+      { text: 'Basic tracking and reporting', included: true },
+      { text: 'Monthly CRA documentation', included: true },
+      { text: 'Email support', included: true },
+      { text: 'Success metrics included', included: true },
+      { text: 'Multi-language support', included: false },
+      { text: 'White-label options', included: false }
     ],
-    cta: 'Get Started',
+    cta: 'Start Pilot',
+    ctaLink: '#pilot',
+    popular: false
   },
   {
-    id: 2,
-    title: 'Standard Package',
-    price: '$5,000',
-    description: 'Complete CRA innovation platform',
+    name: 'Full Deployment',
+    description: 'Scale across your institution',
+    price: 'Custom',
+    priceDetail: 'Annual contract',
     features: [
-      'All Basic features',
-      'Unlimited active users',
-      'Real-time CRA dashboard',
-      'Examiner-ready documentation',
-      'Multi-language support',
-      'Priority support',
-      'Custom branding',
+      { text: 'Unlimited active users', included: true },
+      { text: 'Complete content library (700+ lessons)', included: true },
+      { text: 'Real-time CRA dashboard', included: true },
+      { text: 'Examiner-ready documentation', included: true },
+      { text: 'Multi-language support (Spanish, Vietnamese, Mandarin)', included: true },
+      { text: 'Custom branding', included: true },
+      { text: 'Priority support', included: true },
+      { text: 'Quarterly business reviews', included: true }
     ],
-    cta: 'Get Started',
+    cta: 'Get Pricing',
+    ctaLink: '#demo',
     popular: true
   },
   {
-    id: 3,
-    title: 'Enterprise Package',
-    price: '$10,000',
-    description: 'Full-service CRA excellence',
+    name: 'Enterprise',
+    description: 'For multi-branch institutions',
+    price: 'Custom',
+    priceDetail: 'Contact for quote',
     features: [
-      'All Standard features',
-      'Dedicated success manager',
-      'Examination support',
-      'Custom integrations',
-      'Advanced analytics',
-      'White-label options',
-      'SLA guarantee',
+      { text: 'Everything in Full Deployment', included: true },
+      { text: 'Dedicated success manager', included: true },
+      { text: 'Examination support', included: true },
+      { text: 'Custom integrations (core banking, CRM)', included: true },
+      { text: 'Advanced analytics and reporting', included: true },
+      { text: 'White-label options', included: true },
+      { text: 'SLA guarantee (99.9% uptime)', included: true },
+      { text: 'Custom content development', included: true }
     ],
     cta: 'Contact Sales',
-  },
+    ctaLink: '#contact',
+    popular: false
+  }
 ]
 
-export default function PricingSection() {
-  const [currentPricingCard, setCurrentPricingCard] = useState(1) // Start with Standard (index 1)
-  const [isDesktop, setIsDesktop] = React.useState(false)
-
-  React.useEffect(() => {
-    setIsDesktop(window.innerWidth >= 768)
-    const handleResize = () => setIsDesktop(window.innerWidth >= 768)
-    window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [])
-
-  const nextPricingCard = () => {
-    setCurrentPricingCard((prev) => (prev + 1) % pricingCards.length)
-  }
-
-  const prevPricingCard = () => {
-    setCurrentPricingCard((prev) => (prev - 1 + pricingCards.length) % pricingCards.length)
-  }
-
-  const containerStyle: React.CSSProperties = {
-    width: "100%",
-    backgroundColor: "white",
-    padding: isDesktop ? "100px 20px" : "60px 16px 80px 16px",
-    position: "relative"
-  }
-
-  const contentStyle: React.CSSProperties = {
-    maxWidth: "1400px",
-    margin: "0 auto",
-    display: "flex",
-    flexDirection: "column",
-    gap: "60px"
-  }
-
-  const headerStyle: React.CSSProperties = {
-    textAlign: "center"
-  }
-
-  const titleStyle: React.CSSProperties = {
-    color: "black",
-    fontSize: isDesktop ? "clamp(32px, 5vw, 56px)" : "clamp(24px, 4vw, 36px)",
-    fontWeight: "900",
-    margin: "0 0 20px 0",
-    lineHeight: "1.2"
-  }
-
-  const highlightStyle: React.CSSProperties = {
-    color: "#625bff",
-    fontWeight: "900"
-  }
-
-  const subtitleStyle: React.CSSProperties = {
-    color: "#666",
-    fontSize: isDesktop ? "20px" : "16px",
-    fontWeight: "600",
-    margin: "0"
-  }
-
-  const carouselContainerStyle: React.CSSProperties = {
-    position: "relative",
-    width: isDesktop ? "450px" : "100%",
-    height: isDesktop ? "550px" : "auto",
-    perspective: "1000px",
-    maxWidth: isDesktop ? "450px" : "100%",
-    margin: "0 auto",
-    paddingBottom: isDesktop ? "0" : "20px"
-  }
-
-  const pricingCardStyle: React.CSSProperties = {
-    position: isDesktop ? "absolute" : "relative",
-    width: "100%",
-    height: isDesktop ? "100%" : "auto",
-    background: "white",
-    borderRadius: isDesktop ? "24px" : "20px",
-    padding: isDesktop ? "40px 30px 30px 30px" : "32px 24px 24px 24px",
-    boxShadow: `
-      0 25px 50px rgba(0, 0, 0, 0.15),
-      0 10px 20px rgba(98, 91, 255, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.8)
-    `,
-    border: "1px solid rgba(98, 91, 255, 0.1)",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    transition: "all 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
-    transformStyle: "preserve-3d"
-  }
-
-  const navigationStyle: React.CSSProperties = {
-    position: isDesktop ? "absolute" : "relative",
-    bottom: isDesktop ? "-80px" : "0",
-    left: isDesktop ? "50%" : "auto",
-    transform: isDesktop ? "translateX(-50%)" : "none",
-    display: "flex",
-    gap: "20px",
-    justifyContent: "center",
-    marginTop: isDesktop ? "0" : "40px",
-    width: isDesktop ? "auto" : "100%"
-  }
-
-  const navButtonStyle: React.CSSProperties = {
-    width: isDesktop ? "50px" : "44px",
-    height: isDesktop ? "50px" : "44px",
-    borderRadius: "50%",
-    background: "#625bff",
-    border: "none",
-    color: "white",
-    fontSize: isDesktop ? "20px" : "18px",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    transition: "all 0.3s ease",
-    boxShadow: "0 5px 15px rgba(98, 91, 255, 0.3)"
-  }
-
+function PricingSection() {
   return (
-    <>
-      <style jsx>{`
-        .pricing-card-active {
-          transform: translateZ(50px) scale(1) !important;
-          opacity: 1 !important;
-          z-index: 3 !important;
-          display: block !important;
-        }
+    <section className="py-24 px-4 bg-gradient-to-b from-gray-50 to-white">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Transparent Pricing, Measurable Impact
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Start with a pilot, scale when you see results. No hidden fees, no surprises.
+          </p>
+        </motion.div>
 
-        .pricing-card-left {
-          transform: translateX(-120px) translateZ(-100px) scale(0.8) rotateY(25deg) !important;
-          opacity: 0.6 !important;
-          z-index: 1 !important;
-          display: none !important;
-        }
-
-        .pricing-card-right {
-          transform: translateX(120px) translateZ(-100px) scale(0.8) rotateY(-25deg) !important;
-          opacity: 0.6 !important;
-          z-index: 1 !important;
-          display: none !important;
-        }
-
-        .pricing-card-hidden {
-          transform: translateZ(-200px) scale(0.5) !important;
-          opacity: 0 !important;
-          z-index: 0 !important;
-          display: none !important;
-        }
-
-        @media (min-width: 768px) {
-          .pricing-card-left {
-            display: block !important;
-          }
-
-          .pricing-card-right {
-            display: block !important;
-          }
-        }
-
-        .nav-button:hover {
-          background: #5048ff !important;
-          transform: scale(1.1);
-        }
-      `}</style>
-
-      <div style={containerStyle} className="relative">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-20 pointer-events-none z-0" style={{
-          backgroundImage: `
-            linear-gradient(0deg, transparent 24%, rgba(98, 91, 255, 0.15) 25%, rgba(98, 91, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.15) 75%, rgba(98, 91, 255, 0.15) 76%, transparent 77%, transparent),
-            linear-gradient(90deg, transparent 24%, rgba(98, 91, 255, 0.15) 25%, rgba(98, 91, 255, 0.15) 26%, transparent 27%, transparent 74%, rgba(98, 91, 255, 0.15) 75%, rgba(98, 91, 255, 0.15) 76%, transparent 77%, transparent)
-          `,
-          backgroundSize: '50px 50px'
-        }} />
-
-        <div style={contentStyle}>
-          {/* Header */}
-          <div style={headerStyle}>
-            <h2 style={titleStyle}>
-              INVESTMENT WITH <span style={highlightStyle}>GUARANTEED ROI</span>
-            </h2>
-            <p style={subtitleStyle}>
-              CRA innovation that pays for itself
-            </p>
-          </div>
-
-          {/* Carousel */}
-          <div style={carouselContainerStyle}>
-            {pricingCards.map((card, index) => {
-              let cardClass = 'pricing-card-hidden'
-              
-              if (index === currentPricingCard) {
-                cardClass = 'pricing-card-active'
-              } else if (index === (currentPricingCard - 1 + pricingCards.length) % pricingCards.length) {
-                cardClass = 'pricing-card-left'
-              } else if (index === (currentPricingCard + 1) % pricingCards.length) {
-                cardClass = 'pricing-card-right'
-              }
-
-              return (
-                <div
-                  key={card.id}
-                  className={cardClass}
-                  style={pricingCardStyle}
-                >
-                  {/* Popular Badge */}
-                  {card.popular && (
-                    <div style={{
-                      position: "absolute",
-                      top: "16px",
-                      right: "16px",
-                      backgroundColor: "#625bff",
-                      color: "white",
-                      padding: "6px 12px",
-                      borderRadius: "20px",
-                      fontSize: "12px",
-                      fontWeight: "700",
-                      zIndex: 10
-                    }}>
-                      MOST POPULAR
-                    </div>
-                  )}
-
-                  <h3 style={{
-                    color: "#625bff",
-                    fontSize: "20px",
-                    fontWeight: "600",
-                    margin: "0 0 12px 0"
-                  }}>
-                    {card.title}
-                  </h3>
-
-                  <div style={{ marginBottom: "12px" }}>
-                    <p style={{
-                      fontSize: "36px",
-                      fontWeight: "700",
-                      color: "black",
-                      margin: "0"
-                    }}>
-                      {card.price}
-                    </p>
-                    <p style={{
-                      color: "#999",
-                      fontSize: "12px",
-                      margin: "4px 0 0 0"
-                    }}>
-                      /month
-                    </p>
-                  </div>
-
-                  <p style={{
-                    color: "#666",
-                    fontSize: "14px",
-                    fontWeight: "500",
-                    margin: "0 0 20px 0"
-                  }}>
-                    {card.description}
-                  </p>
-
-                  <ul style={{
-                    listStyle: "none",
-                    padding: "0",
-                    margin: "0 0 24px 0",
-                    flex: "1"
-                  }}>
-                    {card.features.map((feature, idx) => (
-                      <li
-                        key={idx}
-                        style={{
-                          display: "flex",
-                          alignItems: "flex-start",
-                          color: "#666",
-                          fontSize: "13px",
-                          margin: "10px 0"
-                        }}
-                      >
-                        <span style={{
-                          color: "#625bff",
-                          fontWeight: "700",
-                          marginRight: "8px",
-                          marginTop: "2px",
-                          flexShrink: 0
-                        }}>
-                          ✓
-                        </span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <button
-                    style={{
-                      width: "100%",
-                      padding: "12px 16px",
-                      backgroundColor: "#625bff",
-                      color: "white",
-                      fontWeight: "600",
-                      fontSize: "14px",
-                      border: "none",
-                      borderRadius: "8px",
-                      cursor: "pointer",
-                      transition: "all 0.3s ease"
-                    }}
-                    onMouseOver={(e: React.MouseEvent<HTMLButtonElement>) => {
-                      const target = e.target as HTMLButtonElement
-                      target.style.backgroundColor = "#5048ff"
-                      target.style.transform = "scale(1.02)"
-                    }}
-                    onMouseOut={(e: React.MouseEvent<HTMLButtonElement>) => {
-                      const target = e.target as HTMLButtonElement
-                      target.style.backgroundColor = "#625bff"
-                      target.style.transform = "scale(1)"
-                    }}
-                  >
-                    {card.cta}
-                  </button>
+        {/* Pricing Grid - Side by Side */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          {pricingPlans.map((plan, idx) => (
+            <motion.div
+              key={idx}
+              className={`
+                relative bg-white rounded-2xl border-2 p-8
+                ${plan.popular 
+                  ? 'border-blue-600 shadow-2xl scale-105 z-10' 
+                  : 'border-gray-200 shadow-lg'
+                }
+                hover:shadow-xl transition-all duration-300
+              `}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
+            >
+              {/* Popular Badge */}
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-1.5 rounded-full text-sm font-bold shadow-lg">
+                  MOST POPULAR
                 </div>
-              )
-            })}
+              )}
 
-            {/* Navigation */}
-            <div style={navigationStyle}>
-              <button
-                className="nav-button"
-                style={navButtonStyle}
-                onClick={prevPricingCard}
+              {/* Plan Header */}
+              <div className="mb-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                  {plan.name}
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  {plan.description}
+                </p>
+                <div className="mb-2">
+                  <span className="text-4xl font-black text-gray-900">
+                    {plan.price}
+                  </span>
+                </div>
+                <p className="text-sm text-gray-500">
+                  {plan.priceDetail}
+                </p>
+              </div>
+
+              {/* Features List */}
+              <ul className="space-y-3 mb-8 flex-1">
+                {plan.features.map((feature, featureIdx) => (
+                  <li key={featureIdx} className="flex items-start gap-3">
+                    <CheckCircle 
+                      size={20} 
+                      weight={feature.included ? 'fill' : 'regular'}
+                      className={feature.included ? 'text-green-600' : 'text-gray-300'}
+                    />
+                    <span className={`text-sm ${feature.included ? 'text-gray-700' : 'text-gray-400'}`}>
+                      {feature.text}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA Button */}
+              <a
+                href={plan.ctaLink}
+                className={`
+                  group w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold transition-all
+                  ${plan.popular
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-105 shadow-lg'
+                    : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                  }
+                `}
               >
-                ←
-              </button>
-              <button
-                className="nav-button"
-                style={navButtonStyle}
-                onClick={nextPricingCard}
-              >
-                →
-              </button>
-            </div>
-          </div>
-
-          {/* ROI Section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            <div className="bg-gradient-to-br from-green-50 to-white border-2 border-green-200 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-black text-green-600 mb-2">$6</div>
-              <div className="text-sm font-semibold text-gray-700">Saved per $1 invested (healthcare costs)</div>
-            </div>
-            
-            <div className="bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-black text-blue-600 mb-2">2x</div>
-              <div className="text-sm font-semibold text-gray-700">Employee referral increase</div>
-            </div>
-            
-            <div className="bg-gradient-to-br from-purple-50 to-white border-2 border-purple-200 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-black text-purple-600 mb-2">23-26</div>
-              <div className="text-sm font-semibold text-gray-700">Point credit score improvements</div>
-            </div>
-            
-            <div className="bg-gradient-to-br from-orange-50 to-white border-2 border-orange-200 rounded-2xl p-6 text-center">
-              <div className="text-3xl font-black text-orange-600 mb-2">10-33%</div>
-              <div className="text-sm font-semibold text-gray-700">Delinquency reduction</div>
-            </div>
-          </div>
-
-          {/* Value Props */}
-          <div className="bg-white rounded-3xl p-8 border border-gray-200">
-            <h3 className="text-3xl font-bold text-gray-900 mb-10 text-center">Beyond Pricing: Real CRA Value</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="relative pl-10">
-                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-gradient-to-br from-[#625bff] to-purple-600 flex items-center justify-center">
-                  <span className="text-white text-sm">✓</span>
-                </div>
-                <div>
-                  <p className="text-lg font-bold text-gray-900 mb-2">Outstanding Rating Potential</p>
-                  <p className="text-base text-[#625bff] font-semibold">Priceless</p>
-                  <p className="text-sm text-gray-600 mt-1">Position yourself for examination success</p>
-                </div>
-              </div>
-              
-              <div className="relative pl-10">
-                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-gradient-to-br from-[#625bff] to-purple-600 flex items-center justify-center">
-                  <span className="text-white text-sm">↑</span>
-                </div>
-                <div>
-                  <p className="text-lg font-bold text-gray-900 mb-2">Expanded Assessment Area Approval</p>
-                  <p className="text-base text-[#625bff] font-semibold">Growth Enabler</p>
-                  <p className="text-sm text-gray-600 mt-1">Open new markets and opportunities</p>
-                </div>
-              </div>
-              
-              <div className="relative pl-10">
-                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-gradient-to-br from-[#625bff] to-purple-600 flex items-center justify-center">
-                  <span className="text-white text-sm">⟷</span>
-                </div>
-                <div>
-                  <p className="text-lg font-bold text-gray-900 mb-2">Regulatory Relationship Improvement</p>
-                  <p className="text-base text-[#625bff] font-semibold">Risk Reducer</p>
-                  <p className="text-sm text-gray-600 mt-1">Build trust with regulators and examiners</p>
-                </div>
-              </div>
-              
-              <div className="relative pl-10">
-                <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-gradient-to-br from-[#625bff] to-purple-600 flex items-center justify-center">
-                  <span className="text-white text-sm">★</span>
-                </div>
-                <div>
-                  <p className="text-lg font-bold text-gray-900 mb-2">Competitive Differentiation</p>
-                  <p className="text-base text-[#625bff] font-semibold">Market Winner</p>
-                  <p className="text-sm text-gray-600 mt-1">Stand out from competitors with proven innovation</p>
-                </div>
-              </div>
-            </div>
-          </div>
+                {plan.cta}
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </motion.div>
+          ))}
         </div>
+
+        {/* Value Props - Replace ROI section */}
+        <motion.div
+          className="bg-white rounded-2xl border-2 border-gray-200 p-8 md:p-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-10 text-center">
+            Why Financial Institutions Choose Us
+          </h3>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+            {[
+              {
+                title: 'Start Small, Scale Fast',
+                stat: '90 days',
+                detail: 'Pilot program proves value before full commitment'
+              },
+              {
+                title: 'Research-Backed Results',
+                stat: '83%',
+                detail: 'Completion rate vs 12.6% traditional programs (EdApp 2021)'
+              },
+              {
+                title: 'Examiner-Ready Documentation',
+                stat: 'Automatic',
+                detail: 'All CRA compliance tracking built-in'
+              },
+              {
+                title: 'Implementation Speed',
+                stat: '45 days',
+                detail: 'From contract to live deployment'
+              }
+            ].map((item, idx) => (
+              <div key={idx} className="flex items-start gap-4 md:gap-5">
+                <div className="min-w-[80px] md:min-w-[100px] px-4 py-3 md:px-5 md:py-4 bg-blue-100 rounded-xl flex items-center justify-center shrink-0">
+                  <span className="text-xl md:text-2xl font-bold text-blue-600 whitespace-nowrap text-center leading-tight">
+                    {item.stat}
+                  </span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="text-base md:text-lg font-bold text-gray-900 mb-2 leading-tight">
+                    {item.title}
+                  </h4>
+                  <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+                    {item.detail}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* FAQ / Additional Info */}
+        <motion.div
+          className="mt-12 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-gray-600 mb-4">
+            Questions about pricing or implementation?
+          </p>
+          <a 
+            href="#contact"
+            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-semibold"
+          >
+            Schedule a 20-minute consultation
+            <ArrowRight size={18} />
+          </a>
+        </motion.div>
+
       </div>
-    </>
+    </section>
   )
 }
 
+export default PricingSection

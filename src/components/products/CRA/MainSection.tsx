@@ -1,6 +1,9 @@
 'use client'
 
 import React from 'react'
+import { Safari } from '@/components/magicui/safari'
+import { Marquee } from '@/components/magicui/marquee'
+import { CheckCircle, FileText, Users, BarChart3, BookOpen, Shield, Clock, Target } from 'lucide-react'
 
 function MainSection() {
   return (
@@ -93,16 +96,235 @@ function MainSection() {
           </div>
         </div>
 
-        {/* Right Side - Laptop Image */}
-        <div className="relative flex justify-center items-center z-30 ml-0">
-          <img 
-            src="/assets/images/product/laptopImage.png" 
-            alt="CRA Innovation Credit"
-            className="w-full h-auto"
+        {/* Right Side - Safari Browser with Marquee */}
+        <div className="relative flex justify-center items-center z-30 ml-0 overflow-hidden">
+          <div
+            className="w-full max-w-[600px]"
             style={{
               animation: 'slideInRight 0.8s ease-out 0.8s both, float 3s ease-in-out infinite 1.6s'
             }}
-          />
+          >
+            <Safari url="cra-platform.wisperai.com" className="w-full">
+              <div className="h-full w-full bg-white overflow-hidden">
+                {/* Header */}
+                <div className="px-4 py-3 bg-white border-b border-gray-300 overflow-hidden">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="w-2 h-2 rounded-full bg-gray-400 shrink-0" />
+                    <div className="text-sm font-semibold text-gray-900 truncate">CRA Innovation Platform</div>
+                  </div>
+                  <div className="text-xs text-gray-500 ml-4 truncate">Dashboard overview</div>
+                </div>
+
+                {/* Scrolling Content */}
+                <div className="p-4 overflow-hidden h-full bg-gray-50 w-full">
+                  <Marquee vertical pauseOnHover className="[--duration:40s] w-full" repeat={2}>
+                    {/* Feature Card 1 - Financial Education */}
+                    <div className="bg-white rounded-lg border border-gray-300 p-4 mb-4 shadow-sm w-full max-w-full">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded border border-gray-300 bg-gray-50 flex items-center justify-center shrink-0">
+                          <BookOpen size={18} className="text-gray-900" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs uppercase tracking-wider text-gray-500 mb-1">Core Feature</div>
+                          <div className="text-base font-semibold text-gray-900 leading-tight break-words">
+                            Financial Literacy Platform
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-[52px] space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">700+ microlearning lessons</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Mobile-first delivery</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Multi-language support</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Feature Card 2 - Compliance Tracking */}
+                    <div className="bg-white rounded-lg border border-gray-300 p-4 mb-4 shadow-sm w-full max-w-full">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded border border-gray-300 bg-gray-50 flex items-center justify-center shrink-0">
+                          <Shield size={18} className="text-gray-900" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs uppercase tracking-wider text-gray-500 mb-1">Compliance</div>
+                          <div className="text-base font-semibold text-gray-900 leading-tight break-words">
+                            Automatic CRA Documentation
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-[52px] space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Real-time activity tracking</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Examiner-ready reports</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Assessment area mapping</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Feature Card 3 - Analytics Dashboard */}
+                    <div className="bg-white rounded-lg border border-gray-300 p-4 mb-4 shadow-sm w-full max-w-full">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded border border-gray-300 bg-gray-50 flex items-center justify-center shrink-0">
+                          <BarChart3 size={18} className="text-gray-900" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs uppercase tracking-wider text-gray-500 mb-1">Analytics</div>
+                          <div className="text-base font-semibold text-gray-900 leading-tight break-words">
+                            Impact Measurement Dashboard
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-[52px] space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Completion rates & engagement</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Behavior change metrics</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Credit score improvements</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Feature Card 4 - Member Engagement */}
+                    <div className="bg-white rounded-lg border border-gray-300 p-4 mb-4 shadow-sm w-full max-w-full">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded border border-gray-300 bg-gray-50 flex items-center justify-center shrink-0">
+                          <Users size={18} className="text-gray-900" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs uppercase tracking-wider text-gray-500 mb-1">Engagement</div>
+                          <div className="text-base font-semibold text-gray-900 leading-tight break-words">
+                            Member Participation Tracking
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-[52px] space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">LMI community outreach</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Underserved population access</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Geographic distribution</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Feature Card 5 - Reporting */}
+                    <div className="bg-white rounded-lg border border-gray-300 p-4 mb-4 shadow-sm w-full max-w-full">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded border border-gray-300 bg-gray-50 flex items-center justify-center shrink-0">
+                          <FileText size={18} className="text-gray-900" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs uppercase tracking-wider text-gray-500 mb-1">Reporting</div>
+                          <div className="text-base font-semibold text-gray-900 leading-tight break-words">
+                            CRA Examination Reports
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-[52px] space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Quarterly performance summaries</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Regulatory compliance documentation</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Innovation credit evidence</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Feature Card 6 - Implementation */}
+                    <div className="bg-white rounded-lg border border-gray-300 p-4 mb-4 shadow-sm w-full max-w-full">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded border border-gray-300 bg-gray-50 flex items-center justify-center shrink-0">
+                          <Target size={18} className="text-gray-900" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs uppercase tracking-wider text-gray-500 mb-1">Deployment</div>
+                          <div className="text-base font-semibold text-gray-900 leading-tight break-words">
+                            Rapid Implementation
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-[52px] space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">45-day deployment timeline</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">White-label customization</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <div className="w-1.5 h-1.5 rounded-full bg-gray-900 shrink-0"></div>
+                          <span className="break-words">Core banking integrations</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Feature Card 7 - Success Metrics */}
+                    <div className="bg-white rounded-lg border border-gray-300 p-4 mb-4 shadow-sm w-full max-w-full">
+                      <div className="flex items-start gap-3 mb-3">
+                        <div className="w-10 h-10 rounded border border-gray-300 bg-gray-50 flex items-center justify-center shrink-0">
+                          <Clock size={18} className="text-gray-900" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs uppercase tracking-wider text-gray-500 mb-1">Outcomes</div>
+                          <div className="text-base font-semibold text-gray-900 leading-tight break-words">
+                            Measurable Impact Tracking
+                          </div>
+                        </div>
+                      </div>
+                      <div className="ml-[52px] space-y-2">
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Credit score improvements</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Delinquency reduction</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-sm text-gray-700">
+                          <CheckCircle size={16} className="text-gray-900 shrink-0" />
+                          <span className="break-words">Member retention gains</span>
+                        </div>
+                      </div>
+                    </div>
+                  </Marquee>
+                </div>
+              </div>
+            </Safari>
+          </div>
         </div>
       </div>
 
