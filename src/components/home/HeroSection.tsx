@@ -336,13 +336,7 @@ const TimelineSection: React.FC = () => {
         <WarpBackground
           children={<div />}
           perspective={1000}
-          beamsPerSide={3}
-          beamSize={10}
-          beamDuration={8}
-          beamDelayMin={0}
-          beamDelayMax={5}
           gridColor="rgba(98, 91, 255, 0.4)"
-          beamColor="rgba(98, 91, 255, 0.25)"
           className="!absolute !inset-0 !border-0 !p-0 !rounded-none"
         />
       </div>
