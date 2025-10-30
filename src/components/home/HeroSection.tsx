@@ -3,6 +3,162 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Zap, CheckCircle2, Users, Shield } from 'lucide-react';
+import { ContainerTextFlip } from "@/components/ui/container-text-flip";
+import { Compare } from "@/components/ui/compare";
+import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
+import { PointerHighlight } from "@/components/ui/pointer-highlight";
+import { WarpBackground } from "@/components/ui/warp-background";
+
+// Extended Compare wrapper to fix hover reset issue
+const CompareWrapper: React.FC<React.ComponentProps<typeof Compare>> = (props) => {
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  const mouseLeaveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMouseLeave = () => {
+    // Delay the mouse leave event to allow for minor mouse movements
+    mouseLeaveTimeoutRef.current = setTimeout(() => {
+      // Only trigger actual leave if mouse is still outside
+      if (wrapperRef.current && !wrapperRef.current.matches(':hover')) {
+        // Reset will happen naturally in Compare component
+      }
+    }, 100);
+  };
+
+  const handleMouseEnter = () => {
+    if (mouseLeaveTimeoutRef.current) {
+      clearTimeout(mouseLeaveTimeoutRef.current);
+    }
+  };
+
+  return (
+    <div
+      ref={wrapperRef}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      className="relative"
+    >
+      <Compare {...props} />
+    </div>
+  );
+};
+
+// Ripple Background Component with #625bff color
+const RippleBackground: React.FC = () => {
+  const [clickedCell, setClickedCell] = useState<{ row: number; col: number } | null>(null);
+  const [rippleKey, setRippleKey] = useState(0);
+  const ref = useRef<HTMLDivElement>(null);
+
+  return (
+    <div
+      ref={ref}
+      className="absolute inset-0 h-full w-full [--cell-border-color:#625bff] [--cell-fill-color:rgba(98,91,255,0.3)] [--cell-shadow-color:#625bff]"
+      style={
+        {
+          "--cell-border-color": "#625bff",
+          "--cell-fill-color": "rgba(98, 91, 255, 0.2)",
+          "--cell-shadow-color": "#625bff",
+        } as React.CSSProperties
+      }
+    >
+      <div className="relative h-auto w-auto overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
+        <RippleGrid
+          key={`base-${rippleKey}`}
+          className="mask-radial-from-20% mask-radial-at-top opacity-40"
+          rows={6}
+          cols={20}
+          cellSize={56}
+          borderColor="#625bff"
+          fillColor="rgba(98, 91, 255, 0.2)"
+          clickedCell={clickedCell}
+          onCellClick={(row, col) => {
+            setClickedCell({ row, col });
+            setRippleKey((k) => k + 1);
+          }}
+          interactive
+        />
+      </div>
+    </div>
+  );
+};
+
+type RippleGridProps = {
+  className?: string;
+  rows: number;
+  cols: number;
+  cellSize: number;
+  borderColor: string;
+  fillColor: string;
+  clickedCell: { row: number; col: number } | null;
+  onCellClick?: (row: number, col: number) => void;
+  interactive?: boolean;
+};
+
+type CellStyle = React.CSSProperties & {
+  ["--delay"]?: string;
+  ["--duration"]?: string;
+};
+
+const RippleGrid = ({
+  className,
+  rows = 6,
+  cols = 20,
+  cellSize = 56,
+  borderColor = "#625bff",
+  fillColor = "rgba(98, 91, 255, 0.2)",
+  clickedCell = null,
+  onCellClick = () => {},
+  interactive = true,
+}: RippleGridProps) => {
+  const cells = Array.from({ length: rows * cols }, (_, idx) => idx);
+
+  const gridStyle: React.CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: `repeat(${cols}, ${cellSize}px)`,
+    gridTemplateRows: `repeat(${rows}, ${cellSize}px)`,
+    width: cols * cellSize,
+    height: rows * cellSize,
+    marginInline: "auto",
+  };
+
+  return (
+    <div className={`relative z-[3] ${className || ""}`} style={gridStyle}>
+      {cells.map((idx) => {
+        const rowIdx = Math.floor(idx / cols);
+        const colIdx = idx % cols;
+        const distance = clickedCell
+          ? Math.hypot(clickedCell.row - rowIdx, clickedCell.col - colIdx)
+          : 0;
+        const delay = clickedCell ? Math.max(0, distance * 55) : 0;
+        const duration = 200 + distance * 80;
+
+        const style: CellStyle = clickedCell
+          ? {
+              "--delay": `${delay}ms`,
+              "--duration": `${duration}ms`,
+            }
+          : {};
+
+        return (
+          <div
+            key={idx}
+            className={`cell relative border-[0.5px] opacity-40 transition-opacity duration-150 will-change-transform hover:opacity-80 ${
+              clickedCell ? "animate-cell-ripple [animation-fill-mode:none]" : ""
+            } ${!interactive ? "pointer-events-none" : ""}`}
+            style={{
+              backgroundColor: fillColor,
+              borderColor: borderColor,
+              ...style,
+            }}
+            onClick={
+              interactive ? () => onCellClick?.(rowIdx, colIdx) : undefined
+            }
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 // Text reveal animation component
 const SplitText: React.FC<{ 
@@ -58,119 +214,97 @@ const ComparisonHighlight: React.FC<{
   );
 };
 
-// Different and Why Section - Redesigned for TEXT FOCUS
+// Different and Why Section - 50/50 Layout with Compare Component
 const DifferentSection: React.FC = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const bulletPoints = [
-    "Your 40-year-old core system? Keep it. It's working.",
-    "Your processes? They stay.",
-    "Your team? They'll love us."
-  ];
-
   return (
-    <div ref={ref} className="relative py-16 md:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-[#625bff]/2 to-white">
-      <div className="max-w-5xl mx-auto">
+    <div ref={ref} className="relative py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white via-[#625bff]/2 to-white overflow-hidden">
+      {/* Background Ripple Effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        <RippleBackground />
+      </div>
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.5, delay: 0 }}
-          className="inline-block mb-6"
-        >
-          <span className="inline-block px-4 py-2 rounded-full bg-[#625bff]/10 border border-[#625bff]/30 text-sm font-semibold text-[#625bff] uppercase tracking-wider">
-            How We're Different
-          </span>
-        </motion.div>
 
-        {/* Main Headline - Animated */}
-        <div className="mb-8">
-          <div className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-            <SplitText 
-              text="We don't replace." 
-              isInView={isInView} 
-              delay={0.2}
-              className="text-[#171717]"
-            />
-            <SplitText 
-              text="We enhance." 
-              isInView={isInView} 
-              delay={0.5}
-              className="text-[#625bff]"
-            />
-          </div>
+        {/* Main Content Grid - 50/50 Layout */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+          {/* Left Side - Text Content */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            {/* Main Headline - Animated */}
+            <div className="mb-8">
+              <div className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight">
+                {/* First headline line */}
+                <SplitText
+                  text="We don't replace."
+                  isInView={isInView}
+                  delay={0.2}
+                  className="text-[#171717]"
+                />
+
+                {/* Second headline line: We {changing words}. */}
+                <div className="mt-3">
+                  <span className="text-4xl md:text-5xl lg:text-5xl font-bold leading-tight inline-flex items-center flex-wrap">
+                    <SplitText
+                      text="We"
+                      isInView={isInView}
+                      delay={0.5}
+                      className="text-[#171717] inline-block"
+                    />
+
+                    <span className="inline-block ml-3">
+                      <span className="inline-block bg-[#625bff] text-white rounded-md px-3 py-1">
+                        <ContainerTextFlip
+                          words={["enhance", "enrich", "refine", "polish", "uplift", "improve"]}
+                          className="bg-transparent"
+                          textClassName=""
+                        />
+                      </span>
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Tagline */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+              className="text-lg md:text-xl text-[#6b7280] font-light mb-10"
+            >
+              Build on what you've built. Keep the foundation that works.
+            </motion.p>
+
+
+          </motion.div>
+
+          {/* Right Side - Compare Component */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex justify-center items-center"
+          >
+            <div className="w-full max-w-2xl">
+              <div className="p-4 border rounded-3xl bg-neutral-100 border-neutral-200 dark:bg-neutral-900 dark:border-neutral-800 overflow-hidden">
+                <CompareWrapper
+                  firstImage="/assets/images/home/whatothersdo1.png"
+                  secondImage="/assets/images/home/whatwedo1.png"
+                  firstImageClassName="object-contain object-center bg-[#F5F5F5]"
+                  secondImageClassname="object-contain object-center bg-[#F5F5F5]"
+                  className="h-[400px] w-full md:h-[500px]"
+                  slideMode="hover"
+                />
+              </div>
+            </div>
+          </motion.div>
         </div>
-
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-xl md:text-2xl text-[#6b7280] font-light mb-12"
-        >
-          Build on what you've built. Keep the foundation that works.
-        </motion.p>
-
-        {/* Comparison Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.6, delay: 1.0 }}
-          className="grid md:grid-cols-2 gap-8 mb-16 py-8"
-        >
-          {/* Left: The Problem (What Others Do) */}
-          <div className="p-8 rounded-xl bg-red-50 border border-red-200">
-            <h3 className="text-lg font-bold text-red-700 mb-4 flex items-center gap-2">
-              <span className="text-2xl">❌</span> What Others Do
-            </h3>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <span className="text-red-400 font-bold text-lg mt-0.5">•</span>
-                <span className="text-[#6b7280]"><span className="line-through text-red-500 font-medium">Rip everything out</span> and start from scratch</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-red-400 font-bold text-lg mt-0.5">•</span>
-                <span className="text-[#6b7280]">Your <span className="font-semibold text-red-600">entire team</span> retrains</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-red-400 font-bold text-lg mt-0.5">•</span>
-                <span className="text-[#6b7280]">Months of <span className="font-semibold text-red-600">downtime and disruption</span></span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-red-400 font-bold text-lg mt-0.5">•</span>
-                <span className="text-[#6b7280]">Investment is <span className="font-semibold text-red-600">high risk</span></span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Right: The Solution (What We Do) */}
-          <div className="p-8 rounded-xl bg-[#10b981]/5 border border-[#10b981]/30">
-            <h3 className="text-lg font-bold text-[#10b981] mb-4 flex items-center gap-2">
-              <CheckCircle2 className="w-6 h-6" /> What We Do
-            </h3>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <span className="text-[#10b981] font-bold text-lg mt-0.5">✓</span>
-                <span className="text-[#171717]">Your 40-year-old system? <span className="font-semibold text-[#10b981]">Keep it.</span> It's working.</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#10b981] font-bold text-lg mt-0.5">✓</span>
-                <span className="text-[#171717]">Your processes? <span className="font-semibold text-[#10b981]">They stay.</span></span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#10b981] font-bold text-lg mt-0.5">✓</span>
-                <span className="text-[#171717]">Your team? <span className="font-semibold text-[#10b981]">They'll love us.</span></span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="text-[#10b981] font-bold text-lg mt-0.5">✓</span>
-                <span className="text-[#171717]">Implementation is <span className="font-semibold text-[#10b981]">fast & seamless</span></span>
-              </li>
-            </ul>
-          </div>
-        </motion.div>
-
-    
       </div>
     </div>
   );
@@ -196,8 +330,23 @@ const TimelineSection: React.FC = () => {
   ];
 
   return (
-    <div ref={ref} className="relative py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-[#625bff]/5">
-      <div className="max-w-6xl mx-auto">
+    <div ref={ref} className="relative py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-[#625bff]/5 overflow-hidden">
+      {/* Warp Background Effect */}
+      <div className="absolute inset-0 pointer-events-none">
+        <WarpBackground
+          children={<div />}
+          perspective={1000}
+          beamsPerSide={3}
+          beamSize={10}
+          beamDuration={8}
+          beamDelayMin={0}
+          beamDelayMax={5}
+          gridColor="rgba(98, 91, 255, 0.4)"
+          beamColor="rgba(98, 91, 255, 0.25)"
+          className="!absolute !inset-0 !border-0 !p-0 !rounded-none"
+        />
+      </div>
+      <div className="max-w-6xl mx-auto relative z-10">
         {/* Section Title */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -209,7 +358,14 @@ const TimelineSection: React.FC = () => {
             The Real Impact
           </p>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#171717]">
-            Results That Speak
+            Results That{" "}
+            <PointerHighlight
+              rectangleClassName="bg-[rgba(98,91,255,0.15)] dark:bg-[rgba(98,91,255,0.2)] border-[#625bff]/30 dark:border-[#625bff]/40 leading-loose px-4 py-2"
+              pointerClassName="text-[#625bff] h-3 w-3"
+              containerClassName="inline-block ml-1"
+            >
+              <span className="relative z-10 text-4xl md:text-5xl lg:text-6xl">Speak</span>
+            </PointerHighlight>
           </h2>
         </motion.div>
 

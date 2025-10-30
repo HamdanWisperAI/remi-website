@@ -47,7 +47,7 @@ function ProblemSection() {
           {/* Left Column - Image */}
           <div className={`${styles.problemImageWrapper} ${isInView ? styles.imageInView : ''}`}>
             <img 
-              src="/assets/images/product/manCI.jpg" 
+              src="/.jpg" 
               alt="Bank analyst working late on competitive rates analysis"
               className={styles.problemImage}
             />

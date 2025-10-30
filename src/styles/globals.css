@@ -179,6 +179,23 @@ body {
   animation: slide-up 0.6s ease-out forwards;
 }
 
+/* Cell Ripple Animation for Background Ripple Effect */
+@keyframes cell-ripple {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.4;
+  }
+}
+
+.animate-cell-ripple {
+  animation: cell-ripple var(--duration, 200ms) ease-out var(--delay, 0ms);
+}
+
 /* Respect reduced motion preferences for all custom animations */
 @media (prefers-reduced-motion: reduce) {
   .animate-spin-slow,
@@ -189,7 +206,8 @@ body {
   .animate-glow-pulse,
   .animate-scale-pulse,
   .animate-ripple,
-  .animate-slide-up {
+  .animate-slide-up,
+  .animate-cell-ripple {
     animation: none !important;
   }
 }
