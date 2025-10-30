@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FaBars, FaTimes, FaChevronDown } from 'react-icons/fa'
+import { Menu, MenuItem, ProductItem } from '../ui/navbar-menu'
 
 function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -84,58 +85,30 @@ function Header() {
     return () => window.removeEventListener('keydown', handleEscape)
   }, [isMobileMenuOpen])
 
+  const [activeMenu, setActiveMenu] = useState<string | null>(null)
+
   const navigationItems = [
+    { name: 'Solutions', href: '#solutions' },
+    { name: 'Who We Serve', href: '#who-we-serve' },
+    { name: 'Resources', href: '#resources' },
+    { name: 'Company', href: '#company' }
+  ]
+
+  const productItems = [
     {
-      name: 'Products',
-      hasDropdown: true,
-      items: [
-        { name: 'Consumer Financial Literacy Platform', href: '/product/financialLiteracy', description: 'Empower your customers with financial knowledge' },
-        { name: 'Competitive Intelligence Dashboard', href: '/product/CI', description: 'Stay ahead with market insights' },
-        { name: 'CRA Compliance & Tracking', href: '/product/CRA', description: 'Simplify regulatory compliance' },
-        { name: 'Platform Overview', href: '#platform-overview', description: 'See all our capabilities' }
-      ]
+      name: 'Consumer Financial Literacy Platform',
+      href: '/product/financialLiteracy',
+      description: 'Empower your customers with financial knowledge and skills.'
     },
     {
-      name: 'Solutions',
-      hasDropdown: true,
-      items: [
-        { name: 'Increase Cross-Sell & Retention', href: '#cross-sell', description: 'Boost customer lifetime value' },
-        { name: 'Drive Digital Engagement', href: '#digital-engagement', description: 'Enhance digital experiences' },
-        { name: 'Meet CRA Requirements', href: '#cra-requirements', description: 'Ensure compliance effortlessly' },
-        { name: 'Combat Customer Attrition', href: '#customer-attrition', description: 'Reduce churn and retain customers' },
-        { name: 'Competitive Positioning', href: '#competitive-positioning', description: 'Differentiate your offerings' }
-      ]
+      name: 'Competitive Intelligence Dashboard',
+      href: '/product/CI',
+      description: 'Stay ahead with market insights and competitive analysis.'
     },
     {
-      name: 'Who We Serve',
-      hasDropdown: true,
-      items: [
-        { name: 'Community Banks', href: '#community-banks', description: 'Solutions for local banking' },
-        { name: 'Credit Unions', href: '#credit-unions', description: 'Member-focused tools' },
-        { name: 'Regional Banks', href: '#regional-banks', description: 'Scale with confidence' },
-        { name: 'Digital-First Banks', href: '#digital-first-banks', description: 'Innovation for modern banking' }
-      ]
-    },
-    {
-      name: 'Resources',
-      hasDropdown: true,
-      items: [
-        { name: 'Blog/Insights', href: '#blog', description: 'Industry trends and tips' },
-        { name: 'Financial Literacy Content Library', href: '#content-library', description: 'Educational resources' },
-        { name: 'Case Studies', href: '#case-studies', description: 'Success stories' },
-        { name: 'Research & Reports', href: '#research', description: 'In-depth analysis' },
-        { name: 'Guides & Whitepapers', href: '#guides', description: 'Expert knowledge' }
-      ]
-    },
-    {
-      name: 'Company',
-      hasDropdown: true,
-      items: [
-        { name: 'About Us', href: '#about', description: 'Our mission and values' },
-        { name: 'Team', href: '#team', description: 'Meet our experts' },
-        { name: 'Careers', href: '#careers', description: 'Join our team' },
-        { name: 'Press', href: '#press', description: 'News and media' }
-      ]
+      name: 'CRA Compliance & Tracking',
+      href: '/product/CRA',
+      description: 'Simplify regulatory compliance and tracking effortlessly.'
     }
   ]
 
@@ -200,76 +173,37 @@ function Header() {
           {isDesktop && (
             <nav 
               className="relative flex items-center gap-1 flex-1"
-              onMouseLeave={scheduleClose}
               role="navigation"
               aria-label="Main navigation"
             >
+              {/* Products with Aceternity Menu */}
+              <Menu setActive={setActiveMenu}>
+                <MenuItem setActive={setActiveMenu} active={activeMenu} item="Products">
+                  <div className="flex flex-col space-y-4">
+                    {productItems.map((product, index) => (
+                      <ProductItem
+                        key={index}
+                        title={product.name}
+                        description={product.description}
+                        href={product.href}
+                        src={product.href === '/product/financialLiteracy' ? '/assets/images/home/FL.png' : product.href === '/product/CI' ? '/assets/images/home/CI.png' : '/assets/images/home/CRA.png'}
+                      />
+                    ))}
+                  </div>
+                </MenuItem>
+              </Menu>
+
+              {/* Other Navigation Items */}
               {navigationItems.map((item, index) => (
-                <div
+                <a
                   key={index}
-                  ref={(el) => { navItemsRef.current[index] = el }}
-                  className="nav-item relative flex items-center gap-1.5 px-4 py-2.5 text-[#333] no-underline text-[15px] font-medium cursor-pointer rounded-lg whitespace-nowrap"
-                  onMouseEnter={() => {
-                    cancelClose()
-                    setActiveDropdown(item.name)
-                    setHoveredIndex(index)
-                  }}
-                  onMouseLeave={scheduleClose}
+                  href={item.href}
+                  className="nav-item px-4 py-2.5 text-[#333] no-underline text-[15px] font-medium rounded-lg whitespace-nowrap hover:bg-gray-100 transition-colors"
                   role="menuitem"
-                  aria-haspopup={item.hasDropdown}
-                  aria-expanded={activeDropdown === item.name}
                 >
-                  <span>{item.name}</span>
-                  {item.hasDropdown && (
-                    <FaChevronDown 
-                      size={10} 
-                      className={`transition-transform duration-200 ${
-                        activeDropdown === item.name ? 'rotate-180' : ''
-                      }`}
-                    />
-                  )}
-                  
-                  {item.hasDropdown && (
-                    <div 
-                      className={`absolute top-full left-0 mt-3 bg-white border border-gray-100 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-2 min-w-[320px] z-1001 origin-top-center
-                        ${activeDropdown === item.name 
-                          ? 'opacity-100 visible translate-y-0 scale-100 pointer-events-auto' 
-                          : 'opacity-0 invisible -translate-y-2.5 scale-95 pointer-events-none'
-                        }`}
-                      style={{
-                        transition: 'opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1), transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.25s'
-                      }}
-                      onMouseEnter={cancelClose}
-                      onMouseLeave={scheduleClose}
-                      role="menu"
-                      aria-label={`${item.name} menu`}
-                    >
-                      {item.items?.map((subItem, subIndex) => (
-                        <a
-                          key={subIndex}
-                          href={subItem.href}
-                          className="dropdown-item block px-4 py-3 rounded-xl group"
-                          role="menuitem"
-                        >
-                          <div className="item-title text-[15px] font-semibold text-[#1a1a1a] mb-0.5">
-                            {subItem.name}
-                          </div>
-                          {subItem.description && (
-                            <div className="text-[13px] text-gray-500 leading-snug">
-                              {subItem.description}
-                            </div>
-                          )}
-                        </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                  {item.name}
+                </a>
               ))}
-              <div 
-                className="nav-indicator absolute -bottom-2 left-0 h-[3px] bg-linear-to-r from-[#625bff] to-[#7c6fff] rounded-full"
-                style={indicatorStyle}
-                aria-hidden="true"
-              ></div>
             </nav>
           )}
 
@@ -311,53 +245,58 @@ function Header() {
             aria-label="Mobile navigation"
           >
             <div className="p-6">
-              {navigationItems.map((item, index) => (
-                <div key={index} className="mb-2">
-                  <button 
-                    className="w-full text-left py-3 px-4 text-[#1a1a1a] font-semibold text-base rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-between"
-                    onClick={() => setActiveDropdown(activeDropdown === item.name ? null : item.name)}
-                  >
-                    {item.name}
-                    {item.hasDropdown && (
-                      <FaChevronDown 
-                        size={12} 
-                        className={`transition-transform duration-200 ${
-                          activeDropdown === item.name ? 'rotate-180' : ''
-                        }`}
-                      />
-                    )}
-                  </button>
-                  
-                  {item.hasDropdown && item.items && (
-                    <div 
-                      className={`overflow-hidden transition-all duration-300 ${
-                        activeDropdown === item.name 
-                          ? 'max-h-[1000px] opacity-100 mt-2' 
-                          : 'max-h-0 opacity-0'
-                      }`}
-                    >
-                      <div className="pl-4 space-y-1">
-                        {item.items.map((subItem, subIndex) => (
-                          <a
-                            key={subIndex}
-                            href={subItem.href}
-                            className="block py-2.5 px-4 rounded-lg hover:bg-gray-50 transition-colors"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            <div className="text-[15px] font-medium text-[#1a1a1a] mb-0.5">
-                              {subItem.name}
-                            </div>
-                            {subItem.description && (
-                              <div className="text-[13px] text-gray-500">
-                                {subItem.description}
-                              </div>
-                            )}
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+              {/* Products Section */}
+              <div className="mb-2">
+                <button 
+                  className="w-full text-left py-3 px-4 text-[#1a1a1a] font-semibold text-base rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-between"
+                  onClick={() => setActiveDropdown(activeDropdown === 'Products' ? null : 'Products')}
+                >
+                  Products
+                  <FaChevronDown 
+                    size={12} 
+                    className={`transition-transform duration-200 ${
+                      activeDropdown === 'Products' ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                
+                <div 
+                  className={`overflow-hidden transition-all duration-300 ${
+                    activeDropdown === 'Products' 
+                      ? 'max-h-[1000px] opacity-100 mt-2' 
+                      : 'max-h-0 opacity-0'
+                  }`}
+                >
+                  <div className="pl-4 space-y-1">
+                    {productItems.map((product, index) => (
+                      <a
+                        key={index}
+                        href={product.href}
+                        className="block py-2.5 px-4 rounded-lg hover:bg-gray-50 transition-colors"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <div className="text-[15px] font-medium text-[#1a1a1a] mb-0.5">
+                          {product.name}
+                        </div>
+                        <div className="text-[13px] text-gray-500">
+                          {product.description}
+                        </div>
+                      </a>
+                    ))}
+                  </div>
                 </div>
+              </div>
+
+              {/* Other Navigation Items */}
+              {navigationItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="block py-3 px-4 text-[#1a1a1a] font-semibold text-base rounded-lg hover:bg-gray-50 transition-colors"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.name}
+                </a>
               ))}
               
               <div className="mt-6 pt-6 border-t border-gray-100">

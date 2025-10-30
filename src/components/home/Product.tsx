@@ -11,7 +11,7 @@ import { OrbitComponent } from "@/components/ui/orbit";
 import { AnimatedList } from "@/components/ui/animated-list";
 import { ArrowRight, BookOpen, BarChart3, Smartphone, CheckSquare } from "lucide-react";
 import { motion } from "framer-motion";
-import HeroSection from "./HeroSection";
+import { DifferentSection, TimelineSection, BuiltByPeopleSection } from "./HeroSection";
 
 // Register ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -392,7 +392,7 @@ export default function Product() {
 
         </div>
       </section>
-      <HeroSection/>
+      <DifferentSection/>
       {/* Spacer */}
       <div className="h-[30vh] bg-linear-to-b from-white to-gray-50"></div>
       <Intro/>
@@ -952,6 +952,10 @@ export default function Product() {
 
       {/* Spacer */}
       <div className="h-[30vh] bg-gray-50"></div>
+      
+      {/* Results and Impact Sections */}
+      <TimelineSection />
+      <BuiltByPeopleSection />
     </>
   );
 }

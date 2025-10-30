@@ -4,6 +4,7 @@ import React, { useRef } from 'react';
 import Link from 'next/link';
 import { motion, useInView } from 'framer-motion';
 import { ChevronRight, Sparkles, TrendingUp, Users, Shield } from 'lucide-react';
+import { CometCard } from '@/components/ui/comet-card';
 
 const PickYourPath: React.FC = () => {
   const ref = useRef(null);
@@ -75,9 +76,9 @@ const PickYourPath: React.FC = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                 transition={{ duration: 0.6, delay: 0.1 + index * 0.1 }}
-                className={`group relative p-6 rounded-xl transition-all duration-300 cursor-pointer ${
+                className={`group relative p-6 rounded-xl transition-all duration-300 cursor-pointer h-64 flex flex-col ${
                   path.featured
-                    ? 'bg-gradient-to-br from-[#625bff] to-[#625bff]/80 text-white border-2 border-[#625bff] md:col-span-2 lg:col-span-1 md:row-span-2 lg:row-span-1 flex flex-col justify-center'
+                    ? 'bg-gradient-to-br from-[#625bff] to-[#625bff]/80 text-white border-2 border-[#625bff]'
                     : 'bg-white border-2 border-[#625bff]/20 hover:border-[#625bff] hover:shadow-xl'
                 }`}
               >
@@ -113,12 +114,18 @@ const PickYourPath: React.FC = () => {
               </motion.div>
             );
 
+            const card = (
+              <CometCard key={index}>
+                {cardContent}
+              </CometCard>
+            );
+
             return path.href ? (
               <Link key={index} href={path.href}>
-                {cardContent}
+                {card}
               </Link>
             ) : (
-              cardContent
+              card
             );
           })}
         </div>

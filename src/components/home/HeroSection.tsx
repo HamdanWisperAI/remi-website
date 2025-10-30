@@ -5,6 +5,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { Zap, CheckCircle2, Users, Shield } from 'lucide-react';
 import { ContainerTextFlip } from "@/components/ui/container-text-flip";
 import { Compare } from "@/components/ui/compare";
+import { CardContainer, CardBody, CardItem } from "@/components/ui/3d-card";
 import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { WarpBackground } from "@/components/ui/warp-background";
@@ -316,17 +317,17 @@ const TimelineSection: React.FC = () => {
   const isInView = useInView(ref, { margin: '-100px' });
 
   const milestones = [
-    { period: 'Week 1', text: 'Wait, we can see competitor rates daily?' },
-    { period: 'Month 1', text: 'Our young members are actually engaging.' },
-    { period: 'Month 3', text: 'The board wants to know what other magic we have.' },
-    { period: 'Month 6', text: "We're the innovative FI others copy now." }
+    { period: 'Week 1', text: 'Wait, we can see competitor rates daily?', image: '/assets/images/home/interest1.png' },
+    { period: 'Month 1', text: 'Our young members are actually engaging.', image: '/assets/images/home/young1.png' },
+    { period: 'Month 3', text: 'The board wants to know what other magic we have.', image: '/assets/images/home/board1.png' },
+    { period: 'Month 6', text: "We're the innovative FI others copy now.", image: '/assets/images/home/industry1.png' }
   ];
 
   const metrics = [
-    { value: '41%', label: 'Fewer Delinquencies', source: 'CFPB Financial Wellness Study 2023' },
-    { value: '32%', label: 'Reduction in Support Calls', source: 'Internal Case Studies' },
-    { value: '3.4x', label: 'Product Adoption', source: 'Member Engagement Metrics' },
-    { value: '67%', label: 'Increase in Lifetime Value', source: 'Industry Benchmarks' }
+    { value: '41%', label: 'Fewer Delinquencies', source: 'CFPB Financial Wellness Study 2023'},
+    { value: '32%', label: 'Reduction in Support Calls', source: 'Internal Case Studies'},
+    { value: '3.4x', label: 'Product Adoption', source: 'Member Engagement Metrics'},
+    { value: '67%', label: 'Increase in Lifetime Value', source: 'Industry Benchmarks'}
   ];
 
   return (
@@ -346,7 +347,7 @@ const TimelineSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="mb-16 text-center"
+          className="mb-0 text-center"
         >
           <p className="text-sm font-semibold text-[#625bff] uppercase tracking-wider mb-3">
             The Real Impact
@@ -364,7 +365,7 @@ const TimelineSection: React.FC = () => {
         </motion.div>
 
         {/* Timeline */}
-        <div className="mb-16">
+        <div className="mb-2">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
             {milestones.map((milestone, index) => (
               <motion.div
@@ -376,20 +377,44 @@ const TimelineSection: React.FC = () => {
               >
                 {/* Timeline Connector */}
                 {index < milestones.length - 1 && (
-                  <div className="hidden lg:block absolute left-full top-8 w-full h-1 bg-gradient-to-r from-[#625bff] to-transparent" />
+                  <div className="hidden lg:block absolute left-full top-1/2 -translate-y-1/2 w-full h-1 bg-gradient-to-r from-[#625bff] to-transparent" />
                 )}
 
-                {/* Card */}
-                <div className="relative p-6 rounded-lg border border-[#625bff]/30 bg-white hover:border-[#625bff]/60 hover:shadow-lg transition-all duration-300 h-full">
-                  {/* Period Badge */}
-                  <div className="inline-block mb-3 px-3 py-1 rounded-full bg-[#625bff]/10 text-[#625bff] text-xs font-semibold">
-                    {milestone.period}
-                  </div>
-                  {/* Text */}
-                  <p className="text-sm md:text-base font-medium text-[#171717]">
-                    {milestone.text}
-                  </p>
-                </div>
+                {/* 3D Card Container */}
+                <CardContainer className="inter-var">
+                  <CardBody className="bg-white relative group/card border-[#625bff]/30 w-auto h-auto rounded-lg p-6 border hover:border-[#625bff]/60 hover:shadow-lg transition-all duration-300 flex flex-col">
+                    {/* Period Badge */}
+                    <CardItem
+                      translateZ="20"
+                      className="inline-block mb-4 px-3 py-1 rounded-full bg-[#625bff]/10 text-[#625bff] text-sm font-black"
+                    >
+                      {milestone.period}
+                    </CardItem>
+
+                    {/* Image */}
+                    {milestone.image && (
+                      <CardItem
+                        translateZ="100"
+                        className="mb-4 h-64 overflow-hidden rounded-md flex items-center justify-center w-full"
+                      >
+                        <img
+                          src={milestone.image}
+                          alt=""
+                          className="w-full h-full object-contain group-hover/card:shadow-xl"
+                        />
+                      </CardItem>
+                    )}
+
+                    {/* Text */}
+                    <CardItem
+                      as="p"
+                      translateZ="50"
+                      className="text-sm md:text-base font-bold text-[#171717] text-center"
+                    >
+                      {milestone.text}
+                    </CardItem>
+                  </CardBody>
+                </CardContainer>
               </motion.div>
             ))}
           </div>
@@ -403,13 +428,15 @@ const TimelineSection: React.FC = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.6, delay: 0.2 + index * 0.1 }}
-              className="group relative p-6 rounded-xl bg-gradient-to-br from-[#625bff]/5 to-[#10b981]/5 border border-[#625bff]/20 hover:border-[#625bff]/60 transition-all duration-300"
+              className="group relative p-6 rounded-xl bg-gradient-to-br from-[#625bff]/5 to-[#10b981]/5 border border-[#625bff]/20 hover:border-[#625bff]/60 transition-all duration-300 overflow-hidden"
             >
+
               {/* Animated Counter */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={isInView ? { opacity: 1 } : { opacity: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+                className="relative z-10"
               >
                 <CounterAnimation
                   value={parseFloat(metric.value)}
@@ -418,7 +445,7 @@ const TimelineSection: React.FC = () => {
                 />
               </motion.div>
 
-              <p className="text-sm font-semibold text-[#171717] mt-2">{metric.label}</p>
+              <p className="text-sm font-semibold text-[#171717] mt-2 relative z-10">{metric.label}</p>
             </motion.div>
           ))}
         </div>
@@ -571,5 +598,8 @@ export const HeroSection: React.FC = () => {
     </div>
   );
 };
+
+// Export individual sections
+export { DifferentSection, TimelineSection, BuiltByPeopleSection };
 
 export default HeroSection;
