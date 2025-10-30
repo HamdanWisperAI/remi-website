@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { TrendingUp, Smartphone, Clock, Award, Shield } from 'lucide-react'
+import { TrendUp, DeviceMobile, Clock, Trophy, ShieldCheck } from '@phosphor-icons/react'
+import { HexagonBackground } from '@/components/animate-ui/components/backgrounds/hexagon'
 import styles from './ResearchSection.module.css'
 
 interface AnimatedNumberProps {
@@ -68,22 +69,26 @@ function ResearchSection() {
 
   const stats = [
     {
-      icon: TrendingUp,
+      icon: TrendUp,
       title: 'Completion Rate',
       value: 83,
       suffix: '%',
       subtitle: 'vs 12.6% traditional',
+      comparison: '+70.4%',
       description: 'Microlearning vs traditional online courses',
-      source: 'EdApp 2021, Jordan 2015'
+      source: 'EdApp 2021, Jordan 2015',
+      iconColor: 'blue'
     },
     {
-      icon: Smartphone,
+      icon: DeviceMobile,
       title: 'Mobile Engagement',
       value: 4,
       suffix: 'x',
       subtitle: 'better than desktop',
+      comparison: '+300%',
       description: 'Mobile learning advantage',
-      source: 'Mobile learning industry studies 2024'
+      source: 'Mobile learning industry studies 2024',
+      iconColor: 'purple'
     },
     {
       icon: Clock,
@@ -91,26 +96,32 @@ function ResearchSection() {
       value: 45,
       suffix: '%',
       subtitle: 'with same retention',
+      comparison: '+45%',
       description: 'Mobile learning speed advantage',
-      source: 'Merrill Lynch GoLearn Initiative'
+      source: 'Merrill Lynch GoLearn Initiative',
+      iconColor: 'indigo'
     },
     {
-      icon: Award,
+      icon: Trophy,
       title: 'Credit Score Improvement',
       value: 26,
       suffix: ' points',
       subtitle: 'average increase',
+      comparison: '+26 pts',
       description: 'Following financial education',
-      source: 'CFPB 2019, FINRA Foundation'
+      source: 'CFPB 2019, FINRA Foundation',
+      iconColor: 'amber'
     },
     {
-      icon: Shield,
+      icon: ShieldCheck,
       title: 'Delinquency Reduction',
       value: 33,
       suffix: '%',
       subtitle: 'maximum reduction',
+      comparison: '-33%',
       description: 'State mandate programs',
-      source: 'Federal Reserve Bank of NY/Equifax'
+      source: 'Federal Reserve Bank of NY/Equifax',
+      iconColor: 'emerald'
     }
   ]
 
@@ -134,25 +145,24 @@ function ResearchSection() {
 
   return (
     <section className={styles.researchSection} ref={sectionRef}>
-      {/* Animated Background Grid Pattern */}
-      <div className={styles.backgroundGrid} />
-      
+      <HexagonBackground
+        className={styles.hexagonBackground}
+        hexagonSize={60}
+        hexagonMargin={2}
+        hexagonProps={{
+          className: styles.hexagonStyle,
+          style: {}
+        }}
+      />
       <div className={styles.researchContainer}>
         {/* Section Header */}
         <div className={styles.sectionHeader}>
           <h2 className={`${styles.mainHeadline} ${isInView ? styles.headlineInView : ''}`}>
-            THE NUMBERS DON'T LIE
+            Research-backed results
           </h2>
-          
-          {/* Animated Accent Bar */}
-          <div className={styles.accentBars}>
-            <div className={styles.accentBar}></div>
-            <div className={styles.accentBar}></div>
-            <div className={styles.accentBar}></div>
-          </div>
 
           <p className={`${styles.subHeadline} ${isInView ? styles.subheadlineInView : ''}`}>
-            Published Research. Real Results.
+            Published data from leading financial institutions
           </p>
         </div>
 
@@ -162,15 +172,15 @@ function ResearchSection() {
             <div 
               key={index}
               className={`${styles.statCard} ${isInView ? styles.cardInView : ''}`}
-              style={{ transitionDelay: isInView ? `${index * 0.1}s` : '0s' }}
+              style={{ transitionDelay: isInView ? `${index * 0.05}s` : '0s' }}
             >
-              <div className={styles.cardIcon}>
-                <stat.icon size={32} />
+              {/* Icon container - subtle, not prominent */}
+              <div className={`${styles.cardIcon} ${styles[`icon${stat.iconColor.charAt(0).toUpperCase() + stat.iconColor.slice(1)}`]}`}>
+                <stat.icon size={20} weight="duotone" />
               </div>
               
               <div className={styles.cardContent}>
-                <h3 className={styles.cardTitle}>{stat.title}</h3>
-                
+                {/* Number first - largest element */}
                 <div className={styles.statValue}>
                   <AnimatedNumber 
                     value={stat.value} 
@@ -179,12 +189,20 @@ function ResearchSection() {
                   />
                 </div>
                 
-                <p className={styles.cardSubtitle}>{stat.subtitle}</p>
+                {/* Label */}
+                <h3 className={styles.cardTitle}>{stat.title}</h3>
+                
+                {/* Comparison - subtle green badge */}
+                <div className={styles.cardComparison}>
+                  <span className={styles.comparisonValue}>{stat.comparison}</span>
+                  <span className={styles.comparisonText}>{stat.subtitle}</span>
+                </div>
+                
                 <p className={styles.cardDescription}>{stat.description}</p>
                 
+                {/* Source - tiny, footer */}
                 <div className={styles.cardSource}>
-                  <span className={styles.sourceLabel}>Sources:</span>
-                  <span className={styles.sourceText}>{stat.source}</span>
+                  <p className={styles.sourceText}>{stat.source}</p>
                 </div>
               </div>
             </div>

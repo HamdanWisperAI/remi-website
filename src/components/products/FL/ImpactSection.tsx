@@ -1,7 +1,8 @@
 'use client'
 
 import React, { useEffect, useRef, useState } from 'react'
-import { TrendingUp, Users, Award, Target } from 'lucide-react'
+import Image from 'next/image'
+import { TrendingUp, Users, Award, Target, ArrowUpRight, CheckCircle2 } from 'lucide-react'
 import styles from './ImpactSection.module.css'
 
 interface AnimatedNumberProps {
@@ -101,6 +102,15 @@ function ImpactSection() {
     }
   ]
 
+  const logos = [
+    '/assets/images/chaseLogo.png',
+    '/assets/images/citiLogo.png',
+    '/assets/images/goldmanSachsLogo.png',
+    '/assets/images/jpmorganLogo.png',
+    '/assets/images/tdBankLogo.png',
+    '/assets/images/pncLogo.png',
+  ]
+
   const businessImpacts = [
     {
       title: 'Member Outcomes',
@@ -170,6 +180,26 @@ function ImpactSection() {
           </p>
         </div>
 
+        {/* KPI Strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
+          {[{label:'Avg. completion', value:'83%'},{label:'Lesson length', value:'3–5m'},{label:'Lift in engagement', value:'3x'},{label:'Library', value:'700+'}].map((kpi, i) => (
+            <div key={i} className="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between">
+              <div className="text-sm text-gray-600">{kpi.label}</div>
+              <div className="text-lg md:text-2xl font-bold text-gray-900">{kpi.value}</div>
+            </div>
+          ))}
+        </div>
+
+        {/* Trusted logos */}
+        <div className="mb-12 overflow-hidden">
+          <div className="flex items-center gap-12 animate-[marquee_20s_linear_infinite] [--gap:3rem] opacity-70 hover:opacity-100 will-change-transform">
+            {logos.concat(logos).map((src, idx) => (
+              <Image key={idx} src={src} alt="logo" width={120} height={40} className="h-8 md:h-10 w-auto object-contain" />
+            ))}
+          </div>
+          <style>{`@keyframes marquee{ from{transform:translateX(0)} to{transform:translateX(-50%)} }`}</style>
+        </div>
+
         {/* Case Studies Grid */}
         <div className={styles.caseStudiesGrid}>
           {caseStudies.map((study, index) => (
@@ -191,6 +221,21 @@ function ImpactSection() {
               </div>
               
               <p className={styles.cardDetails}>{study.details}</p>
+
+              {/* Before / After mini bars */}
+              <div className="mt-3 space-y-2">
+                <div className="text-[11px] text-gray-500">Before → After</div>
+                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full bg-gray-300" style={{ width: '15%' }} />
+                </div>
+                <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-full" style={{ width: '90%', backgroundColor: study.color }} />
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-1 text-xs text-gray-500">
+                <CheckCircle2 size={14} className="text-emerald-600" />
+                Proven with large distributed workforces
+              </div>
             </div>
           ))}
         </div>
@@ -226,6 +271,14 @@ function ImpactSection() {
                     </div>
                   ))}
                 </div>
+                {/* Micro trend sparkline */}
+                <div className="mt-3 h-12 flex items-end gap-1">
+                  {[20,35,28,45,40,60,54].map((h,i)=>(
+                    <div key={i} className="flex-1 bg-gray-100 rounded-sm overflow-hidden">
+                      <div className="w-full bg-linear-to-t from-blue-600 to-blue-400" style={{height:`${h}%`}} />
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
@@ -238,6 +291,7 @@ function ImpactSection() {
           </p>
           <button className={styles.ctaButton}>
             Start Your Pilot
+            <ArrowUpRight size={16} className="ml-1" />
           </button>
         </div>
       </div>
