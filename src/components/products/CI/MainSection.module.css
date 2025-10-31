@@ -247,21 +247,18 @@
   perspective: 1200px;
   max-width: 600px;
   width: 100%;
-}
-
-/* Dashboard image */
-.ciHeroDashboardImage {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 16px;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
-  transform: rotateY(-8deg) rotateX(5deg);
-  transition: all 0.3s ease;
   animation: slideInRight 0.8s ease-out 0.8s both, float 3s ease-in-out infinite 1.6s;
 }
 
-.ciHeroDashboardImage:hover {
+/* Safari browser styling within dashboard wrapper */
+.ciHeroDashboardWrapper .safari-container {
+  transform: rotateY(-8deg) rotateX(5deg);
+  transition: all 0.3s ease;
+  border-radius: 16px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.ciHeroDashboardWrapper:hover .safari-container {
   transform: rotateY(-6deg) rotateX(3deg) scale(1.02);
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
 }
