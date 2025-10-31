@@ -30,14 +30,6 @@ function MainSection() {
             <span className={styles.flHeroPulseDot}></span>
           </p>
           
-          <p className={styles.flHeroBody}>
-            Remember that financial literacy program you launched? The one with 12.6% completion rates? Where members downloaded the PDF and never opened it? Where your team spent months creating content that gathered digital dust?
-          </p>
-          
-          <p className={styles.flHeroValueStatement}>
-            We fixed that. With data to prove it.
-          </p>
-          
           <div className={styles.flHeroButtons}>
             <button className={`${styles.flBtn} ${styles.flBtnPrimary}`}>See the Platform</button>
             <button className={`${styles.flBtn} ${styles.flBtnSecondary}`}>Calculate Your ROI</button>

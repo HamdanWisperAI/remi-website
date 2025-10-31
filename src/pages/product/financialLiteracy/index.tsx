@@ -19,7 +19,6 @@ function index() {
         <ProblemSection />
         <ResearchSection />
         <PhoneDashboard />
-        <ImpactSection />
         <HowItWorksSection />
         <FAQ />
         <CTA />

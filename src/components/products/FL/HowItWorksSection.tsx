@@ -3,7 +3,22 @@
 import React from 'react'
 import { Timeline } from '@/components/ui/timeline'
 import { motion } from 'framer-motion'
-import { CheckCircle } from 'lucide-react'
+import { 
+  CheckCircle, 
+  Clock, 
+  Target, 
+  Baby, 
+  Zap, 
+  Link, 
+  TrendingUp, 
+  ShoppingCart, 
+  BarChart3, 
+  Eye, 
+  Smartphone, 
+  Palette, 
+  Shield, 
+  Users 
+} from 'lucide-react'
 
 function HowItWorksSection() {
   const colors = {
@@ -59,15 +74,73 @@ function HowItWorksSection() {
       content: (
         <div className="max-w-4xl">
           <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">Life <span className="text-green-600">Moment</span> Integration</h3>
-          <p className="text-base md:text-lg text-gray-600 mb-5">Right lesson at the right moment</p>
-          <ul className="space-y-3 text-gray-700">
-            {['First job? Student loans? New baby?','Behavioral triggers, not random pushes','Connection to actual decisions','Personalized learning paths'].map((d, idx) => (
-              <motion.li key={idx} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.05 }} className="flex items-start gap-2">
-                <CheckCircle size={18} className={`${colors[2].text} mt-0.5 shrink-0`} />
-                <span>{d}</span>
-              </motion.li>
-            ))}
-          </ul>
+          <p className="text-base md:text-lg text-gray-600 mb-6">Right lesson at the right moment</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: 0.1 }}
+              className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-xl p-4 hover:shadow-md transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <Baby size={20} className="text-green-600" />
+                </div>
+                <span className="font-semibold text-gray-800">Life Events</span>
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed">First job? Student loans? New baby?</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: 0.2 }}
+              className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-xl p-4 hover:shadow-md transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <Zap size={20} className="text-green-600" />
+                </div>
+                <span className="font-semibold text-gray-800">Smart Triggers</span>
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed">Behavioral triggers, not random pushes</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: 0.3 }}
+              className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-xl p-4 hover:shadow-md transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <Target size={20} className="text-green-600" />
+                </div>
+                <span className="font-semibold text-gray-800">Real Decisions</span>
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed">Connection to actual decisions</p>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              whileInView={{ opacity: 1, y: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: 0.4 }}
+              className="bg-gradient-to-br from-green-50 to-emerald-50 border border-green-100 rounded-xl p-4 hover:shadow-md transition-all duration-300"
+            >
+              <div className="flex items-center gap-3 mb-3">
+                <div className="p-2 bg-green-100 rounded-lg">
+                  <Users size={20} className="text-green-600" />
+                </div>
+                <span className="font-semibold text-gray-800">Personal Paths</span>
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed">Personalized learning paths</p>
+            </motion.div>
+          </div>
         </div>
       )
     },
@@ -76,15 +149,72 @@ function HowItWorksSection() {
       content: (
         <div className="max-w-4xl">
           <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">Product <span className="text-purple-600">Integration</span></h3>
-          <p className="text-base md:text-lg text-gray-600 mb-5">Every lesson connects to your products</p>
-          <ul className="space-y-3 text-gray-700">
-            {['"Learn about CDs" → "Open a CD"','Education drives action','Track conversion lift','Seamless product discovery'].map((d, idx) => (
-              <motion.li key={idx} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.05 }} className="flex items-start gap-2">
-                <CheckCircle size={18} className={`${colors[3].text} mt-0.5 shrink-0`} />
-                <span>{d}</span>
-              </motion.li>
-            ))}
-          </ul>
+          <p className="text-base md:text-lg text-gray-600 mb-6">Every lesson connects to your products</p>
+          
+          <div className="space-y-4">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }} 
+              whileInView={{ opacity: 1, x: 0 }} 
+              viewport={{ once: true }} 
+              transition={{ delay: 0.1 }}
+              className="flex items-center justify-between bg-gradient-to-r from-purple-50 via-white to-indigo-50 border border-purple-100 rounded-2xl p-6 hover:shadow-lg transition-all duration-300"
+            >
+              <div className="flex items-center gap-4">
+                <div className="p-3 bg-purple-100 rounded-full">
+                  <Link size={24} className="text-purple-600" />
+                </div>
+                <div>
+                  <div className="font-semibold text-gray-800 mb-1">Learn → Act Flow</div>
+                  <div className="text-sm text-gray-600">"Learn about CDs" → "Open a CD"</div>
+                </div>
+              </div>
+              <div className="hidden md:block text-2xl">→</div>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }} 
+                transition={{ delay: 0.2 }}
+                className="text-center bg-white border border-purple-100 rounded-xl p-4 hover:border-purple-200 transition-all duration-300"
+              >
+                <div className="mx-auto w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+                  <TrendingUp size={20} className="text-purple-600" />
+                </div>
+                <h4 className="font-semibold text-gray-800 mb-2">Drive Action</h4>
+                <p className="text-sm text-gray-600">Education drives action</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }} 
+                transition={{ delay: 0.3 }}
+                className="text-center bg-white border border-purple-100 rounded-xl p-4 hover:border-purple-200 transition-all duration-300"
+              >
+                <div className="mx-auto w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+                  <BarChart3 size={20} className="text-purple-600" />
+                </div>
+                <h4 className="font-semibold text-gray-800 mb-2">Track Impact</h4>
+                <p className="text-sm text-gray-600">Track conversion lift</p>
+              </motion.div>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }} 
+                transition={{ delay: 0.4 }}
+                className="text-center bg-white border border-purple-100 rounded-xl p-4 hover:border-purple-200 transition-all duration-300"
+              >
+                <div className="mx-auto w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-3">
+                  <Eye size={20} className="text-purple-600" />
+                </div>
+                <h4 className="font-semibold text-gray-800 mb-2">Discovery</h4>
+                <p className="text-sm text-gray-600">Seamless product discovery</p>
+              </motion.div>
+            </div>
+          </div>
         </div>
       )
     },
@@ -93,15 +223,79 @@ function HowItWorksSection() {
       content: (
         <div className="max-w-4xl">
           <h3 className="text-2xl md:text-4xl font-black tracking-tight text-gray-900 mb-2">White‑Label <span className="text-orange-600">Delivery</span></h3>
-          <p className="text-base md:text-lg text-gray-600 mb-5">Your brand, your voice</p>
-          <ul className="space-y-3 text-gray-700">
-            {['Seamless app integration','Custom content options','Member data stays yours','Complete brand consistency'].map((d, idx) => (
-              <motion.li key={idx} initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: idx * 0.05 }} className="flex items-start gap-2">
-                <CheckCircle size={18} className={`${colors[4].text} mt-0.5 shrink-0`} />
-                <span>{d}</span>
-              </motion.li>
-            ))}
-          </ul>
+          <p className="text-base md:text-lg text-gray-600 mb-6">Your brand, your voice</p>
+          
+          <div className="bg-gradient-to-br from-orange-50 via-amber-50 to-yellow-50 border border-orange-100 rounded-2xl p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }} 
+                  whileInView={{ opacity: 1, scale: 1 }} 
+                  viewport={{ once: true }} 
+                  transition={{ delay: 0.1 }}
+                  className="flex items-start gap-3 bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-white/50"
+                >
+                  <div className="p-2 bg-orange-100 rounded-lg mt-1">
+                    <Smartphone size={18} className="text-orange-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-1">App Integration</h4>
+                    <p className="text-sm text-gray-600">Seamless app integration</p>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }} 
+                  whileInView={{ opacity: 1, scale: 1 }} 
+                  viewport={{ once: true }} 
+                  transition={{ delay: 0.2 }}
+                  className="flex items-start gap-3 bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-white/50"
+                >
+                  <div className="p-2 bg-orange-100 rounded-lg mt-1">
+                    <Palette size={18} className="text-orange-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-1">Custom Content</h4>
+                    <p className="text-sm text-gray-600">Custom content options</p>
+                  </div>
+                </motion.div>
+              </div>
+
+              <div className="space-y-4">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }} 
+                  whileInView={{ opacity: 1, scale: 1 }} 
+                  viewport={{ once: true }} 
+                  transition={{ delay: 0.3 }}
+                  className="flex items-start gap-3 bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-white/50"
+                >
+                  <div className="p-2 bg-orange-100 rounded-lg mt-1">
+                    <Shield size={18} className="text-orange-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-1">Data Privacy</h4>
+                    <p className="text-sm text-gray-600">Member data stays yours</p>
+                  </div>
+                </motion.div>
+
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.95 }} 
+                  whileInView={{ opacity: 1, scale: 1 }} 
+                  viewport={{ once: true }} 
+                  transition={{ delay: 0.4 }}
+                  className="flex items-start gap-3 bg-white/70 backdrop-blur-sm rounded-xl p-4 border border-white/50"
+                >
+                  <div className="p-2 bg-orange-100 rounded-lg mt-1">
+                    <Users size={18} className="text-orange-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-800 mb-1">Brand Unity</h4>
+                    <p className="text-sm text-gray-600">Complete brand consistency</p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </div>
         </div>
       )
     }

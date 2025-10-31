@@ -42,7 +42,7 @@ export const Timeline = ({
 
   return (
     <div
-      className="w-full bg-white dark:bg-neutral-950 font-sans md:px-10"
+      className="w-full bg-white font-sans md:px-10"
       ref={containerRef}
     >
       {(title || subtitle) && (

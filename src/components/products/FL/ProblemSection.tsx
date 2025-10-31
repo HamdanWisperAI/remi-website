@@ -1,8 +1,12 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { AlertCircle, Clock, Monitor, FileText, Zap, Smartphone, Target, Link, Play } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { SparklesCore } from "@/components/ui/sparkles"
+import { IconDotsVertical } from "@tabler/icons-react"
+import { cn } from "@/lib/utils"
+import { WarpBackground } from "@/components/ui/warp-background"
 import styles from './ProblemSection.module.css'
 
 interface AnimatedNumberProps {
@@ -109,10 +113,244 @@ const parseStat = (stat: string): { value: number; suffix: string; prefix: strin
   }
 }
 
+// Compare Cards Component
+interface CompareCardsProps {
+  problemsData: any[];
+  solutionsData: any[];
+  className?: string;
+  slideMode?: "hover" | "drag";
+  isInView: boolean;
+}
+
+const CompareCards: React.FC<CompareCardsProps> = ({
+  problemsData,
+  solutionsData,
+  className,
+  slideMode = "hover",
+  isInView
+}) => {
+  const [sliderXPercent, setSliderXPercent] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [isMouseOver, setIsMouseOver] = useState(false);
+
+  function mouseEnterHandler() {
+    setIsMouseOver(true);
+  }
+
+  function mouseLeaveHandler() {
+    setIsMouseOver(false);
+    if (slideMode === "hover") {
+      setSliderXPercent(50);
+    }
+    if (slideMode === "drag") {
+      setIsDragging(false);
+    }
+  }
+
+  const handleStart = useCallback((clientX: number) => {
+    if (slideMode === "drag") {
+      setIsDragging(true);
+    }
+  }, [slideMode]);
+
+  const handleEnd = useCallback(() => {
+    if (slideMode === "drag") {
+      setIsDragging(false);
+    }
+  }, [slideMode]);
+
+  const handleMove = useCallback((clientX: number) => {
+    if (!sliderRef.current) return;
+    if (slideMode === "hover" || (slideMode === "drag" && isDragging)) {
+      const rect = sliderRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const percent = (x / rect.width) * 100;
+      requestAnimationFrame(() => {
+        setSliderXPercent(Math.max(0, Math.min(100, percent)));
+      });
+    }
+  }, [slideMode, isDragging]);
+
+  const handleMouseDown = useCallback((e: React.MouseEvent) => handleStart(e.clientX), [handleStart]);
+  const handleMouseUp = useCallback(() => handleEnd(), [handleEnd]);
+  const handleMouseMove = useCallback((e: React.MouseEvent) => handleMove(e.clientX), [handleMove]);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => handleStart(e.touches[0].clientX), [handleStart]);
+  const handleTouchEnd = useCallback(() => handleEnd(), [handleEnd]);
+  const handleTouchMove = useCallback((e: React.TouchEvent) => handleMove(e.touches[0].clientX), [handleMove]);
+
+  return (
+    <div
+      ref={sliderRef}
+      className={cn("relative overflow-hidden", className)}
+      style={{
+        cursor: slideMode === "drag" ? "grab" : "col-resize",
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={mouseLeaveHandler}
+      onMouseEnter={mouseEnterHandler}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchMove={handleTouchMove}
+    >
+      {/* Slider Line */}
+      <AnimatePresence initial={false}>
+        <motion.div
+          className="h-full w-px absolute top-0 z-30 bg-gradient-to-b from-transparent from-[5%] to-[95%] via-indigo-500 to-transparent"
+          style={{
+            left: `${sliderXPercent}%`,
+            top: "0",
+            zIndex: 40,
+          }}
+          transition={{ duration: 0 }}
+        >
+          <div className="w-36 h-full [mask-image:radial-gradient(100px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-indigo-400 via-transparent to-transparent z-20 opacity-50" />
+          <div className="w-10 h-1/2 [mask-image:radial-gradient(50px_at_left,white,transparent)] absolute top-1/2 -translate-y-1/2 left-0 bg-gradient-to-r from-cyan-400 via-transparent to-transparent z-10 opacity-100" />
+          <div className="w-10 h-3/4 top-1/2 -translate-y-1/2 absolute -right-10 [mask-image:radial-gradient(100px_at_left,white,transparent)]">
+            <SparklesCore
+              background="transparent"
+              minSize={0.4}
+              maxSize={1}
+              particleDensity={1200}
+              className="w-full h-full"
+              particleColor="#FFFFFF"
+            />
+          </div>
+          <div className="h-5 w-5 rounded-md top-1/2 -translate-y-1/2 bg-white z-30 -right-2.5 absolute flex items-center justify-center shadow-[0px_-1px_0px_0px_#FFFFFF40]">
+            <IconDotsVertical className="h-4 w-4 text-black" />
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Solutions Side (Right) - Always visible as base */}
+      <div className={`${styles.tabContent} ${styles.solutionsTab} absolute inset-0 z-10`}>
+        {/* Solutions Header - Top Right */}
+        <div className="absolute top-4 right-4 z-30 text-right">
+          <h3 className="text-2xl font-black text-gray-900 mb-1 leading-tight">
+            Our Microlearning<br />
+            Approach
+          </h3>
+          
+        </div>
+
+        <div className={`${styles.cardsGrid} pt-20`}>
+          {solutionsData.map((solution, index) => {
+            const statParts = parseStat(solution.stat);
+            const improvementParts = solution.improvement ? parseStat(solution.improvement) : null;
+            return (
+              <div 
+                key={`solution-${index}`}
+                className={`${styles.statCard} ${styles.solutionCard} ${isInView ? styles.cardInView : ''}`}
+                style={{ transitionDelay: isInView ? `${index * 0.1}s` : '0s' }}
+              >
+                {solution.improvement && (
+                  <div className={styles.improvementBadge}>
+                    {improvementParts?.value === Infinity ? (
+                      <span>∞</span>
+                    ) : improvementParts ? (
+                      <AnimatedNumber
+                        value={improvementParts.value}
+                        suffix={improvementParts.suffix}
+                        prefix={improvementParts.prefix}
+                        decimals={improvementParts.decimals}
+                        duration={1500}
+                      />
+                    ) : (
+                      solution.improvement
+                    )}
+                  </div>
+                )}
+                <div className={styles.cardIcon}>
+                  <solution.icon size={24} />
+                </div>
+                <div className={styles.cardContent}>
+                  <h4 className={styles.cardTitle}>{solution.title}</h4>
+                  <div className={styles.statContainer}>
+                    <div className={styles.statValue}>
+                      {statParts.value === Infinity ? (
+                        <span>∞</span>
+                      ) : (
+                        <AnimatedNumber
+                          value={statParts.value}
+                          suffix={statParts.suffix}
+                          prefix={statParts.prefix}
+                          decimals={statParts.decimals}
+                          duration={2000}
+                        />
+                      )}
+                    </div>
+                    <div className={styles.statLabel}>{solution.statLabel}</div>
+                  </div>
+                  <p className={styles.cardImpact}>{solution.impact}</p>
+                  <div className={styles.cardSource}>Source: {solution.source}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Problems Side (Left) - Revealed by slider */}
+      <motion.div
+        className={`${styles.tabContent} ${styles.problemsTab} absolute inset-0 z-20`}
+        style={{
+          clipPath: `inset(0 ${100 - sliderXPercent}% 0 0)`,
+        }}
+        transition={{ duration: 0 }}
+      >
+        {/* Problems Header - Top Left */}
+        <div className="absolute top-4 left-4 z-30 text-left">
+          <h3 className="text-2xl font-black text-gray-900 mb-1 leading-tight">
+            Why Traditional Financial<br />
+            Education Fails
+          </h3>
+          
+        </div>
+
+        <div className={`${styles.cardsGrid} pt-20`}>
+          {problemsData.map((problem, index) => {
+            const statParts = parseStat(problem.stat);
+            return (
+              <div 
+                key={`problem-${index}`}
+                className={`${styles.statCard} ${isInView ? styles.cardInView : ''}`}
+                style={{ transitionDelay: isInView ? `${index * 0.1}s` : '0s' }}
+              >
+                <div className={styles.cardIcon}>
+                  <problem.icon size={24} />
+                </div>
+                <div className={styles.cardContent}>
+                  <h4 className={styles.cardTitle}>{problem.title}</h4>
+                  <div className={styles.statContainer}>
+                    <div className={styles.statValue}>
+                      <AnimatedNumber
+                        value={statParts.value}
+                        suffix={statParts.suffix}
+                        prefix={statParts.prefix}
+                        decimals={statParts.decimals}
+                        duration={2000}
+                      />
+                    </div>
+                    <div className={styles.statLabel}>{problem.statLabel}</div>
+                  </div>
+                  <p className={styles.cardImpact}>{problem.impact}</p>
+                  <div className={styles.cardSource}>Source: {problem.source}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
 function ProblemSection() {
   const sectionRef = useRef(null)
   const [isInView, setIsInView] = useState(false)
-  const [activeTab, setActiveTab] = useState<'problems' | 'solutions'>('problems')
 
   const problemsData = [
     {
@@ -223,191 +461,42 @@ function ProblemSection() {
     return () => observer.disconnect()
   }, [])
 
-  // Reset animations when tab changes
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsInView(true)
-    }, 100)
-    return () => clearTimeout(timer)
-  }, [activeTab])
-
   return (
     <section className={styles.problemSection} ref={sectionRef}>
-      <div className={styles.problemContainer}>
-        {/* Section Header */}
-        <div className={styles.sectionHeader}>
-          <h2 className={`${styles.mainHeadline} ${isInView ? styles.headlineInView : ''}`}>
-            The Uncomfortable Truth
-          </h2>
-          <p className={`${styles.subHeadline} ${isInView ? styles.subheadlineInView : ''}`}>
-            Everyone agrees financial education is important. Nobody finishes it. We fixed that.
-          </p>
+      <div ref={sectionRef} className="relative py-12 md:py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-[#625bff]/5 overflow-hidden">
+        {/* Warp Background Effect */}
+        <div className="absolute inset-0 pointer-events-none">
+          <WarpBackground
+            children={<div />}
+            perspective={1000}
+            gridColor="rgba(98, 91, 255, 0.4)"
+            className="!absolute !inset-0 !border-0 !p-0 !rounded-none"
+          />
         </div>
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className={styles.problemContainer}>
+            {/* Section Header */}
+            <div className={styles.sectionHeader}>
+              <h2 className={`${styles.mainHeadline} ${isInView ? styles.headlineInView : ''}`}>
+                The Uncomfortable Truth
+              </h2>
+              <p className={`${styles.subHeadline} ${isInView ? styles.subheadlineInView : ''}`}>
+                Everyone agrees financial education is important. Nobody finishes it. We fixed that.
+              </p>
+            </div>
 
-        {/* Tabs */}
-        <div className={styles.tabsContainer}>
-          <div className={styles.tabsButtons} role="tablist">
-            <button
-              onClick={() => setActiveTab('problems')}
-              className={`${styles.tabButton} ${activeTab === 'problems' ? styles.tabButtonActive : ''}`}
-              aria-selected={activeTab === 'problems'}
-              aria-controls="problems-tabpanel"
-              id="problems-tab"
-              role="tab"
-            >
-              <span>Traditional Approach</span>
-            </button>
-            <button
-              onClick={() => setActiveTab('solutions')}
-              className={`${styles.tabButton} ${activeTab === 'solutions' ? styles.tabButtonActive : ''}`}
-              aria-selected={activeTab === 'solutions'}
-              aria-controls="solutions-tabpanel"
-              id="solutions-tab"
-              role="tab"
-            >
-              <span>Our Solution</span>
-            </button>
-          </div>
-
-          {/* Tab Content */}
-          <div className={styles.tabContentWrapper}>
-            <AnimatePresence mode="wait">
-              {activeTab === 'problems' && (
-                <motion.div
-                  key="problems"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className={`${styles.tabContent} ${styles.problemsTab}`}
-                  role="tabpanel"
-                  id="problems-tabpanel"
-                  aria-labelledby="problems-tab"
-                >
-                  <div className={styles.tabHeader}>
-                    <h3 className={styles.tabTitle}>Why Traditional Financial Education Fails</h3>
-                    <p className={styles.tabDescription}>
-                      Despite best intentions, most programs see completion rates under 15%. Here&apos;s why:
-                    </p>
-                  </div>
-
-                  <div className={styles.cardsGrid}>
-                    {problemsData.map((problem, index) => {
-                      const statParts = parseStat(problem.stat)
-                      return (
-                        <div 
-                          key={`problem-${activeTab}-${index}`}
-                          className={`${styles.statCard} ${isInView ? styles.cardInView : ''}`}
-                          style={{ transitionDelay: isInView ? `${index * 0.1}s` : '0s' }}
-                        >
-                          <div className={styles.cardIcon}>
-                            <problem.icon size={24} />
-                          </div>
-                          <div className={styles.cardContent}>
-                            <h4 className={styles.cardTitle}>{problem.title}</h4>
-                            <div className={styles.statContainer}>
-                              <div className={styles.statValue}>
-                                {statParts.value === Infinity ? (
-                                  <span>∞</span>
-                                ) : (
-                                  <AnimatedNumber
-                                    value={statParts.value}
-                                    suffix={statParts.suffix}
-                                    prefix={statParts.prefix}
-                                    decimals={statParts.decimals}
-                                    duration={2000}
-                                  />
-                                )}
-                              </div>
-                              <div className={styles.statLabel}>{problem.statLabel}</div>
-                            </div>
-                            <p className={styles.cardImpact}>{problem.impact}</p>
-                            <div className={styles.cardSource}>Source: {problem.source}</div>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </motion.div>
-              )}
-
-              {activeTab === 'solutions' && (
-                <motion.div
-                  key="solutions"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.3, ease: 'easeOut' }}
-                  className={`${styles.tabContent} ${styles.solutionsTab}`}
-                  role="tabpanel"
-                  id="solutions-tabpanel"
-                  aria-labelledby="solutions-tab"
-                >
-                  <div className={styles.tabHeader}>
-                    <h3 className={styles.tabTitle}>Our Microlearning Approach</h3>
-                    <p className={styles.tabDescription}>
-                      Research-backed design delivers 6x better completion rates. Here&apos;s how:
-                    </p>
-                  </div>
-
-                  <div className={styles.cardsGrid}>
-                    {solutionsData.map((solution, index) => {
-                      const statParts = parseStat(solution.stat)
-                      const improvementParts = solution.improvement ? parseStat(solution.improvement) : null
-                      return (
-                        <div 
-                          key={`solution-${activeTab}-${index}`}
-                          className={`${styles.statCard} ${styles.solutionCard} ${isInView ? styles.cardInView : ''}`}
-                          style={{ transitionDelay: isInView ? `${index * 0.1}s` : '0s' }}
-                        >
-                          {solution.improvement && (
-                            <div className={styles.improvementBadge}>
-                              {improvementParts?.value === Infinity ? (
-                                <span>∞</span>
-                              ) : improvementParts ? (
-                                <AnimatedNumber
-                                  value={improvementParts.value}
-                                  suffix={improvementParts.suffix}
-                                  prefix={improvementParts.prefix}
-                                  decimals={improvementParts.decimals}
-                                  duration={1500}
-                                />
-                              ) : (
-                                solution.improvement
-                              )}
-                            </div>
-                          )}
-                          <div className={styles.cardIcon}>
-                            <solution.icon size={24} />
-                          </div>
-                          <div className={styles.cardContent}>
-                            <h4 className={styles.cardTitle}>{solution.title}</h4>
-                            <div className={styles.statContainer}>
-                              <div className={styles.statValue}>
-                                {statParts.value === Infinity ? (
-                                  <span>∞</span>
-                                ) : (
-                                  <AnimatedNumber
-                                    value={statParts.value}
-                                    suffix={statParts.suffix}
-                                    prefix={statParts.prefix}
-                                    decimals={statParts.decimals}
-                                    duration={2000}
-                                  />
-                                )}
-                              </div>
-                              <div className={styles.statLabel}>{solution.statLabel}</div>
-                            </div>
-                            <p className={styles.cardImpact}>{solution.impact}</p>
-                            <div className={styles.cardSource}>Source: {solution.source}</div>
-                          </div>
-                        </div>
-                      )
-                    })}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Compare Section */}
+            <div className={styles.tabsContainer}>
+              <div className={styles.tabContentWrapper}>
+                <CompareCards
+                  problemsData={problemsData}
+                  solutionsData={solutionsData}
+                  className="h-[600px] w-full"
+                  slideMode="hover"
+                  isInView={isInView}
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>
