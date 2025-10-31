@@ -1,4 +1,5 @@
 import React from 'react'
+import { CardContainer, CardBody, CardItem } from '@/components/ui/3d-card'
 
 interface TrackCard {
   id: string
@@ -95,38 +96,62 @@ function TrackSection() {
         {/* Feature Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
           {trackCards.map((card, index) => (
-            <div
-              key={card.id}
-              className="group relative bg-white border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#625bff] hover:border-2 hover:-translate-y-1 cursor-pointer opacity-0 animate-fade-in"
-              style={{
-                animationDelay: `${index * 0.08}s`
-              }}
-            >
-              {/* Top accent bar on hover */}
-              <div className="absolute top-0 left-0 w-0 h-1 bg-[#625bff] group-hover:w-full transition-all duration-500" />
+            <CardContainer key={card.id} className="inter-var" containerClassName="py-4">
+              <CardBody className="bg-transparent relative group/card w-auto sm:w-[16rem] h-auto rounded-xl border-0">
+                <CardItem
+                  translateZ="50"
+                  className="w-full h-full"
+                >
+                  <div
+                    className="group relative bg-white border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg hover:border-[#625bff] hover:border-2 cursor-pointer opacity-0 animate-fade-in w-full h-full"
+                    style={{
+                      animationDelay: `${index * 0.08}s`
+                    }}
+                  >
+                    {/* Top accent bar on hover */}
+                    <div className="absolute top-0 left-0 w-0 h-1 bg-[#625bff] group-hover:w-full transition-all duration-500" />
 
-              {/* Card Image Container */}
-              <div className="relative w-full h-28 md:h-32 lg:h-36 bg-gradient-to-br from-purple-50 via-white to-gray-50 border-b border-gray-200 group-hover:border-[#625bff] overflow-hidden">
-                <img
-                  src={card.image}
-                  alt={card.title}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                />
-              </div>
+                    {/* Card Image Container */}
+                    <CardItem
+                      translateZ="100"
+                      rotateX={5}
+                      className="relative w-full h-28 md:h-32 lg:h-36 bg-gradient-to-br from-purple-50 via-white to-gray-50 border-b border-gray-200 group-hover:border-[#625bff] overflow-hidden"
+                    >
+                      <img
+                        src={card.image}
+                        alt={card.title}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                    </CardItem>
 
-              {/* Card Content */}
-              <div className="p-3 lg:p-4 flex flex-col flex-grow">
-                <h4 className="text-sm md:text-base lg:text-base font-bold text-black mb-1 leading-tight group-hover:text-[#625bff] transition-colors duration-300">
-                  {card.title}
-                </h4>
-                <p className="text-xs md:text-sm text-gray-600 leading-snug flex-grow">
-                  {card.subtitle}
-                </p>
+                    {/* Card Content */}
+                    <div className="p-3 lg:p-4 flex flex-col flex-grow">
+                      <CardItem
+                        translateZ="70"
+                        className="text-sm md:text-base lg:text-base font-bold text-black mb-1 leading-tight group-hover:text-[#625bff] transition-colors duration-300"
+                      >
+                        {card.title}
+                      </CardItem>
+                      <CardItem
+                        as="p"
+                        translateZ="40"
+                        className="text-xs md:text-sm text-gray-600 leading-snug flex-grow"
+                      >
+                        {card.subtitle}
+                      </CardItem>
 
-                {/* Bottom accent line */}
-                <div className="mt-3 h-0.5 w-0 bg-gradient-to-r from-[#625bff] to-purple-400 group-hover:w-full transition-all duration-500" />
-              </div>
-            </div>
+                      {/* Bottom accent line */}
+                      <CardItem
+                        translateZ="80"
+                        className="mt-3"
+                      >
+                        <div className="h-0.5 w-0 bg-gradient-to-r from-[#625bff] to-purple-400 group-hover:w-full transition-all duration-500" />
+                      </CardItem>
+                    </div>
+                  </div>
+                </CardItem>
+              </CardBody>
+            </CardContainer>
           ))}
         </div>
       </div>

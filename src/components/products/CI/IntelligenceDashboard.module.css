@@ -210,12 +210,14 @@
 /* ===== DASHBOARD MOCKUP ===== */
 .dashboardMockup {
   background: #ffffff;
-  border-radius: 12px;
+  border-radius: 0;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: none;
+  border: none;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  min-height: 600px;
 }
 
 /* Dashboard Header */
@@ -264,7 +266,8 @@
 .mainContent {
   padding: 18px;
   flex: 1;
-  min-height: auto;
+  min-height: 500px;
+  overflow-y: auto;
 }
 
 /* View Header */

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './IntelligenceDashboard.module.css'
+import { Safari } from '@/components/magicui/safari'
 import {
   Briefcase,
   Settings,
@@ -650,49 +651,51 @@ function IntelligenceDashboard() {
 
           {/* 70% - Dashboard */}
           <div className={styles.dashboardColumn}>
-            {/* Dashboard Mockup */}
-            <div className={styles.dashboardMockup}>
-              {/* Header Bar */}
-              <div className={styles.dashboardHeader}>
-                <div className={styles.headerBrand}>
-                  <div className={styles.brandLogo}></div>
-                  <span className={styles.brandText}>Competitive Intelligence Dashboard</span>
+            {/* Safari Browser with Dashboard */}
+            <Safari url="ci-intelligence.wisperai.com" className="w-full">
+              <div className={styles.dashboardMockup}>
+                {/* Header Bar */}
+                <div className={styles.dashboardHeader}>
+                  <div className={styles.headerBrand}>
+                    <div className={styles.brandLogo}></div>
+                    <span className={styles.brandText}>Competitive Intelligence Dashboard</span>
+                  </div>
+                  <div className={styles.headerActions}>
+                    <div className={styles.actionButton}></div>
+                    <div className={styles.actionButton}></div>
+                    <div className={styles.actionButton}></div>
+                  </div>
                 </div>
-                <div className={styles.headerActions}>
-                  <div className={styles.actionButton}></div>
-                  <div className={styles.actionButton}></div>
-                  <div className={styles.actionButton}></div>
-                </div>
-              </div>
 
-              {/* Main Dashboard Content */}
-              <div className={styles.mainContent}>
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeRole}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    {renderContent()}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                {/* Main Dashboard Content */}
+                <div className={styles.mainContent}>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeRole}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      {renderContent()}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
 
-              {/* Footer Bar */}
-              <div className={styles.dashboardFooter}>
-                <div className={styles.footerStatus}>Last updated: 2 minutes ago</div>
-                <div className={styles.footerIndicators}>
-                  <motion.div
-                    className={styles.liveIndicator}
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  ></motion.div>
-                  <span>Live</span>
+                {/* Footer Bar */}
+                <div className={styles.dashboardFooter}>
+                  <div className={styles.footerStatus}>Last updated: 2 minutes ago</div>
+                  <div className={styles.footerIndicators}>
+                    <motion.div
+                      className={styles.liveIndicator}
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    ></motion.div>
+                    <span>Live</span>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Safari>
           </div>
 
           {/* 20% - Explanation Panel (Right) */}
