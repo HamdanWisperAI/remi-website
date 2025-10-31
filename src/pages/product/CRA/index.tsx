@@ -6,10 +6,8 @@ import ProblemSection from '@/components/products/CRA/ProblemSection'
 import RegulatorsSection from '@/components/products/CRA/RegulatorsSection'
 import PlatformSection from '@/components/products/CRA/PlatformSection'
 import BenefitsSection from '@/components/products/CRA/BenefitsSection'
-import CaseStudiesSection from '@/components/products/CRA/CaseStudiesSection'
 import ExaminationSection from '@/components/products/CRA/ExaminationSection'
 import FeaturesSection from '@/components/products/CRA/FeaturesSection'
-import ImpactSection from '@/components/products/CRA/ImpactSection'
 import TimelineSection from '@/components/products/CRA/TimelineSection'
 import PricingSection from '@/components/products/CRA/PricingSection'
 import AssessmentCTA from '@/components/products/CRA/AssessmentCTA'
@@ -26,10 +24,8 @@ function index() {
         <RegulatorsSection />
         <PlatformSection />
         <BenefitsSection />
-        <CaseStudiesSection />
         <ExaminationSection />
         <FeaturesSection />
-        <ImpactSection />
         <TimelineSection />
         <PricingSection />
         <AssessmentCTA />
